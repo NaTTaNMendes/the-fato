@@ -1,0 +1,53 @@
+body {
+    background-color: #ffffff;
+    color: #000000;
+    overflow-x: hidden;
+}
+
+/* Fun, Bold, Random Typography Targeting */
+h1, h2, h3, h4, .font-display {
+    font-family: 'Londrina Solid', cursive;
+    font-weight: 900;
+    letter-spacing: 0.03em;
+}
+
+/* Brutalist/Streetwear inspired utilities */
+.border-brand { border-color: #000000; }
+
+/* Simple Marquee Animation */
+.marquee-container {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+}
+.marquee-content {
+    display: inline-block;
+    animation: marquee 20s linear infinite;
+}
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.btn-brand:hover {
+    background-color: #000000;
+    color: #ffffff;
+    box-shadow: 4px 4px 0px #e5243b;
+    transform: translate(-2px, -2px);
+}
+
+.text-stroke-white {
+    -webkit-text-stroke: 3px #ffffff;
+    text-stroke: 3px #ffffff;
+}
+
+.text-stroke-black {
+    -webkit-text-stroke: 3px #000000;
+    text-stroke: 3px #000000;
+}
+
+@media (max-width: 640px) {
+    .text-stroke-white {
+        -webkit-text-stroke: 2px #ffffff;
+    }
+}
