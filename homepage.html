@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE FATO | Streetwear & Design</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@400;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            red: '#e5243b',
+                            yellow: '#fcc30b',
+                            green: '#4c9f38',
+                            blue: '#0a97d9',
+                            black: '#000000',
+                            white: '#ffffff'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Space Grotesk"', 'sans-serif'],
+                        display: ['"Londrina Solid"', 'cursive'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #ffffff;
+            color: #000000;
+            overflow-x: hidden;
+        }
+
+        /* Fun, Bold, Random Typography Targeting */
+        h1, h2, h3, h4, .font-display {
+            font-family: 'Londrina Solid', cursive;
+            font-weight: 900;
+            letter-spacing: 0.03em;
+        }
+
+        /* Brutalist/Streetwear inspired utilities */
+        .border-brand { border-color: #000000; }
+        
+        /* Simple Marquee Animation */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+            width: 100%;
+        }
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .btn-brand:hover {
+            background-color: #000000;
+            color: #ffffff;
+            box-shadow: 4px 4px 0px #e5243b;
+            transform: translate(-2px, -2px);
+        }
+
+        .text-stroke-white {
+            -webkit-text-stroke: 3px #ffffff;
+            text-stroke: 3px #ffffff;
+        }
+        
+        .text-stroke-black {
+            -webkit-text-stroke: 3px #000000;
+            text-stroke: 3px #000000;
+        }
+        
+        @media (max-width: 640px) {
+            .text-stroke-white {
+                -webkit-text-stroke: 2px #ffffff;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased font-sans">
+
+    <!-- Marquee Announcement -->
+    <div class="marquee-container sticky top-0 z-[100] bg-brand-red border-b-[3px] border-brand-black text-brand-white py-2 shadow-md">
+        <div class="marquee-content font-display text-xl sm:text-2xl uppercase tracking-wider">
+            THE FATO • STREETWEAR CULTURE • NO PLANET B • THE FATO • A REVOLUÇÃO SERÁ POPA • THE FATO • STREETWEAR CULTURE • NO PLANET B • THE FATO • A REVOLUÇÃO SERÁ POPA • THE FATO • STREETWEAR CULTURE • NO PLANET B • THE FATO • A REVOLUÇÃO SERÁ POPA •
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="fixed top-12 sm:top-14 left-1/2 -translate-x-1/2 w-[95%] lg:w-[85%] max-w-6xl z-[55] pointer-events-none">
+        <header class="pointer-events-auto bg-brand-white border-[3px] border-brand-black rounded-[40px] shadow-[6px_6px_0px_#e5243b] px-5 sm:px-8 py-3 flex justify-between items-center transition-all">
+            <!-- Mobile Menu Button -->
+            <div class="flex items-center sm:hidden">
+                <button type="button" class="text-brand-black hover:text-brand-red focus:outline-none transition-transform hover:scale-110">
+                    <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="3" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Logo (Left) -->
+            <div class="flex-shrink-0 flex items-center justify-center">
+                <a href="#">
+                    <img class="h-10 sm:h-12 w-auto object-contain" src="Logo-the-fato-ideia.jpg" alt="The Fato Logo">
+                </a>
+            </div>
+
+            <!-- Centralized Links (Center) -->
+            <nav class="hidden sm:flex items-center justify-center space-x-8 lg:space-x-12 flex-1 relative">
+                <!-- Coleções with Simple Dropdown -->
+                <div class="relative flex items-center" id="collections-container">
+                    <button onclick="toggleSubmenu(event)" class="text-brand-black hover:text-brand-red font-display text-2xl uppercase tracking-wider transition-colors hover:-translate-y-1 inline-block transform duration-200 flex items-center gap-1 group">
+                        Coleções
+                        <svg class="w-5 h-5 -mb-1 transform group-hover:rotate-180 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    
+                    <!-- Simple Popup Dropdown -->
+                    <div class="absolute top-full mt-4 left-1/2 -translate-x-1/2 z-[70]">
+                        <div id="submenu-popup" class="w-56 bg-brand-white border-[3px] border-brand-black shadow-[6px_6px_0px_#e5243b] opacity-0 scale-50 pointer-events-none transition-all duration-300 ease-[cubic-bezier(0.68,-0.55,0.265,1.55)] origin-top rounded-xl overflow-hidden flex flex-col">
+                            <a href="#" class="font-display text-2xl text-brand-black hover:bg-brand-yellow hover:text-brand-black px-6 py-3 border-b-[3px] border-brand-black uppercase transition-colors">Inverno Caos</a>
+                            <a href="#" class="font-display text-2xl text-brand-black hover:bg-brand-green hover:text-brand-white px-6 py-3 border-b-[3px] border-brand-black uppercase transition-colors">No Planet B</a>
+                            <a href="#" class="font-display text-2xl text-brand-black hover:bg-brand-blue hover:text-brand-white px-6 py-3 uppercase transition-colors">Básicos</a>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="#" class="text-brand-black hover:text-brand-red font-display text-2xl uppercase tracking-wider transition-colors hover:-translate-y-1 inline-block transform duration-200">Sobre Nós</a>
+            </nav>
+
+            <!-- Icons (Right) -->
+            <div class="flex items-center space-x-4 sm:space-x-6">
+                <a href="#" class="text-brand-black hover:text-brand-red transition-transform hover:scale-110">
+                    <span class="sr-only">Buscar</span>
+                    <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="3" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </a>
+                
+                <!-- FATO.AI Stylist Icon -->
+                <button onclick="toggleAIDrawer(event)" class="text-brand-black hover:text-brand-red transition-transform hover:scale-110 relative group">
+                    <span class="sr-only">FATO.AI Stylist</span>
+                    <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                    <span class="absolute -bottom-12 left-1/2 -translate-x-1/2 bg-brand-black text-brand-white text-xs font-bold px-3 py-1 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none border-2 border-brand-black shadow-[3px_3px_0px_#e5243b]">FATO.AI</span>
+                </button>
+
+                <a href="#" onclick="toggleCart(event)" class="text-brand-black hover:text-brand-red transition-transform hover:scale-110 relative">
+                    <span class="sr-only">Carrinho</span>
+                    <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="3" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                    </svg>
+                    <!-- Cart Badge -->
+                    <span id="cart-count" class="absolute -top-2 -right-2 bg-brand-red text-brand-white text-xs font-bold rounded-full h-6 w-6 flex items-center justify-center border-2 border-brand-black">0</span>
+                </a>
+            </div>
+        </header>
+    </div>
+
+    <main id="main-content">
+        <!-- Hero Banner with Physics and Dynamic Text -->
+        <section class="relative bg-brand-white border-b-[3px] border-brand-black overflow-hidden pt-32 pb-16 px-4 min-h-[90vh] flex items-center justify-center">
+            
+            <!-- Fullscreen Background Image -->
+            <div class="absolute inset-0 z-0 pointer-events-none">
+                <img src="Moodboard.jpg" class="w-full h-full object-cover opacity-60 mix-blend-multiply grayscale" alt="The Fato Vibe">
+                <!-- Light overlay to keep it clean and highlight the physics shapes/text -->
+                <div class="absolute inset-0 bg-brand-white/85"></div>
+            </div>
+
+            <!-- Physics Canvas Container - max-md ignora cliques para priorizar o SCROLL no celular! -->
+            <div id="physics-canvas-container" class="absolute inset-0 z-10 pointer-events-auto max-md:pointer-events-none"></div>
+
+            <div class="max-w-6xl w-full mx-auto relative z-20 text-center flex flex-col items-center pointer-events-none">
+                
+                <!-- Dynamic Text (No bounding box, clean layout) -->
+                <h1 class="font-display text-5xl sm:text-7xl md:text-8xl text-brand-black text-center uppercase p-4 leading-[0.9] drop-shadow-[3px_3px_0px_#ffffff]">
+                    Com The Fato,<br> o mundo é mais<br>
+                    <span id="dynamic-word" class="block mt-2 text-[5rem] sm:text-[8rem] md:text-[10rem] text-brand-yellow text-stroke-black drop-shadow-[6px_6px_0px_#000000] transition-all duration-300">Pika</span>
+                </h1>
+                
+                <p class="text-xl sm:text-2xl font-bold text-brand-black max-w-2xl mx-auto mt-4 mb-10 bg-brand-white/90 backdrop-blur-sm px-6 py-4 border-[3px] border-brand-black rounded-xl shadow-[4px_4px_0px_#000000] pointer-events-auto">
+                    Streetwear autêntico. Expressão sem filtros. Descubra a nova coleção.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-6 pointer-events-auto items-center">
+                    <a href="#shop" class="btn-brand px-12 py-4 text-2xl uppercase font-display bg-brand-red text-brand-white border-[3px] border-brand-black hover:bg-brand-black hover:text-brand-white hover:shadow-[8px_8px_0px_#fcc30b] transition-all">
+                        Comprar Agora
+                    </a>
+                    
+                    <button onclick="toggleGravity()" id="btn-gravity" class="btn-brand px-8 py-4 text-2xl uppercase font-display bg-brand-blue text-brand-white border-[3px] border-brand-black hover:bg-brand-black hover:text-brand-white hover:shadow-[8px_8px_0px_#4c9f38] transition-all flex items-center gap-2">
+                        <span>⬇</span> GRAVIDADE CAOS <span>⬇</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="absolute bottom-4 left-1/2 -translate-x-1/2 text-brand-black font-bold uppercase text-sm tracking-widest bg-brand-yellow px-4 py-1 border-2 border-brand-black rounded-full pointer-events-none z-20 animate-bounce">
+                Arraste as formas no fundo!
+            </div>
+        </section>
+
+        <!-- Shop Grid -->
+        <section id="shop" class="bg-brand-white py-20 px-4 border-b-[3px] border-brand-black">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex justify-between items-end mb-10 border-b-[3px] border-brand-black pb-4">
+                    <h2 class="font-display text-5xl text-brand-black uppercase">Últimos Drops</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Product 1 -->
+                    <a href="#" onclick="openProduct(event, 'T-Shirt Ainda Se Lembra', 'estampa-8.jpg', 149.90, 'Off-White / Black')" class="group block cursor-pointer bg-brand-white border-[3px] border-brand-black hover:shadow-[8px_8px_0px_#fcc30b] hover:-translate-y-2 transition-all duration-300 flex flex-col">
+                        <div class="aspect-[4/5] relative flex items-center justify-center p-6 border-b-[3px] border-brand-black bg-brand-white overflow-hidden">
+                            <div class="absolute top-0 left-0 bg-brand-red text-brand-white text-xs font-bold uppercase px-3 py-1 border-r-[3px] border-b-[3px] border-brand-black z-10">Novo</div>
+                            <img src="estampa-8.jpg" alt="Camiseta Ainda Se Lembra" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="p-5 flex flex-col flex-1 justify-between bg-brand-white">
+                            <div>
+                                <h3 class="text-2xl font-display uppercase font-black text-brand-black group-hover:text-brand-red transition-colors leading-none mb-2">Ainda Se Lembra</h3>
+                                <p class="text-sm text-brand-black font-bold uppercase">Off-White / Black</p>
+                            </div>
+                            <p class="text-3xl font-display font-black text-brand-red mt-4 drop-shadow-[1px_1px_0px_#000000]">R$ 149,90</p>
+                        </div>
+                    </a>
+
+                    <!-- Product 2 -->
+                    <a href="#" onclick="openProduct(event, 'T-Shirt Melzinho', 'estampa-6.jpg', 149.90, 'White / Black')" class="group block cursor-pointer bg-brand-white border-[3px] border-brand-black hover:shadow-[8px_8px_0px_#0a97d9] hover:-translate-y-2 transition-all duration-300 flex flex-col">
+                        <div class="aspect-[4/5] relative flex items-center justify-center p-6 border-b-[3px] border-brand-black bg-brand-white overflow-hidden">
+                            <img src="estampa-6.jpg" alt="Camiseta Melzinho na Chupeta" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="p-5 flex flex-col flex-1 justify-between bg-brand-white">
+                            <div>
+                                <h3 class="text-2xl font-display uppercase font-black text-brand-black group-hover:text-brand-red transition-colors leading-none mb-2">Melzinho</h3>
+                                <p class="text-sm text-brand-black font-bold uppercase">White / Black</p>
+                            </div>
+                            <p class="text-3xl font-display font-black text-brand-red mt-4 drop-shadow-[1px_1px_0px_#000000]">R$ 149,90</p>
+                        </div>
+                    </a>
+
+                    <!-- Product 3 -->
+                    <a href="#" onclick="openProduct(event, 'T-Shirt Let It Quack', 'estampa-4.jpg', 149.90, 'White / Black')" class="group block cursor-pointer bg-brand-white border-[3px] border-brand-black hover:shadow-[8px_8px_0px_#4c9f38] hover:-translate-y-2 transition-all duration-300 flex flex-col">
+                        <div class="aspect-[4/5] relative flex items-center justify-center p-6 border-b-[3px] border-brand-black bg-brand-white overflow-hidden">
+                            <img src="estampa-4.jpg" alt="Camiseta Let It Quack" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="p-5 flex flex-col flex-1 justify-between bg-brand-white">
+                            <div>
+                                <h3 class="text-2xl font-display uppercase font-black text-brand-black group-hover:text-brand-red transition-colors leading-none mb-2">Let It Quack</h3>
+                                <p class="text-sm text-brand-black font-bold uppercase">White / Black</p>
+                            </div>
+                            <p class="text-3xl font-display font-black text-brand-red mt-4 drop-shadow-[1px_1px_0px_#000000]">R$ 149,90</p>
+                        </div>
+                    </a>
+
+                    <!-- Product 4 -->
+                    <a href="#" onclick="openProduct(event, 'T-Shirt Possui Ecobag', 'estampa-16.jpg', 149.90, 'White / Black')" class="group block cursor-pointer bg-brand-white border-[3px] border-brand-black hover:shadow-[8px_8px_0px_#fcc30b] hover:-translate-y-2 transition-all duration-300 flex flex-col">
+                        <div class="aspect-[4/5] relative flex items-center justify-center p-6 border-b-[3px] border-brand-black bg-brand-white overflow-hidden">
+                            <img src="estampa-16.jpg" alt="Camiseta Possui Ecobag" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="p-5 flex flex-col flex-1 justify-between bg-brand-white">
+                            <div>
+                                <h3 class="text-2xl font-display uppercase font-black text-brand-black group-hover:text-brand-red transition-colors leading-none mb-2">Possui Ecobag</h3>
+                                <p class="text-sm text-brand-black font-bold uppercase">White / Black</p>
+                            </div>
+                            <p class="text-3xl font-display font-black text-brand-red mt-4 drop-shadow-[1px_1px_0px_#000000]">R$ 149,90</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Brand Manifesto / Vibe Section -->
+        <section class="border-b-[3px] border-brand-black bg-brand-red text-brand-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="font-display text-5xl sm:text-7xl uppercase leading-[0.9] mb-8 text-brand-black drop-shadow-[4px_4px_0px_#ffffff]">
+                        Não confunda <br>discurso de ódio<br> com liberdade<br> de expressão.
+                    </h2>
+                    <p class="text-xl font-bold mb-10 max-w-md text-brand-white">
+                        Inspirados no caos urbano e na arte subversiva. Nossas estampas são mais do que tinta no tecido, são declarações. There is no planet B.
+                    </p>
+                    <a href="#" class="btn-brand inline-block px-8 py-4 bg-brand-black text-brand-white border-[3px] border-brand-black hover:bg-brand-white hover:text-brand-black hover:shadow-[6px_6px_0px_#000000] transition-all">
+                        Nossa História
+                    </a>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="aspect-square border-[3px] border-brand-black bg-brand-white flex items-center justify-center overflow-hidden">
+                        <img src="Logo-the-fato-ideia.jpg" alt="The Fato Idea" class="w-full h-full object-cover grayscale mix-blend-multiply">
+                    </div>
+                    <div class="aspect-square border-[3px] border-brand-black bg-brand-black flex items-center justify-center p-4">
+                        <span class="font-display text-4xl text-brand-red text-center uppercase leading-none drop-shadow-[2px_2px_0px_#ffffff]">Alto em Ódio</span>
+                    </div>
+                    <div class="aspect-square border-[3px] border-brand-black bg-brand-red flex items-center justify-center overflow-hidden col-span-2 mix-blend-color-burn">
+                        <img src="Moodboard.jpg" alt="Moodboard The Fato" class="w-full h-full object-cover opacity-60 mix-blend-multiply">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <main id="product-view" class="hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 min-h-[80vh]">
+        <button onclick="closeProduct()" class="mb-8 flex items-center text-brand-black hover:text-brand-red font-bold uppercase tracking-wider text-sm transition-colors">
+            ← Voltar para a loja
+        </button>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <!-- Product Image -->
+            <div class="bg-brand-white border-[3px] border-brand-black aspect-[4/5] overflow-hidden relative flex items-center justify-center p-8 shadow-[8px_8px_0px_#fcc30b]">
+                <img id="pv-image" src="" alt="Product" class="w-full h-full object-contain">
+            </div>
+            <!-- Product Info -->
+            <div class="flex flex-col justify-center">
+                <h1 id="pv-title" class="text-5xl sm:text-6xl font-display uppercase tracking-tight text-brand-black mb-2">Title</h1>
+                <p id="pv-desc" class="text-xl text-brand-black font-bold mb-6">Color</p>
+                <p id="pv-price" class="text-5xl font-display text-brand-red mb-10 drop-shadow-[2px_2px_0px_#000000]">R$ 0,00</p>
+                
+                <div class="mb-8">
+                    <p class="font-bold uppercase text-brand-black text-sm mb-3">Tamanho</p>
+                    <div class="flex space-x-3">
+                        <button class="w-14 h-14 border-[3px] border-brand-black font-display text-xl hover:bg-brand-yellow hover:text-brand-black transition-colors bg-brand-white text-brand-black">P</button>
+                        <button class="w-14 h-14 border-[3px] border-brand-black font-display text-xl bg-brand-black text-brand-white hover:bg-brand-red transition-colors">M</button>
+                        <button class="w-14 h-14 border-[3px] border-brand-black font-display text-xl hover:bg-brand-green hover:text-brand-white transition-colors bg-brand-white text-brand-black">G</button>
+                        <button class="w-14 h-14 border-[3px] border-brand-black font-display text-xl hover:bg-brand-blue hover:text-brand-white transition-colors bg-brand-white text-brand-black">GG</button>
+                    </div>
+                </div>
+
+                <button id="pv-add-btn" class="btn-brand py-5 text-2xl w-full hover:shadow-[6px_6px_0px_#0a97d9]">
+                    Adicionar ao Carrinho
+                </button>
+                
+                <div class="mt-8 border-t-[3px] border-brand-black pt-6">
+                    <p class="font-bold text-brand-black">Modelagem streetwear oversized. Tecido 100% algodão premium sustentável. Estampa em serigrafia de alta durabilidade. Produzido no Brasil.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FATO.AI Drawer -->
+    <div id="ai-overlay" class="fixed inset-0 bg-brand-black bg-opacity-90 z-[60] hidden transition-opacity" onclick="toggleAIDrawer()"></div>
+    <div id="ai-drawer" class="fixed top-0 right-0 h-full w-full sm:w-[400px] bg-brand-white border-l-[3px] border-brand-black z-[70] transform translate-x-full transition-transform duration-300 flex flex-col shadow-2xl">
+        <div class="flex justify-between items-center p-6 border-b-[3px] border-brand-black bg-brand-yellow">
+            <h2 class="font-display uppercase text-3xl flex items-center gap-2 text-brand-black">
+                <svg class="h-8 w-8 text-brand-red" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                FATO.AI
+            </h2>
+            <button onclick="toggleAIDrawer()" class="text-brand-black hover:text-brand-red font-black text-3xl leading-none transition-transform hover:scale-125">✕</button>
+        </div>
+        <div id="ai-chat-history" class="flex-1 overflow-y-auto p-6 flex flex-col gap-4 bg-brand-white">
+            <div class="bg-brand-blue text-brand-white p-4 rounded-2xl rounded-tl-none self-start max-w-[85%] border-[3px] border-brand-black font-bold text-sm shadow-[4px_4px_0px_#000000]">
+                Salve! Sou o FATO.AI, seu stylist digital. Qual a vibe do seu look hoje? Posso te recomendar as melhores peças da coleção pra montar seu kit.
+            </div>
+        </div>
+        <div class="p-4 border-t-[3px] border-brand-black bg-brand-white">
+            <form id="ai-chat-form" class="flex gap-2" onsubmit="handleAISubmit(event)">
+                <input type="text" id="ai-input" placeholder="Manda a ideia..." class="flex-1 border-[3px] border-brand-black px-4 py-3 font-bold text-brand-black focus:outline-none focus:border-brand-red bg-brand-white placeholder-brand-black" autocomplete="off">
+                <button type="submit" class="bg-brand-red text-brand-white px-5 py-3 font-display text-xl uppercase hover:bg-brand-black hover:text-brand-white transition-colors border-[3px] border-brand-black flex items-center justify-center min-w-[90px] shadow-[4px_4px_0px_#000000]">
+                    <span id="ai-btn-text">Enviar</span>
+                    <svg id="ai-btn-spinner" class="animate-spin h-6 w-6 text-brand-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div id="cart-overlay" class="fixed inset-0 bg-brand-black bg-opacity-90 z-[60] hidden transition-opacity" onclick="toggleCart()"></div>
+    <div id="cart-drawer" class="fixed top-0 right-0 h-full w-full sm:w-[400px] bg-brand-white border-l-[3px] border-brand-black z-[70] transform translate-x-full transition-transform duration-300 flex flex-col shadow-2xl">
+        <div class="flex justify-between items-center p-6 border-b-[3px] border-brand-black bg-brand-green">
+            <h2 class="font-display uppercase text-3xl text-brand-white drop-shadow-[2px_2px_0px_#000000]">Carrinho</h2>
+            <button onclick="toggleCart()" class="text-brand-black hover:text-brand-white font-black text-3xl leading-none transition-transform hover:scale-125">✕</button>
+        </div>
+        <div id="cart-items" class="flex-1 overflow-y-auto p-6 flex flex-col gap-6 bg-brand-white">
+            <!-- Items injected by JS -->
+            <p class="text-brand-black font-bold text-center mt-10 text-xl font-display uppercase">Seu carrinho está vazio.</p>
+        </div>
+        <div class="p-6 border-t-[3px] border-brand-black bg-brand-white">
+            <div class="flex justify-between font-display text-4xl mb-6 text-brand-black">
+                <span>TOTAL</span>
+                <span id="cart-total" class="text-brand-red drop-shadow-[2px_2px_0px_#000000]">R$ 0,00</span>
+            </div>
+            <button class="btn-brand w-full py-5 text-2xl tracking-wider hover:shadow-[6px_6px_0px_#4c9f38]">
+                FINALIZAR COMPRA
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let cart = [];
+        const formatPrice = (price) => `R$ ${price.toFixed(2).replace('.', ',')}`;
+
+        function toggleCart(e) {
+            if(e) e.preventDefault();
+            const drawer = document.getElementById('cart-drawer');
+            const overlay = document.getElementById('cart-overlay');
+            drawer.classList.toggle('translate-x-full');
+            overlay.classList.toggle('hidden');
+        }
+
+        function addToCart(title, price, image) {
+            cart.push({ title, price, image });
+            updateCartUI();
+            toggleCart(); // Automatically open drawer
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            document.getElementById('cart-count').innerText = cart.length;
+            const container = document.getElementById('cart-items');
+            
+            if(cart.length === 0) {
+                container.innerHTML = '<p class="text-brand-black font-bold text-center mt-10 text-xl font-display uppercase">Seu carrinho está vazio.</p>';
+                document.getElementById('cart-total').innerText = 'R$ 0,00';
+                return;
+            }
+
+            container.innerHTML = '';
+            let total = 0;
+            cart.forEach((item, index) => {
+                total += item.price;
+                container.innerHTML += `
+                    <div class="flex gap-4 items-center border-[3px] border-brand-black p-3 bg-brand-white relative group shadow-[4px_4px_0px_#fcc30b]">
+                        <div class="w-20 h-24 bg-brand-white border-[3px] border-brand-black flex items-center justify-center p-2">
+                            <img src="${item.image}" class="w-full h-full object-contain">
+                        </div>
+                        <div class="flex-1 pr-6">
+                            <h4 class="font-display font-black uppercase text-xl leading-tight text-brand-black">${item.title}</h4>
+                            <p class="font-black text-brand-red mt-1 text-lg drop-shadow-[1px_1px_0px_#000000]">${formatPrice(item.price)}</p>
+                        </div>
+                        <button onclick="removeFromCart(${index})" class="absolute top-2 right-2 text-brand-black hover:text-brand-red font-black text-xl transition-transform hover:scale-125">✕</button>
+                    </div>
+                `;
+            });
+            document.getElementById('cart-total').innerText = formatPrice(total);
+        }
+
+        function openProduct(e, title, image, price, desc) {
+            if(e) e.preventDefault();
+            document.getElementById('main-content').classList.add('hidden');
+            document.getElementById('product-view').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            document.getElementById('pv-image').src = image;
+            document.getElementById('pv-title').innerText = title;
+            document.getElementById('pv-price').innerText = formatPrice(price);
+            document.getElementById('pv-desc').innerText = desc;
+            
+            document.getElementById('pv-add-btn').onclick = () => addToCart(title, price, image);
+        }
+
+        function closeProduct() {
+            document.getElementById('main-content').classList.remove('hidden');
+            document.getElementById('product-view').classList.add('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // --- THE FATO PHYSICS ENGINE (MATTER.JS) ---
+        let physicsEngine, physicsRender, gravityNormal = true;
+        
+        function initPhysics() {
+            const Engine = Matter.Engine,
+                  Render = Matter.Render,
+                  Runner = Matter.Runner,
+                  Bodies = Matter.Bodies,
+                  Composite = Matter.Composite,
+                  Mouse = Matter.Mouse,
+                  MouseConstraint = Matter.MouseConstraint;
+
+            physicsEngine = Engine.create();
+            const container = document.getElementById('physics-canvas-container');
+            
+            physicsRender = Render.create({
+                element: container,
+                engine: physicsEngine,
+                options: {
+                    width: container.clientWidth,
+                    height: container.clientHeight,
+                    wireframes: false,
+                    background: 'transparent',
+                    pixelRatio: window.devicePixelRatio
+                }
+            });
+
+            // Strict Brand Colors
+            const brandColors = ['#e5243b', '#fcc30b', '#4c9f38', '#0a97d9'];
+            
+            // Create Boundaries (Walls, Floor, Ceiling)
+            const wallOptions = { isStatic: true, render: { fillStyle: 'transparent' } };
+            const updateBoundaries = () => {
+                const w = container.clientWidth;
+                const h = container.clientHeight;
+                const thickness = 100;
+                return [
+                    Bodies.rectangle(w / 2, -thickness / 2, w, thickness, wallOptions), // Ceiling
+                    Bodies.rectangle(w / 2, h + thickness / 2 - 5, w, thickness, wallOptions), // Floor (slightly raised to ensure visibility)
+                    Bodies.rectangle(-thickness / 2, h / 2, thickness, h, wallOptions), // Left Wall
+                    Bodies.rectangle(w + thickness / 2, h / 2, thickness, h, wallOptions) // Right Wall
+                ];
+            };
+            
+            let boundaries = updateBoundaries();
+            Composite.add(physicsEngine.world, boundaries);
+
+            // Function to spawn a random brand shape or LOGO
+            function spawnShape(x, y) {
+                // Adaptive sizing based on screen proportions
+                const isMobile = window.innerWidth < 768;
+                
+                // 70% chance de ser a Logo, 30% chance de ser um polígono brutalista nas cores da marca
+                const isLogo = Math.random() < 0.7;
+
+                let body;
+                if (isLogo) {
+                    const scale = isMobile ? 0.07 : 0.12; 
+                    // Approximate hitbox based on logo proportions
+                    body = Bodies.rectangle(x, y, 400 * scale, 500 * scale, {
+                        restitution: 0.8,
+                        friction: 0.1,
+                        render: {
+                            sprite: {
+                                texture: 'Logo-the-fato-ideia_2.jpg',
+                                xScale: scale,
+                                yScale: scale
+                            }
+                        }
+                    });
+                } else {
+                    const size = isMobile ? 15 + Math.random() * 15 : 25 + Math.random() * 20; 
+                    const color = brandColors[Math.floor(Math.random() * brandColors.length)];
+                    const sides = Math.floor(Math.random() * 3) + 3; // 3 to 5 sides (triângulos e formas afiadas)
+                    
+                    body = Bodies.polygon(x, y, sides, size, {
+                        restitution: 0.9,
+                        friction: 0.05,
+                        render: {
+                            fillStyle: color,
+                            strokeStyle: '#000000',
+                            lineWidth: 3
+                        }
+                    });
+                }
+                
+                // Add random initial rotation and velocity for chaos
+                Matter.Body.setAngularVelocity(body, (Math.random() - 0.5) * 0.5);
+                Composite.add(physicsEngine.world, body);
+            }
+
+            // Initial Drop of Shapes
+            const spawnCount = window.innerWidth < 640 ? 15 : 25; // Less shapes for a cleaner look
+            for (let i = 0; i < spawnCount; i++) {
+                if (i < 12) {
+                    spawnShape(
+                        Math.random() * container.clientWidth, 
+                        Math.random() * (container.clientHeight / 2) // Spawn inside the top half immediately
+                    );
+                } else {
+                    setTimeout(() => {
+                        spawnShape(
+                            Math.random() * container.clientWidth, 
+                            -50 - (Math.random() * 200) // Spawn above screen
+                        );
+                    }, i * 100); // Staggered drop
+                }
+            }
+
+            // Mouse Interaction (Click and Drag)
+            const mouse = Mouse.create(physicsRender.canvas);
+            
+            // CORREÇÃO CRÍTICA DO SCROLL: Impede o Matter.js de sequestrar a rodinha do mouse
+            // Isso permite que o usuário faça o scroll da página normalmente pelo desktop
+            mouse.element.removeEventListener("mousewheel", mouse.mousewheel);
+            mouse.element.removeEventListener("DOMMouseScroll", mouse.mousewheel);
+
+            const mouseConstraint = MouseConstraint.create(physicsEngine, {
+                mouse: mouse,
+                constraint: {
+                    stiffness: 0.2,
+                    render: { visible: false }
+                }
+            });
+            Composite.add(physicsEngine.world, mouseConstraint);
+            physicsRender.mouse = mouse;
+
+            // Spawn new shape on click (if not clicking a body)
+            Matter.Events.on(mouseConstraint, 'mousedown', function(event) {
+                if (!mouseConstraint.body) {
+                    spawnShape(event.mouse.position.x, event.mouse.position.y);
+                }
+            });
+
+            // Start Engine and Renderer
+            Render.run(physicsRender);
+            const runner = Runner.create();
+            Runner.run(runner, physicsEngine);
+
+            // Handle Resize
+            window.addEventListener('resize', () => {
+                physicsRender.canvas.width = container.clientWidth;
+                physicsRender.canvas.height = container.clientHeight;
+                Matter.Composite.remove(physicsEngine.world, boundaries);
+                boundaries = updateBoundaries();
+                Matter.Composite.add(physicsEngine.world, boundaries);
+            });
+            
+            // MAGIC INTERACTION 1: Window Shake (Inertia on Desktop)
+            let lastScreenX = window.screenX;
+            let lastScreenY = window.screenY;
+            setInterval(() => {
+                if (!physicsEngine) return;
+                const dx = window.screenX - lastScreenX;
+                const dy = window.screenY - lastScreenY;
+                
+                if (Math.abs(dx) > 3 || Math.abs(dy) > 3) {
+                    Matter.Composite.allBodies(physicsEngine.world).forEach(body => {
+                        if (!body.isStatic) {
+                            // Apply opposite force to simulate inertia when shaking the browser window
+                            Matter.Body.applyForce(body, body.position, {
+                                x: -dx * 0.0015, 
+                                y: -dy * 0.0015
+                            });
+                        }
+                    });
+                }
+                lastScreenX = window.screenX;
+                lastScreenY = window.screenY;
+            }, 50);
+
+            // MAGIC INTERACTION 2: Mobile Shake (DeviceMotion)
+            window.addEventListener('devicemotion', (event) => {
+                if (!physicsEngine || !event.acceleration) return;
+                const acc = event.acceleration;
+                const shakeMag = Math.abs(acc.x || 0) + Math.abs(acc.y || 0) + Math.abs(acc.z || 0);
+                
+                if (shakeMag > 12) {
+                    Matter.Composite.allBodies(physicsEngine.world).forEach(body => {
+                        if (!body.isStatic) {
+                            Matter.Body.applyForce(body, body.position, {
+                                x: (Math.random() - 0.5) * 0.15,
+                                y: (Math.random() - 0.5) * 0.15
+                            });
+                        }
+                    });
+                }
+            });
+            
+            // MAGIC INTERACTION 3: Mouse Swoosh Wind Effect
+            let lastMouseX = -1;
+            let lastMouseY = -1;
+            let lastMouseTime = Date.now();
+            container.addEventListener('mousemove', (e) => {
+                if (!physicsEngine || lastMouseX === -1) {
+                    lastMouseX = e.clientX;
+                    lastMouseY = e.clientY;
+                    return;
+                }
+                const now = Date.now();
+                const dt = now - lastMouseTime;
+                if (dt === 0) return;
+                
+                const dx = e.clientX - lastMouseX;
+                const dy = e.clientY - lastMouseY;
+                const speed = Math.sqrt(dx*dx + dy*dy) / dt;
+                
+                if (speed > 2) { 
+                    Matter.Composite.allBodies(physicsEngine.world).forEach(body => {
+                        if (!body.isStatic) {
+                            const dist = Math.sqrt(Math.pow(body.position.x - e.clientX, 2) + Math.pow(body.position.y - e.clientY, 2));
+                            if (dist < 150) { // Only affect bodies near the mouse
+                                Matter.Body.applyForce(body, body.position, {
+                                    x: dx * 0.0003,
+                                    y: dy * 0.0003
+                                });
+                            }
+                        }
+                    });
+                }
+                lastMouseX = e.clientX;
+                lastMouseY = e.clientY;
+                lastMouseTime = now;
+            });
+        }
+
+        function toggleGravity() {
+            if(!physicsEngine) return;
+            gravityNormal = !gravityNormal;
+            
+            physicsEngine.gravity.y = gravityNormal ? 1 : -1;
+            
+            const btn = document.getElementById('btn-gravity');
+            const spans = btn.querySelectorAll('span');
+            
+            if(gravityNormal) {
+                spans[0].innerText = '⬇';
+                spans[1].innerText = '⬇';
+                btn.classList.remove('bg-brand-yellow', 'text-brand-black');
+                btn.classList.add('bg-brand-blue', 'text-brand-white');
+            } else {
+                spans[0].innerText = '⬆';
+                spans[1].innerText = '⬆';
+                btn.classList.remove('bg-brand-blue', 'text-brand-white');
+                btn.classList.add('bg-brand-yellow', 'text-brand-black');
+            }
+            
+            Matter.Composite.allBodies(physicsEngine.world).forEach(body => {
+                if(!body.isStatic) {
+                    Matter.Body.applyForce(body, body.position, {
+                        x: (Math.random() - 0.5) * 0.15,
+                        y: (Math.random() - 0.5) * 0.15
+                    });
+                }
+            });
+        }
+
+        function startPhysicsSafely() {
+            if (physicsEngine) return;
+            const container = document.getElementById('physics-canvas-container');
+            // Só inicia se o container existir e tiver largura na tela
+            if (container && container.clientWidth > 0) {
+                initPhysics();
+            } else {
+                // Tenta novamente em 100ms se a tela ainda estiver carregando o layout
+                setTimeout(startPhysicsSafely, 100);
+            }
+        }
+
+        // Tenta iniciar independentemente de como o navegador carrega a página
+        if (document.readyState === 'complete' || document.readyState === 'interactive') {
+            setTimeout(startPhysicsSafely, 100);
+        } else {
+            window.addEventListener('DOMContentLoaded', startPhysicsSafely);
+            window.addEventListener('load', startPhysicsSafely);
+        }
+
+        // --- Dynamic Text Alternator ---
+        const words = ["Pika", "Sustentável", "Caótico", "Brabo", "Verde"];
+        const wordColors = ["text-brand-yellow", "text-brand-green", "text-brand-red", "text-brand-blue", "text-brand-white"];
+        let wordIdx = 0;
+        
+        setInterval(() => {
+            const dynamicWordEl = document.getElementById('dynamic-word');
+            if(dynamicWordEl) {
+                // Fade out and move down
+                dynamicWordEl.style.opacity = '0';
+                dynamicWordEl.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    wordIdx = (wordIdx + 1) % words.length;
+                    dynamicWordEl.innerText = words[wordIdx];
+                    
+                    // Reset classes and apply new color
+                    dynamicWordEl.className = `block mt-2 text-[5rem] sm:text-[8rem] md:text-[10rem] text-stroke-black drop-shadow-[6px_6px_0px_#000000] transition-all duration-300 ${wordColors[wordIdx]}`;
+                    
+                    // Fade in and move to original position
+                    dynamicWordEl.style.opacity = '1';
+                    dynamicWordEl.style.transform = 'translateY(0)';
+                }, 300); // 300ms matches the CSS duration
+            }
+        }, 2500); // Change word every 2.5 seconds
+
+
+        function toggleSubmenu(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const popup = document.getElementById('submenu-popup');
+            
+            if (popup.classList.contains('opacity-0')) {
+                // Open Menu
+                popup.classList.remove('opacity-0', 'scale-50', 'pointer-events-none');
+                popup.classList.add('opacity-100', 'scale-100', 'pointer-events-auto');
+            } else {
+                // Close Menu
+                popup.classList.add('opacity-0', 'scale-50', 'pointer-events-none');
+                popup.classList.remove('opacity-100', 'scale-100', 'pointer-events-auto');
+            }
+        }
+
+        // Close submenu when clicking anywhere else
+        document.addEventListener('click', (e) => {
+            const popup = document.getElementById('submenu-popup');
+            const container = document.getElementById('collections-container');
+            if (popup && !popup.classList.contains('opacity-0') && container && !container.contains(e.target)) {
+                popup.classList.add('opacity-0', 'scale-50', 'pointer-events-none');
+                popup.classList.remove('opacity-100', 'scale-100', 'pointer-events-auto');
+            }
+        });
+
+        // --- FATO.AI Stylist Integration ---
+        const aiChatState = [
+            {
+                role: "user",
+                parts: [{ text: "System prompt: Aja como um stylist de moda streetwear e assistente de vendas da marca 'THE FATO'. Você tem uma atitude ousada, direta, um pouco rebelde e usa gírias do streetwear brasileiro (ex: 'salve', 'kit', 'brabo', 'drip', 'mano'). Recomende peças do nosso catálogo com base no que o usuário pedir. Nosso catálogo atual: 1. 'T-Shirt Ainda Se Lembra' (estampa borboleta/lagarta), 2. 'T-Shirt Melzinho' (estampa abelha/chupeta), 3. 'T-Shirt Let It Quack' (estampa de patos psicodélica), 4. 'T-Shirt Possui Ecobag' (estampa canguru e estrela). Todas custam R$ 149,90. Mantenha as respostas bem curtas, diretas e autênticas, como mensagens de chat (máximo 2-3 frases curtas)." }]
+            },
+            {
+                role: "model",
+                parts: [{ text: "Pode pá. Salve! Bora montar esse kit brabo pra você." }]
+            }
+        ];
+
+        function toggleAIDrawer(e) {
+            if(e) e.preventDefault();
+            const drawer = document.getElementById('ai-drawer');
+            const overlay = document.getElementById('ai-overlay');
+            drawer.classList.toggle('translate-x-full');
+            overlay.classList.toggle('hidden');
+        }
+
+        function appendMessage(sender, text) {
+            const chatHistory = document.getElementById('ai-chat-history');
+            const msgDiv = document.createElement('div');
+            
+            if (sender === 'user') {
+                msgDiv.className = 'bg-brand-red text-brand-white p-4 rounded-2xl rounded-tr-none self-end max-w-[85%] border-[3px] border-brand-black font-bold text-sm shadow-[4px_4px_0px_#000000]';
+            } else {
+                msgDiv.className = 'bg-brand-blue text-brand-white p-4 rounded-2xl rounded-tl-none self-start max-w-[85%] border-[3px] border-brand-black font-bold text-sm shadow-[4px_4px_0px_#000000]';
+            }
+            
+            msgDiv.innerText = text;
+            chatHistory.appendChild(msgDiv);
+            chatHistory.scrollTop = chatHistory.scrollHeight;
+        }
+
+        async function handleAISubmit(e) {
+            e.preventDefault();
+            const input = document.getElementById('ai-input');
+            const btnText = document.getElementById('ai-btn-text');
+            const btnSpinner = document.getElementById('ai-btn-spinner');
+            const message = input.value.trim();
+            
+            if (!message) return;
+
+            appendMessage('user', message);
+            input.value = '';
+            input.disabled = true;
+            btnText.classList.add('hidden');
+            btnSpinner.classList.remove('hidden');
+
+            aiChatState.push({ role: "user", parts: [{ text: message }] });
+
+            try {
+                const apiKey = ""; // Platform automatically provides key
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+                
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ contents: aiChatState })
+                });
+                
+                const data = await response.json();
+                
+                if (data.candidates && data.candidates[0].content) {
+                    const reply = data.candidates[0].content.parts[0].text;
+                    appendMessage('model', reply);
+                    aiChatState.push({ role: "model", parts: [{ text: reply }] });
+                } else {
+                    appendMessage('model', "Putz, deu um erro aqui na matrix. Manda a ideia de novo.");
+                }
+            } catch (error) {
+                console.error("FATO.AI Error:", error);
+                appendMessage('model', "Caiu a rede aqui, mano. Tenta de novo.");
+            } finally {
+                input.disabled = false;
+                btnText.classList.remove('hidden');
+                btnSpinner.classList.add('hidden');
+                input.focus();
+            }
+        }
+    </script>
+
+    <!-- Footer -->
+    <footer class="bg-brand-black text-brand-white pt-16 pb-8 border-t-[3px] border-brand-red">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12 border-b-[3px] border-brand-white pb-12">
+                
+                <div class="col-span-1 md:col-span-2">
+                    <img class="h-20 w-auto mb-6 bg-brand-white p-3 border-[3px] border-brand-white" src="Logo-the-fato-ideia.jpg" alt="The Fato Logo">
+                    <p class="text-brand-white font-bold max-w-sm mb-6 text-lg">
+                        Junte-se à revolução. Assine nossa newsletter para receber drops exclusivos, descontos e novidades antes de todo mundo.
+                    </p>
+                    <form class="flex max-w-md border-[3px] border-brand-white p-1 bg-brand-black focus-within:border-brand-red transition-colors">
+                        <input type="email" placeholder="Seu melhor e-mail" class="flex-1 bg-transparent px-4 py-2 text-brand-white focus:outline-none font-bold placeholder-brand-white">
+                        <button type="submit" class="bg-brand-red text-brand-white px-6 py-2 font-display text-xl uppercase hover:bg-brand-white hover:text-brand-black transition-colors">
+                            Assinar
+                        </button>
+                    </form>
+                </div>
+
+                <div>
+                    <h4 class="text-2xl font-display uppercase mb-4 text-brand-yellow drop-shadow-[2px_2px_0px_#000000]">Shop</h4>
+                    <ul class="space-y-3 font-bold text-brand-white">
+                        <li><a href="#" class="hover:text-brand-red hover:underline decoration-[3px] underline-offset-4 transition-all">Todas as Camisetas</a></li>
+                        <li><a href="#" class="hover:text-brand-blue hover:underline decoration-[3px] underline-offset-4 transition-all">Lançamentos</a></li>
+                        <li><a href="#" class="hover:text-brand-green hover:underline decoration-[3px] underline-offset-4 transition-all">Acessórios</a></li>
+                        <li><a href="#" class="hover:text-brand-yellow hover:underline decoration-[3px] underline-offset-4 transition-all">Sale</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-2xl font-display uppercase mb-4 text-brand-blue drop-shadow-[2px_2px_0px_#000000]">Suporte</h4>
+                    <ul class="space-y-3 font-bold text-brand-white">
+                        <li><a href="#" class="hover:text-brand-red hover:underline decoration-[3px] underline-offset-4 transition-all">FAQ</a></li>
+                        <li><a href="#" class="hover:text-brand-blue hover:underline decoration-[3px] underline-offset-4 transition-all">Trocas e Devoluções</a></li>
+                        <li><a href="#" class="hover:text-brand-green hover:underline decoration-[3px] underline-offset-4 transition-all">Guia de Medidas</a></li>
+                        <li><a href="#" class="hover:text-brand-yellow hover:underline decoration-[3px] underline-offset-4 transition-all">Contato</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-between items-center text-brand-white text-sm font-bold uppercase tracking-wider">
+                <p>&copy; 2026 THE FATO. NO PLANET B.</p>
+                <div class="flex space-x-6 mt-6 md:mt-0">
+                    <a href="#" class="hover:text-brand-red transition-colors">Instagram</a>
+                    <a href="#" class="hover:text-brand-blue transition-colors">TikTok</a>
+                    <a href="#" class="hover:text-brand-green transition-colors">Twitter</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
