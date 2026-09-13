@@ -1,18 +1,40 @@
+/* ═══════════════════════════════════════════════════════════
+   THE FATO — Main JavaScript (Refactored)
+   Dark Industrial Streetwear Edition
+   ═══════════════════════════════════════════════════════════ */
+
+// ── Cart State ─────────────────────────────────────────────
 let cart = [];
 const formatPrice = (price) => `R$ ${price.toFixed(2).replace('.', ',')}`;
 
+// ── Drawer Toggle (Generic) ────────────────────────────────
+function openDrawer(panelId, overlayId) {
+    document.getElementById(panelId).classList.add('open');
+    document.getElementById(overlayId).classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeDrawer(panelId, overlayId) {
+    document.getElementById(panelId).classList.remove('open');
+    document.getElementById(overlayId).classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+// ── Cart ───────────────────────────────────────────────────
 function toggleCart(e) {
     if (e) e.preventDefault();
-    const drawer = document.getElementById('cart-drawer');
-    const overlay = document.getElementById('cart-overlay');
-    drawer.classList.toggle('translate-x-full');
-    overlay.classList.toggle('hidden');
+    const panel = document.getElementById('cart-drawer');
+    if (panel.classList.contains('open')) {
+        closeDrawer('cart-drawer', 'cart-overlay');
+    } else {
+        openDrawer('cart-drawer', 'cart-overlay');
+    }
 }
 
 function addToCart(title, price, image) {
     cart.push({ title, price, image });
     updateCartUI();
-    toggleCart(); // Automatically open drawer
+    openDrawer('cart-drawer', 'cart-overlay');
 }
 
 function removeFromCart(index) {
@@ -21,11 +43,23 @@ function removeFromCart(index) {
 }
 
 function updateCartUI() {
-    document.getElementById('cart-count').innerText = cart.length;
+    const badge = document.getElementById('cart-count');
+    if (badge) {
+        badge.innerText = cart.length;
+        badge.style.display = cart.length > 0 ? 'flex' : 'none';
+    }
+
     const container = document.getElementById('cart-items');
+    if (!container) return;
 
     if (cart.length === 0) {
-        container.innerHTML = '<p class="text-brand-black font-bold text-center mt-10 text-xl font-display uppercase">Seu carrinho está vazio.</p>';
+        container.innerHTML = `
+            <div class="flex flex-col items-center justify-center h-full gap-4 text-center">
+                <svg class="w-16 h-16 text-[var(--c-border)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                </svg>
+                <p class="text-[var(--c-text-dim)] text-sm uppercase tracking-[0.2em] font-semibold">Carrinho vazio</p>
+            </div>`;
         document.getElementById('cart-total').innerText = 'R$ 0,00';
         return;
     }
@@ -35,21 +69,22 @@ function updateCartUI() {
     cart.forEach((item, index) => {
         total += item.price;
         container.innerHTML += `
-            <div class="flex gap-4 items-center border-[3px] border-brand-black p-3 bg-brand-white relative group shadow-[4px_4px_0px_#fcc30b]">
-                <div class="w-20 h-24 bg-brand-white border-[3px] border-brand-black flex items-center justify-center p-2">
-                    <img src="${item.image}" class="w-full h-full object-contain">
+            <div class="flex gap-4 items-center border border-[var(--c-border)] p-3 group relative">
+                <div class="w-16 h-20 bg-[var(--c-surface2)] flex items-center justify-center overflow-hidden flex-shrink-0">
+                    <img src="${item.image}" class="w-full h-full object-cover" alt="${item.title}">
                 </div>
-                <div class="flex-1 pr-6">
-                    <h4 class="font-display font-black uppercase text-xl leading-tight text-brand-black">${item.title}</h4>
-                    <p class="font-black text-brand-red mt-1 text-lg drop-shadow-[1px_1px_0px_#000000]">${formatPrice(item.price)}</p>
+                <div class="flex-1 min-w-0 pr-6">
+                    <h4 class="font-display text-base uppercase leading-tight text-[var(--c-text)] truncate">${item.title}</h4>
+                    <p class="text-sm text-[var(--c-accent)] mt-1 font-semibold">${formatPrice(item.price)}</p>
                 </div>
-                <button onclick="removeFromCart(${index})" class="absolute top-2 right-2 text-brand-black hover:text-brand-red font-black text-xl transition-transform hover:scale-125">✕</button>
-            </div>
-        `;
+                <button onclick="removeFromCart(${index})"
+                    class="absolute top-2 right-2 w-6 h-6 flex items-center justify-center text-[var(--c-text-dim)] hover:text-[var(--c-accent)] transition-colors text-sm">✕</button>
+            </div>`;
     });
     document.getElementById('cart-total').innerText = formatPrice(total);
 }
 
+// ── Product View ───────────────────────────────────────────
 function openProduct(e, title, image, price, desc) {
     if (e) e.preventDefault();
     document.getElementById('main-content').classList.add('hidden');
@@ -70,33 +105,26 @@ function closeProduct() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// --- Dynamic Text Alternator ---
-const words = ["Revolucionário", "Sustentável", "Caótico", "Brabo", "Verde", "Irônico"];
-const wordColors = ["text-brand-yellow", "text-brand-blue", "text-brand-red", "text-brand-white", "text-brand-green", "text-brand-white"];
+// ── Hero Dynamic Text ──────────────────────────────────────
+const words = ["REVOLUCIONÁRIO", "SUSTENTÁVEL", "CAÓTICO", "IRÔNICO", "INEVITÁVEL", "INCÔMODO"];
 let wordIdx = 0;
 
 setInterval(() => {
-    const dynamicWordEl = document.getElementById('dynamic-word');
-    if (dynamicWordEl) {
-        // Fade out and move down
-        dynamicWordEl.style.opacity = '0';
-        dynamicWordEl.style.transform = 'translateY(20px)';
+    const el = document.getElementById('dynamic-word');
+    if (!el) return;
 
-        setTimeout(() => {
-            wordIdx = (wordIdx + 1) % words.length;
-            dynamicWordEl.innerText = words[wordIdx];
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(-10px)';
 
-            // Reset classes and apply new color
-            dynamicWordEl.className = `block mt-2 text-[5rem] sm:text-[8rem] md:text-[10rem] text-stroke-black drop-shadow-[6px_6px_0px_#000000] transition-all duration-300 ${wordColors[wordIdx]}`;
+    setTimeout(() => {
+        wordIdx = (wordIdx + 1) % words.length;
+        el.innerText = words[wordIdx];
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+    }, 350);
+}, 3000);
 
-            // Fade in and move to original position
-            dynamicWordEl.style.opacity = '1';
-            dynamicWordEl.style.transform = 'translateY(0)';
-        }, 300); // 300ms matches the CSS duration
-    }
-}, 2500); // Change word every 2.5 seconds
-
-
+// ── Submenu Toggle ─────────────────────────────────────────
 function toggleSubmenu(e) {
     e.preventDefault();
     e.stopPropagation();
@@ -104,31 +132,28 @@ function toggleSubmenu(e) {
     const chevron = document.getElementById('collections-chevron');
 
     if (popup.classList.contains('opacity-0')) {
-        // Open Menu
-        popup.classList.remove('opacity-0', 'scale-50', 'pointer-events-none');
+        popup.classList.remove('opacity-0', 'scale-95', 'pointer-events-none');
         popup.classList.add('opacity-100', 'scale-100', 'pointer-events-auto');
         if (chevron) chevron.classList.add('rotate-180');
     } else {
-        // Close Menu
-        popup.classList.add('opacity-0', 'scale-50', 'pointer-events-none');
+        popup.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
         popup.classList.remove('opacity-100', 'scale-100', 'pointer-events-auto');
         if (chevron) chevron.classList.remove('rotate-180');
     }
 }
 
-// Close submenu when clicking anywhere else
 document.addEventListener('click', (e) => {
     const popup = document.getElementById('submenu-popup');
     const container = document.getElementById('collections-container');
     const chevron = document.getElementById('collections-chevron');
     if (popup && !popup.classList.contains('opacity-0') && container && !container.contains(e.target)) {
-        popup.classList.add('opacity-0', 'scale-50', 'pointer-events-none');
+        popup.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
         popup.classList.remove('opacity-100', 'scale-100', 'pointer-events-auto');
         if (chevron) chevron.classList.remove('rotate-180');
     }
 });
 
-// --- FATO.AI Stylist Integration ---
+// ── FATO.AI Stylist Drawer ─────────────────────────────────
 const aiChatState = [
     {
         role: "user",
@@ -142,10 +167,12 @@ const aiChatState = [
 
 function toggleAIDrawer(e) {
     if (e) e.preventDefault();
-    const drawer = document.getElementById('ai-drawer');
-    const overlay = document.getElementById('ai-overlay');
-    drawer.classList.toggle('translate-x-full');
-    overlay.classList.toggle('hidden');
+    const panel = document.getElementById('ai-drawer');
+    if (panel.classList.contains('open')) {
+        closeDrawer('ai-drawer', 'ai-overlay');
+    } else {
+        openDrawer('ai-drawer', 'ai-overlay');
+    }
 }
 
 function appendMessage(sender, text) {
@@ -153,9 +180,9 @@ function appendMessage(sender, text) {
     const msgDiv = document.createElement('div');
 
     if (sender === 'user') {
-        msgDiv.className = 'bg-brand-red text-brand-white p-4 rounded-2xl rounded-tr-none self-end max-w-[85%] border-[3px] border-brand-black font-bold text-sm shadow-[4px_4px_0px_#000000]';
+        msgDiv.className = 'self-end max-w-[85%] px-4 py-3 text-sm font-medium bg-[var(--c-accent)] text-[var(--c-black)] rounded-2xl rounded-tr-sm';
     } else {
-        msgDiv.className = 'bg-brand-blue text-brand-white p-4 rounded-2xl rounded-tl-none self-start max-w-[85%] border-[3px] border-brand-black font-bold text-sm shadow-[4px_4px_0px_#000000]';
+        msgDiv.className = 'self-start max-w-[85%] px-4 py-3 text-sm font-medium bg-[var(--c-surface2)] text-[var(--c-text)] border border-[var(--c-border)] rounded-2xl rounded-tl-sm';
     }
 
     msgDiv.innerText = text;
@@ -181,7 +208,7 @@ async function handleAISubmit(e) {
     aiChatState.push({ role: "user", parts: [{ text: message }] });
 
     try {
-        const apiKey = ""; // Platform automatically provides key
+        const apiKey = "";
         const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
 
         const response = await fetch(apiUrl, {
@@ -197,11 +224,11 @@ async function handleAISubmit(e) {
             appendMessage('model', reply);
             aiChatState.push({ role: "model", parts: [{ text: reply }] });
         } else {
-            appendMessage('model', "Putz, deu um erro aqui na matrix. Manda a ideia de novo.");
+            appendMessage('model', "Deu ruim aqui. Manda de novo.");
         }
     } catch (error) {
         console.error("FATO.AI Error:", error);
-        appendMessage('model', "Caiu a rede aqui, mano. Tenta de novo.");
+        appendMessage('model', "Caiu a rede. Tenta de novo.");
     } finally {
         input.disabled = false;
         btnText.classList.remove('hidden');
@@ -209,3 +236,41 @@ async function handleAISubmit(e) {
         input.focus();
     }
 }
+
+// ── Intersection Observer (Scroll Reveal) ──────────────────
+document.addEventListener('DOMContentLoaded', () => {
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        },
+        { threshold: 0.1, rootMargin: '0px 0px -60px 0px' }
+    );
+
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+    // Size selector buttons
+    document.querySelectorAll('.size-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        });
+    });
+
+    // Init cart badge
+    const badge = document.getElementById('cart-count');
+    if (badge) badge.style.display = 'none';
+
+    // Mobile nav toggle
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const mobileNav = document.getElementById('mobile-nav');
+    if (mobileBtn && mobileNav) {
+        mobileBtn.addEventListener('click', () => {
+            mobileNav.classList.toggle('hidden');
+        });
+    }
+});

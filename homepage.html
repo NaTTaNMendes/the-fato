@@ -4,11 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE FATO | Streetwear & Design</title>
+    <title>THE FATO | Streetwear Consciente</title>
+
     <script src="https://cdn.tailwindcss.com"></script>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@400;900&family=Space+Grotesk:wght@400;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@400;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
         rel="stylesheet">
 
     <script>
@@ -16,507 +19,584 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: {
-                            red: '#e5243b',
-                            yellow: '#fcc30b',
-                            green: '#4c9f38',
-                            blue: '#0a97d9',
-                            black: '#000000',
-                            white: '#ffffff'
-                        }
+                        carbon:  { 950: '#0a0a0a', 900: '#141414', 800: '#1a1a1a', 700: '#2a2a2a', 600: '#3a3a3a' },
+                        bone:    { DEFAULT: '#e8e4de', 100: '#f5f3f0' },
+                        toxic:   { DEFAULT: '#ff2d20', dark: '#cc2419', glow: 'rgba(255,45,32,0.15)' },
+                        muted:   '#8a8680'
                     },
                     fontFamily: {
-                        sans: ['"Space Grotesk"', 'sans-serif'],
-                        display: ['"Londrina Solid"', 'cursive'],
-                    }
+                        display: ['"Londrina Solid"', 'system-ui', 'sans-serif'],
+                        body:    ['"Space Grotesk"', 'system-ui', 'sans-serif'],
+                        mono:    ['"Space Mono"', '"Courier New"', 'monospace'],
+                    },
                 }
             }
         }
     </script>
+
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
-<body class="antialiased font-sans">
+<body class="antialiased font-body">
 
-    <!-- Marquee Announcement -->
-    <div
-        class="marquee-container sticky top-0 z-[100] bg-brand-red border-b-[3px] border-brand-black text-brand-white py-2 shadow-md">
-        <div class="marquee-content font-display text-xl sm:text-2xl uppercase tracking-wider">
-            THE FATO • STREETWEAR CULTURE • NO PLANET B • THE FATO • A REVOLUÇÃO SERÁ FOFA • THE FATO • STREETWEAR
-            CULTURE • NO PLANET B • THE FATO • A REVOLUÇÃO SERÁ FOFA • THE FATO • STREETWEAR CULTURE • NO PLANET B • THE
-            FATO • A REVOLUÇÃO SERÁ FOFA •
+    <!-- ═══════════════════════ MARQUEE ═══════════════════════ -->
+    <div class="marquee-container sticky top-0 z-[100] bg-carbon-950 border-b border-carbon-700">
+        <div class="marquee-content font-mono text-[0.65rem] sm:text-xs uppercase tracking-[0.3em] text-muted py-1">
+            <span class="text-toxic">⬤</span>&nbsp;&nbsp;THERE IS NO PLANET B&nbsp;&nbsp;—&nbsp;&nbsp;SUSTENTABILIDADE NÃO É TREND, É URGÊNCIA&nbsp;&nbsp;—&nbsp;&nbsp;CONSUMO CONSCIENTE OU EXTINÇÃO&nbsp;&nbsp;—&nbsp;&nbsp;STREETWEAR COM PROPÓSITO&nbsp;&nbsp;—&nbsp;&nbsp;<span class="text-toxic">⬤</span>&nbsp;&nbsp;THERE IS NO PLANET B&nbsp;&nbsp;—&nbsp;&nbsp;SUSTENTABILIDADE NÃO É TREND, É URGÊNCIA&nbsp;&nbsp;—&nbsp;&nbsp;CONSUMO CONSCIENTE OU EXTINÇÃO&nbsp;&nbsp;—&nbsp;&nbsp;STREETWEAR COM PROPÓSITO&nbsp;&nbsp;—&nbsp;&nbsp;
         </div>
     </div>
 
-    <!-- Navigation -->
-    <div
-        class="fixed top-12 sm:top-14 left-1/2 -translate-x-1/2 w-[95%] lg:w-[85%] max-w-6xl z-[55] pointer-events-none">
-        <header
-            class="pointer-events-auto bg-brand-white border-[3px] border-brand-black rounded-[40px] shadow-[6px_6px_0px_#e5243b] px-5 sm:px-8 py-3 flex justify-between items-center transition-all">
-            <!-- Mobile Menu Button -->
-            <div class="flex items-center sm:hidden">
-                <button type="button"
-                    class="text-brand-black hover:text-brand-red focus:outline-none transition-transform hover:scale-110">
-                    <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="3"
-                            d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-                </button>
-            </div>
+    <!-- ═══════════════════ NAVIGATION ═══════════════════════ -->
+    <div class="fixed top-[var(--marquee-h)] left-0 right-0 z-[55]">
+        <header class="max-w-[1400px] mx-auto flex justify-between items-center px-6 lg:px-10 py-4 bg-carbon-950/80 backdrop-blur-xl border-b border-carbon-700/50">
 
-            <!-- Logo (Left) -->
-            <div class="flex-shrink-0 flex items-center justify-center">
+            <!-- Logo -->
+            <div class="flex-shrink-0 w-20 sm:w-24">
                 <a href="#">
-                    <img class="h-14 sm:h-16 w-auto object-contain" src="assets/images/banners/logo.jpg"
-                        alt="The Fato Logo">
+                    <img class="w-full h-auto brightness-0 invert opacity-90 hover:opacity-100 transition-opacity"
+                        src="assets/images/banners/logo.svg" alt="The Fato">
                 </a>
             </div>
 
-            <!-- Centralized Links (Center) -->
-            <nav class="hidden sm:flex items-center justify-center space-x-8 lg:space-x-12 flex-1 relative">
-                <!-- Coleções with Simple Dropdown -->
-                <div class="relative flex items-center" id="collections-container">
+            <!-- Center Nav -->
+            <nav class="hidden md:flex items-center gap-10 flex-1 justify-center">
+                <div class="relative" id="collections-container">
                     <button onclick="toggleSubmenu(event)"
-                        class="text-brand-black hover:text-brand-red font-display text-2xl uppercase tracking-wider transition-colors hover:-translate-y-1 inline-block transform duration-200 flex items-center gap-1 group">
+                        class="flex items-center gap-1 text-[0.75rem] font-semibold uppercase tracking-[0.2em] text-bone hover:text-toxic transition-colors">
                         Coleções
-                        <svg id="collections-chevron" class="w-5 h-5 -mb-1 transform transition-transform duration-300"
+                        <svg id="collections-chevron" class="w-3.5 h-3.5 transform transition-transform duration-300"
                             fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="3" d="M19 9l-7 7-7-7">
-                            </path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                         </svg>
                     </button>
 
-                    <!-- Simple Popup Dropdown -->
-                    <div class="absolute top-full mt-4 left-1/2 -translate-x-1/2 z-[70]">
+                    <!-- Dropdown -->
+                    <div class="absolute top-full mt-3 left-1/2 -translate-x-1/2 z-[70]">
                         <div id="submenu-popup"
-                            class="w-56 bg-brand-white border-[3px] border-brand-black shadow-[6px_6px_0px_#e5243b] opacity-0 scale-50 pointer-events-none transition-all duration-300 ease-[cubic-bezier(0.68,-0.55,0.265,1.55)] origin-top rounded-xl overflow-hidden flex flex-col">
+                            class="w-52 bg-carbon-900 border border-carbon-700 opacity-0 scale-95 pointer-events-none transition-all duration-300 origin-top overflow-hidden">
                             <a href="#"
-                                class="font-display text-2xl text-brand-black hover:bg-brand-yellow hover:text-brand-black px-6 py-3 border-b-[3px] border-brand-black uppercase transition-colors">Inverno
-                                Caos</a>
+                                class="block px-5 py-3 text-xs font-semibold uppercase tracking-[0.15em] text-bone hover:bg-toxic hover:text-carbon-950 transition-colors border-b border-carbon-700">Inverno Caos</a>
                             <a href="#"
-                                class="font-display text-2xl text-brand-black hover:bg-brand-green hover:text-brand-white px-6 py-3 border-b-[3px] border-brand-black uppercase transition-colors">No
-                                Planet B</a>
+                                class="block px-5 py-3 text-xs font-semibold uppercase tracking-[0.15em] text-bone hover:bg-toxic hover:text-carbon-950 transition-colors border-b border-carbon-700">No Planet B</a>
                             <a href="#"
-                                class="font-display text-2xl text-brand-black hover:bg-brand-blue hover:text-brand-white px-6 py-3 uppercase transition-colors">Básicos</a>
+                                class="block px-5 py-3 text-xs font-semibold uppercase tracking-[0.15em] text-bone hover:bg-toxic hover:text-carbon-950 transition-colors">Básicos</a>
                         </div>
                     </div>
                 </div>
 
-                <a href="#"
-                    class="text-brand-black hover:text-brand-red font-display text-2xl uppercase tracking-wider transition-colors hover:-translate-y-1 inline-block transform duration-200">Sobre
-                    Nós</a>
+                <a href="#shop"
+                    class="text-[0.75rem] font-semibold uppercase tracking-[0.2em] text-bone hover:text-toxic transition-colors">
+                    Drops
+                </a>
+                <a href="#manifesto"
+                    class="text-[0.75rem] font-semibold uppercase tracking-[0.2em] text-bone hover:text-toxic transition-colors">
+                    Manifesto
+                </a>
             </nav>
 
-            <!-- Icons (Right) -->
-            <div class="flex items-center space-x-4 sm:space-x-6">
-                <a href="#" class="text-brand-black hover:text-brand-red transition-transform hover:scale-110">
-                    <span class="sr-only">Buscar</span>
-                    <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="3"
-                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
-                </a>
-
-                <!-- FATO.AI Stylist Icon -->
+            <!-- Right Icons -->
+            <div class="flex items-center gap-5">
+                <!-- FATO.AI -->
                 <button onclick="toggleAIDrawer(event)"
-                    class="text-brand-black hover:text-brand-red transition-transform hover:scale-110 relative group">
-                    <span class="sr-only">FATO.AI Stylist</span>
-                    <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                    class="text-muted hover:text-toxic transition-colors relative group">
+                    <span class="sr-only">FATO.AI</span>
+                    <svg class="w-[18px] h-[18px]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M13 10V3L4 14h7v7l9-11h-7z" />
                     </svg>
-                    <span
-                        class="absolute -bottom-12 left-1/2 -translate-x-1/2 bg-brand-black text-brand-white text-xs font-bold px-3 py-1 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none border-2 border-brand-black shadow-[3px_3px_0px_#e5243b]">FATO.AI</span>
+                    <span class="absolute -bottom-8 left-1/2 -translate-x-1/2 bg-carbon-900 text-bone text-[0.6rem] font-mono uppercase tracking-widest px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap border border-carbon-700 pointer-events-none">fato.ai</span>
                 </button>
 
-                <a href="#" onclick="toggleCart(event)"
-                    class="text-brand-black hover:text-brand-red transition-transform hover:scale-110 relative">
+                <!-- Cart -->
+                <button onclick="toggleCart(event)"
+                    class="text-muted hover:text-toxic transition-colors relative">
                     <span class="sr-only">Carrinho</span>
-                    <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="3"
+                    <svg class="w-[18px] h-[18px]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                     </svg>
-                    <!-- Cart Badge -->
                     <span id="cart-count"
-                        class="absolute -top-2 -right-2 bg-brand-red text-brand-white text-xs font-bold rounded-full h-6 w-6 flex items-center justify-center border-2 border-brand-black">0</span>
-                </a>
-            </div>
-        </header>
-    </div>
-
-    <main id="main-content">
-        <!-- Hero Banner with Physics and Dynamic Text -->
-        <section
-            class="relative bg-brand-white border-b-[3px] border-brand-black overflow-hidden pt-32 pb-16 px-4 min-h-[90vh] flex items-center justify-center">
-
-            <!-- Fullscreen Background Image -->
-            <div class="absolute inset-0 z-0 pointer-events-none">
-                <img src="assets/images/banners/Moodboard.jpg"
-                    class="w-full h-full object-cover opacity-60 mix-blend-multiply grayscale" alt="The Fato Vibe">
-                <!-- Light overlay to keep it clean and highlight the physics shapes/text -->
-                <div class="absolute inset-0 bg-brand-white/85"></div>
-            </div>
-
-
-
-            <div
-                class="max-w-6xl w-full mx-auto relative z-20 text-center flex flex-col items-center pointer-events-none">
-
-                <!-- Dynamic Text (No bounding box, clean layout) -->
-                <h1
-                    class="font-display text-5xl sm:text-7xl md:text-8xl text-brand-black text-center uppercase p-4 leading-[0.9] drop-shadow-[3px_3px_0px_#ffffff]">
-                    <span id="dynamic-word"
-                        class="block mt-2 text-[5rem] sm:text-[8rem] md:text-[10rem] text-brand-yellow text-stroke-black drop-shadow-[6px_6px_0px_#000000] transition-all duration-300">Pika</span>
-                    The Fato
-                    <br>
-
-                </h1>
-
-                <p
-                    class="text-xl sm:text-2xl font-bold text-brand-black max-w-2xl mx-auto mt-4 mb-10 bg-brand-white/90 backdrop-blur-sm px-6 py-4 border-[3px] border-brand-black rounded-xl shadow-[4px_4px_0px_#000000] pointer-events-auto">
-                    Streetwear autêntico. Expressão sem filtros. Descubra a nova coleção.
-                </p>
-
-                <div class="flex flex-col sm:flex-row gap-6 pointer-events-auto items-center">
-                    <a href="#shop"
-                        class="btn-brand px-12 py-4 text-2xl uppercase font-display bg-brand-red text-brand-white border-[3px] border-brand-black hover:bg-brand-black hover:text-brand-white hover:shadow-[8px_8px_0px_#fcc30b] transition-all">
-                        Comprar Agora
-                    </a>
-
-                </div>
-            </div>
-
-        </section>
-
-        <!-- Shop Grid -->
-        <section id="shop" class="bg-brand-white py-20 px-4 border-b-[3px] border-brand-black">
-            <div class="max-w-7xl mx-auto">
-                <div class="flex justify-between items-end mb-10 border-b-[3px] border-brand-black pb-4">
-                    <h2 class="font-display text-5xl text-brand-black uppercase">Últimos Drops</h2>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <!-- Product 1 -->
-                    <a href="#"
-                        onclick="openProduct(event, 'T-Shirt Ainda Se Lembra', 'estampa-8.jpg', 149.90, 'Off-White / Black')"
-                        class="group block cursor-pointer bg-brand-white border-[3px] border-brand-black hover:shadow-[8px_8px_0px_#fcc30b] hover:-translate-y-2 transition-all duration-300 flex flex-col">
-                        <div
-                            class="aspect-[4/5] relative flex items-center justify-center p-6 border-b-[3px] border-brand-black bg-brand-white overflow-hidden">
-                            <div
-                                class="absolute top-0 left-0 bg-brand-red text-brand-white text-xs font-bold uppercase px-3 py-1 border-r-[3px] border-b-[3px] border-brand-black z-10">
-                                Novo</div>
-                            <img src="assets/images/products/estampa-8.jpg" alt="Camiseta Ainda Se Lembra"
-                                class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
-                        </div>
-                        <div class="p-5 flex flex-col flex-1 justify-between bg-brand-white">
-                            <div>
-                                <h3
-                                    class="text-2xl font-display uppercase font-black text-brand-black group-hover:text-brand-red transition-colors leading-none mb-2">
-                                    Ainda Se Lembra</h3>
-                                <p class="text-sm text-brand-black font-bold uppercase">Off-White / Black</p>
-                            </div>
-                            <p
-                                class="text-3xl font-display font-black text-brand-red mt-4 drop-shadow-[1px_1px_0px_#000000]">
-                                R$ 149,90</p>
-                        </div>
-                    </a>
-
-                    <!-- Product 2 -->
-                    <a href="#"
-                        onclick="openProduct(event, 'T-Shirt Melzinho', 'estampa-6.jpg', 149.90, 'White / Black')"
-                        class="group block cursor-pointer bg-brand-white border-[3px] border-brand-black hover:shadow-[8px_8px_0px_#0a97d9] hover:-translate-y-2 transition-all duration-300 flex flex-col">
-                        <div
-                            class="aspect-[4/5] relative flex items-center justify-center p-6 border-b-[3px] border-brand-black bg-brand-white overflow-hidden">
-                            <img src="assets/images/products/estampa-6.jpg" alt="Camiseta Melzinho na Chupeta"
-                                class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
-                        </div>
-                        <div class="p-5 flex flex-col flex-1 justify-between bg-brand-white">
-                            <div>
-                                <h3
-                                    class="text-2xl font-display uppercase font-black text-brand-black group-hover:text-brand-red transition-colors leading-none mb-2">
-                                    Melzinho</h3>
-                                <p class="text-sm text-brand-black font-bold uppercase">White / Black</p>
-                            </div>
-                            <p
-                                class="text-3xl font-display font-black text-brand-red mt-4 drop-shadow-[1px_1px_0px_#000000]">
-                                R$ 149,90</p>
-                        </div>
-                    </a>
-
-                    <!-- Product 3 -->
-                    <a href="#"
-                        onclick="openProduct(event, 'T-Shirt Let It Quack', 'estampa-4.jpg', 149.90, 'White / Black')"
-                        class="group block cursor-pointer bg-brand-white border-[3px] border-brand-black hover:shadow-[8px_8px_0px_#4c9f38] hover:-translate-y-2 transition-all duration-300 flex flex-col">
-                        <div
-                            class="aspect-[4/5] relative flex items-center justify-center p-6 border-b-[3px] border-brand-black bg-brand-white overflow-hidden">
-                            <img src="assets/images/products/estampa-4.jpg" alt="Camiseta Let It Quack"
-                                class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
-                        </div>
-                        <div class="p-5 flex flex-col flex-1 justify-between bg-brand-white">
-                            <div>
-                                <h3
-                                    class="text-2xl font-display uppercase font-black text-brand-black group-hover:text-brand-red transition-colors leading-none mb-2">
-                                    Let It Quack</h3>
-                                <p class="text-sm text-brand-black font-bold uppercase">White / Black</p>
-                            </div>
-                            <p
-                                class="text-3xl font-display font-black text-brand-red mt-4 drop-shadow-[1px_1px_0px_#000000]">
-                                R$ 149,90</p>
-                        </div>
-                    </a>
-
-                    <!-- Product 4 -->
-                    <a href="#"
-                        onclick="openProduct(event, 'T-Shirt Possui Ecobag', 'estampa-16.jpg', 149.90, 'White / Black')"
-                        class="group block cursor-pointer bg-brand-white border-[3px] border-brand-black hover:shadow-[8px_8px_0px_#fcc30b] hover:-translate-y-2 transition-all duration-300 flex flex-col">
-                        <div
-                            class="aspect-[4/5] relative flex items-center justify-center p-6 border-b-[3px] border-brand-black bg-brand-white overflow-hidden">
-                            <img src="assets/images/products/estampa-16.jpg" alt="Camiseta Possui Ecobag"
-                                class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
-                        </div>
-                        <div class="p-5 flex flex-col flex-1 justify-between bg-brand-white">
-                            <div>
-                                <h3
-                                    class="text-2xl font-display uppercase font-black text-brand-black group-hover:text-brand-red transition-colors leading-none mb-2">
-                                    Possui Ecobag</h3>
-                                <p class="text-sm text-brand-black font-bold uppercase">White / Black</p>
-                            </div>
-                            <p
-                                class="text-3xl font-display font-black text-brand-red mt-4 drop-shadow-[1px_1px_0px_#000000]">
-                                R$ 149,90</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Brand Manifesto / Vibe Section -->
-        <section class="border-b-[3px] border-brand-black bg-brand-red text-brand-white">
-            <div
-                class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div>
-                    <h2
-                        class="font-display text-5xl sm:text-7xl uppercase leading-[0.9] mb-8 text-brand-black drop-shadow-[4px_4px_0px_#ffffff]">
-                        Não confunda <br>discurso de ódio<br> com liberdade<br> de expressão.
-                    </h2>
-                    <p class="text-xl font-bold mb-10 max-w-md text-brand-white">
-                        Inspirados no caos urbano e na arte subversiva. Nossas estampas são mais do que tinta no tecido,
-                        são declarações. There is no planet B.
-                    </p>
-                    <a href="#"
-                        class="btn-brand inline-block px-8 py-4 bg-brand-black text-brand-white border-[3px] border-brand-black hover:bg-brand-white hover:text-brand-black hover:shadow-[6px_6px_0px_#000000] transition-all">
-                        Nossa História
-                    </a>
-                </div>
-                <div class="grid grid-cols-2 gap-4">
-                    <div
-                        class="aspect-square border-[3px] border-brand-black bg-brand-white flex items-center justify-center overflow-hidden">
-                        <img src="Logo-the-fato-ideia.jpg" alt="The Fato Idea"
-                            class="w-full h-full object-cover grayscale mix-blend-multiply">
-                    </div>
-                    <div
-                        class="aspect-square border-[3px] border-brand-black bg-brand-black flex items-center justify-center p-4">
-                        <span
-                            class="font-display text-4xl text-brand-red text-center uppercase leading-none drop-shadow-[2px_2px_0px_#ffffff]">Alto
-                            em Ódio</span>
-                    </div>
-                    <div
-                        class="aspect-square border-[3px] border-brand-black bg-brand-red flex items-center justify-center overflow-hidden col-span-2 mix-blend-color-burn">
-                        <img src="assets/images/banners/Moodboard.jpg" alt="Moodboard The Fato"
-                            class="w-full h-full object-cover opacity-60 mix-blend-multiply">
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <main id="product-view" class="hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 min-h-[80vh]">
-        <button onclick="closeProduct()"
-            class="mb-8 flex items-center text-brand-black hover:text-brand-red font-bold uppercase tracking-wider text-sm transition-colors">
-            ← Voltar para a loja
-        </button>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <!-- Product Image -->
-            <div
-                class="bg-brand-white border-[3px] border-brand-black aspect-[4/5] overflow-hidden relative flex items-center justify-center p-8 shadow-[8px_8px_0px_#fcc30b]">
-                <img id="pv-image" src="" alt="Product" class="w-full h-full object-contain">
-            </div>
-            <!-- Product Info -->
-            <div class="flex flex-col justify-center">
-                <h1 id="pv-title"
-                    class="text-5xl sm:text-6xl font-display uppercase tracking-tight text-brand-black mb-2">Title</h1>
-                <p id="pv-desc" class="text-xl text-brand-black font-bold mb-6">Color</p>
-                <p id="pv-price" class="text-5xl font-display text-brand-red mb-10 drop-shadow-[2px_2px_0px_#000000]">R$
-                    0,00</p>
-
-                <div class="mb-8">
-                    <p class="font-bold uppercase text-brand-black text-sm mb-3">Tamanho</p>
-                    <div class="flex space-x-3">
-                        <button
-                            class="w-14 h-14 border-[3px] border-brand-black font-display text-xl hover:bg-brand-yellow hover:text-brand-black transition-colors bg-brand-white text-brand-black">P</button>
-                        <button
-                            class="w-14 h-14 border-[3px] border-brand-black font-display text-xl bg-brand-black text-brand-white hover:bg-brand-red transition-colors">M</button>
-                        <button
-                            class="w-14 h-14 border-[3px] border-brand-black font-display text-xl hover:bg-brand-green hover:text-brand-white transition-colors bg-brand-white text-brand-black">G</button>
-                        <button
-                            class="w-14 h-14 border-[3px] border-brand-black font-display text-xl hover:bg-brand-blue hover:text-brand-white transition-colors bg-brand-white text-brand-black">GG</button>
-                    </div>
-                </div>
-
-                <button id="pv-add-btn" class="btn-brand py-5 text-2xl w-full hover:shadow-[6px_6px_0px_#0a97d9]">
-                    Adicionar ao Carrinho
+                        class="absolute -top-1.5 -right-1.5 bg-toxic text-carbon-950 text-[0.55rem] font-bold rounded-full h-4 w-4 flex items-center justify-center">0</span>
                 </button>
 
-                <div class="mt-8 border-t-[3px] border-brand-black pt-6">
-                    <p class="font-bold text-brand-black">Modelagem streetwear oversized. Tecido 100% algodão premium
-                        sustentável. Estampa em serigrafia de alta durabilidade. Produzido no Brasil.</p>
+                <!-- Mobile Menu -->
+                <button id="mobile-menu-btn" class="md:hidden text-bone">
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Mobile Nav -->
+        <nav id="mobile-nav" class="hidden md:hidden bg-carbon-950 border-b border-carbon-700 px-6 py-6 flex flex-col gap-4">
+            <a href="#shop" class="text-sm font-semibold uppercase tracking-[0.2em] text-bone hover:text-toxic transition-colors">Drops</a>
+            <a href="#manifesto" class="text-sm font-semibold uppercase tracking-[0.2em] text-bone hover:text-toxic transition-colors">Manifesto</a>
+            <a href="#" class="text-sm font-semibold uppercase tracking-[0.2em] text-bone hover:text-toxic transition-colors">Coleções</a>
+        </nav>
+    </div>
+
+
+    <!-- ═══════════════════════ MAIN ═══════════════════════ -->
+    <main id="main-content">
+
+        <!-- ─────────────── HERO ─────────────── -->
+        <section class="relative min-h-screen flex items-center justify-center overflow-hidden noise-overlay"
+            style="padding-top: calc(var(--marquee-h) + var(--header-h) + 2rem);">
+
+            <!-- BG Image -->
+            <div class="absolute inset-0 z-0">
+                <img src="assets/images/banners/cuzinho-lindo-3.jpg"
+                    class="w-full h-full object-cover opacity-[0.07]" alt="">
+            </div>
+
+            <!-- Radial gradient overlay -->
+            <div class="absolute inset-0 z-0 bg-gradient-to-b from-carbon-950 via-transparent to-carbon-950"></div>
+
+            <!-- Content -->
+            <div class="relative z-10 max-w-5xl mx-auto px-6 text-center flex flex-col items-center">
+
+                <!-- Overline -->
+                <p class="font-mono text-[0.65rem] sm:text-xs uppercase tracking-[0.4em] text-muted mb-8 reveal">
+                    Streetwear Consciente — Est. 2024
+                </p>
+
+                <!-- Main Title -->
+                <h1 class="font-display text-[3.5rem] sm:text-[5.5rem] md:text-[7.5rem] lg:text-[9rem] leading-[0.85] tracking-tight text-bone uppercase mb-4 reveal">
+                    The Fato
+                </h1>
+
+                <!-- Dynamic Word -->
+                <div class="h-12 sm:h-16 md:h-20 flex items-center justify-center overflow-hidden mb-10 reveal">
+                    <span id="dynamic-word"
+                        class="font-display text-3xl sm:text-5xl md:text-6xl text-toxic uppercase transition-all duration-500 ease-[var(--ease-out-expo)]"
+                        style="opacity:1; transform:translateY(0);">
+                        REVOLUCIONÁRIO
+                    </span>
+                </div>
+
+                <!-- Tagline -->
+                <p class="text-sm sm:text-base text-muted max-w-lg mx-auto mb-12 leading-relaxed font-light reveal">
+                    Nossas estampas são declarações. Cada peça é uma provocação ao consumo
+                    descartável e um manifesto em algodão sustentável.
+                </p>
+
+                <!-- CTAs -->
+                <div class="flex flex-col sm:flex-row gap-4 items-center reveal">
+                    <a href="#shop" class="btn-primary">
+                        <span>Ver Coleção</span>
+                        <svg class="w-4 h-4 relative z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </a>
+                    <a href="#manifesto" class="btn-ghost">
+                        <span>Nosso Manifesto</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Scroll indicator -->
+            <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2">
+                <span class="font-mono text-[0.55rem] uppercase tracking-[0.3em] text-muted">Scroll</span>
+                <div class="w-px h-8 bg-gradient-to-b from-muted to-transparent"></div>
+            </div>
+        </section>
+
+
+        <!-- ─────────── PRODUCT GRID ─────────── -->
+        <section id="shop" class="relative py-24 sm:py-32 px-6 lg:px-10 bg-carbon-950">
+
+            <!-- Section Header -->
+            <div class="max-w-[1400px] mx-auto mb-16 reveal">
+                <div class="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-4">
+                    <div>
+                        <p class="font-mono text-[0.6rem] uppercase tracking-[0.4em] text-toxic mb-3">Catálogo</p>
+                        <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl text-bone uppercase">Últimos Drops</h2>
+                    </div>
+                    <p class="text-sm text-muted max-w-xs font-light">
+                        Cada estampa carrega uma mensagem. Escolha a sua provocação.
+                    </p>
+                </div>
+                <div class="divider-accent mt-8"></div>
+            </div>
+
+            <!-- Grid -->
+            <div class="max-w-[1400px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 reveal-stagger">
+
+                <!-- Product 1 — Ainda Se Lembra -->
+                <a href="#"
+                    onclick="openProduct(event, 'T-Shirt Ainda Se Lembra', 'assets/images/products/estampa-8.jpg', 149.90, 'Off-White / Black')"
+                    class="product-card reveal">
+                    <div class="card-img aspect-[3/4] bg-carbon-800">
+                        <span class="card-tag">Novo</span>
+                        <img src="assets/images/products/camiseta-atras.webp" alt="Camiseta Ainda Se Lembra">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Ainda Se Lembra</h3>
+                        <p class="card-subtitle">Off-White / Black</p>
+                        <p class="card-price">R$ 149,90</p>
+                    </div>
+                </a>
+
+                <!-- Product 2 — Melzinho -->
+                <a href="#"
+                    onclick="openProduct(event, 'T-Shirt Melzinho', 'assets/images/products/estampa-6.jpg', 149.90, 'White / Black')"
+                    class="product-card reveal">
+                    <div class="card-img aspect-[3/4] bg-carbon-800">
+                        <img src="assets/images/products/estampa-6.jpg" alt="Camiseta Melzinho na Chupeta">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Melzinho</h3>
+                        <p class="card-subtitle">White / Black</p>
+                        <p class="card-price">R$ 149,90</p>
+                    </div>
+                </a>
+
+                <!-- Product 3 — Let It Quack -->
+                <a href="#"
+                    onclick="openProduct(event, 'T-Shirt Let It Quack', 'assets/images/products/estampa-4.jpg', 149.90, 'White / Black')"
+                    class="product-card reveal">
+                    <div class="card-img aspect-[3/4] bg-carbon-800">
+                        <img src="assets/images/products/estampa-4.jpg" alt="Camiseta Let It Quack">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Let It Quack</h3>
+                        <p class="card-subtitle">White / Black</p>
+                        <p class="card-price">R$ 149,90</p>
+                    </div>
+                </a>
+
+                <!-- Product 4 — Possui Ecobag -->
+                <a href="#"
+                    onclick="openProduct(event, 'T-Shirt Possui Ecobag', 'assets/images/products/estampa-16.jpg', 149.90, 'White / Black')"
+                    class="product-card reveal">
+                    <div class="card-img aspect-[3/4] bg-carbon-800">
+                        <img src="assets/images/products/estampa-16.jpg" alt="Camiseta Possui Ecobag">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Possui Ecobag</h3>
+                        <p class="card-subtitle">White / Black</p>
+                        <p class="card-price">R$ 149,90</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+
+        <!-- ──────── EDITORIAL STRIP ──────── -->
+        <section class="relative py-6 overflow-hidden bg-carbon-900 border-y border-carbon-700">
+            <div class="max-w-[1400px] mx-auto px-6 lg:px-10 grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="flex flex-col items-center text-center reveal">
+                    <span class="font-display text-3xl sm:text-4xl text-bone">100%</span>
+                    <span class="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-muted mt-1">Algodão Sustentável</span>
+                </div>
+                <div class="flex flex-col items-center text-center reveal">
+                    <span class="font-display text-3xl sm:text-4xl text-bone">0</span>
+                    <span class="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-muted mt-1">Greenwashing</span>
+                </div>
+                <div class="flex flex-col items-center text-center reveal">
+                    <span class="font-display text-3xl sm:text-4xl text-toxic">BR</span>
+                    <span class="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-muted mt-1">Produção Nacional</span>
+                </div>
+                <div class="flex flex-col items-center text-center reveal">
+                    <span class="font-display text-3xl sm:text-4xl text-bone">∞</span>
+                    <span class="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-muted mt-1">Atitude</span>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ──────── LOOKBOOK / MODELS ──────── -->
+        <section class="relative py-24 sm:py-32 px-6 lg:px-10 bg-carbon-950">
+            <div class="max-w-[1400px] mx-auto">
+
+                <div class="mb-16 reveal">
+                    <p class="font-mono text-[0.6rem] uppercase tracking-[0.4em] text-toxic mb-3">Lookbook</p>
+                    <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl text-bone uppercase">Na Pele</h2>
+                    <div class="divider-accent mt-8"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 reveal-stagger">
+                    <!-- Model 1 -->
+                    <div class="relative group overflow-hidden aspect-[3/4] bg-carbon-800 reveal">
+                        <img src="assets/images/products/mulher-frente.webp" alt="Modelo feminino com camiseta The Fato"
+                            class="w-full h-full object-cover transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover:scale-105 filter grayscale-[30%] group-hover:grayscale-0">
+                        <div class="absolute inset-0 bg-gradient-to-t from-carbon-950/80 via-transparent to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 p-6 sm:p-8">
+                            <p class="font-mono text-[0.6rem] uppercase tracking-[0.3em] text-toxic mb-2">Col. Inverno Caos</p>
+                            <h3 class="font-display text-2xl sm:text-3xl text-bone uppercase">Very Kill Tee</h3>
+                        </div>
+                    </div>
+
+                    <!-- Model 2 -->
+                    <div class="relative group overflow-hidden aspect-[3/4] bg-carbon-800 reveal">
+                        <img src="assets/images/products/homem-frente.webp" alt="Modelo masculino com camiseta The Fato"
+                            class="w-full h-full object-cover transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover:scale-105 filter grayscale-[30%] group-hover:grayscale-0">
+                        <div class="absolute inset-0 bg-gradient-to-t from-carbon-950/80 via-transparent to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 p-6 sm:p-8">
+                            <p class="font-mono text-[0.6rem] uppercase tracking-[0.3em] text-toxic mb-2">Col. Inverno Caos</p>
+                            <h3 class="font-display text-2xl sm:text-3xl text-bone uppercase">Very Kill Tee</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ──────── MANIFESTO ──────── -->
+        <section id="manifesto" class="relative py-32 sm:py-40 px-6 lg:px-10 bg-carbon-950 noise-overlay overflow-hidden">
+
+            <!-- Accent line -->
+            <div class="absolute top-0 left-0 w-1 h-full bg-toxic"></div>
+
+            <div class="max-w-[1400px] mx-auto relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
+
+                    <!-- Text Column -->
+                    <div class="lg:col-span-7 reveal">
+                        <p class="font-mono text-[0.6rem] uppercase tracking-[0.4em] text-toxic mb-6">Manifesto</p>
+
+                        <h2 class="font-display text-[2.5rem] sm:text-[4rem] md:text-[5rem] lg:text-[6rem] leading-[0.85] text-bone uppercase mb-10">
+                            Não confunda<br>
+                            discurso de<br>
+                            <span class="text-toxic">ódio</span> com<br>
+                            liberdade de<br>
+                            expressão.
+                        </h2>
+
+                        <p class="text-base sm:text-lg text-muted max-w-lg leading-relaxed mb-10 font-light">
+                            Inspirados no caos urbano e na arte subversiva. Nossas estampas são mais
+                            do que tinta no tecido — são declarações impressas em algodão 100%
+                            sustentável. Produção nacional. Zero greenwashing.
+                        </p>
+
+                        <a href="#" class="btn-ghost">
+                            <span>Nossa História</span>
+                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                            </svg>
+                        </a>
+                    </div>
+
+                    <!-- Image Grid -->
+                    <div class="lg:col-span-5 grid grid-cols-2 gap-3 reveal">
+                        <div class="aspect-square bg-carbon-900 border border-carbon-700 overflow-hidden">
+                            <img src="assets/images/products/estampa-15.jpg" alt="Humano — Um Ser Biopsicosocial"
+                                class="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity">
+                        </div>
+                        <div class="aspect-square bg-carbon-900 border border-carbon-700 flex items-center justify-center p-4">
+                            <span class="font-display text-2xl sm:text-3xl text-toxic text-center uppercase leading-none">
+                                Alto<br>em<br>Ódio
+                            </span>
+                        </div>
+                        <div class="aspect-square bg-carbon-900 border border-carbon-700 flex items-center justify-center p-4">
+                            <span class="font-mono text-[0.55rem] uppercase tracking-[0.2em] text-muted text-center leading-relaxed">
+                                "A revolução<br>será fofa<br>ou não será"
+                            </span>
+                        </div>
+                        <div class="aspect-square bg-carbon-900 border border-carbon-700 overflow-hidden">
+                            <img src="assets/images/banners/cuzinho-lindo-3.jpg" alt="The Fato texture"
+                                class="w-full h-full object-cover opacity-30 hover:opacity-50 transition-opacity">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- ═══════════ PRODUCT VIEW (Single) ═══════════ -->
+    <main id="product-view" class="hidden min-h-screen bg-carbon-950"
+        style="padding-top: calc(var(--marquee-h) + var(--header-h) + 3rem);">
+        <div class="max-w-[1200px] mx-auto px-6 lg:px-10 py-12">
+
+            <button onclick="closeProduct()"
+                class="mb-10 flex items-center gap-2 text-muted hover:text-toxic text-xs font-semibold uppercase tracking-[0.2em] transition-colors">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Voltar
+            </button>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
+                <!-- Image -->
+                <div class="aspect-[3/4] bg-carbon-900 border border-carbon-700 overflow-hidden flex items-center justify-center p-8">
+                    <img id="pv-image" src="" alt="Product" class="max-w-full max-h-full object-contain">
+                </div>
+
+                <!-- Info -->
+                <div class="flex flex-col justify-center">
+                    <p class="font-mono text-[0.6rem] uppercase tracking-[0.3em] text-toxic mb-4">The Fato®</p>
+                    <h1 id="pv-title"
+                        class="font-display text-4xl sm:text-5xl lg:text-6xl text-bone uppercase mb-2 leading-[0.9]">
+                        Title</h1>
+                    <p id="pv-desc" class="text-sm text-muted font-semibold uppercase tracking-[0.1em] mb-8">Color</p>
+                    <p id="pv-price" class="font-display text-3xl sm:text-4xl text-toxic mb-10">R$ 0,00</p>
+
+                    <!-- Size selector -->
+                    <div class="mb-10">
+                        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-muted mb-4">Tamanho</p>
+                        <div class="flex gap-2">
+                            <button class="size-btn w-12 h-12 border border-carbon-700 text-sm font-semibold text-bone bg-transparent hover:border-toxic hover:text-toxic transition-colors">P</button>
+                            <button class="size-btn active w-12 h-12 border border-toxic text-sm font-semibold text-carbon-950 bg-toxic transition-colors">M</button>
+                            <button class="size-btn w-12 h-12 border border-carbon-700 text-sm font-semibold text-bone bg-transparent hover:border-toxic hover:text-toxic transition-colors">G</button>
+                            <button class="size-btn w-12 h-12 border border-carbon-700 text-sm font-semibold text-bone bg-transparent hover:border-toxic hover:text-toxic transition-colors">GG</button>
+                        </div>
+                    </div>
+
+                    <button id="pv-add-btn" class="btn-primary w-full justify-center py-4 text-sm">
+                        <span>Adicionar ao Carrinho</span>
+                    </button>
+
+                    <div class="mt-10 pt-8 border-t border-carbon-700">
+                        <p class="text-sm text-muted leading-relaxed font-light">
+                            Modelagem streetwear oversized. Tecido 100% algodão premium sustentável.
+                            Estampa em serigrafia de alta durabilidade. Produzido no Brasil.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- FATO.AI Drawer -->
-    <div id="ai-overlay" class="fixed inset-0 bg-brand-black bg-opacity-90 z-[60] hidden transition-opacity"
-        onclick="toggleAIDrawer()"></div>
-    <div id="ai-drawer"
-        class="fixed top-0 right-0 h-full w-full sm:w-[400px] bg-brand-white border-l-[3px] border-brand-black z-[70] transform translate-x-full transition-transform duration-300 flex flex-col shadow-2xl">
-        <div class="flex justify-between items-center p-6 border-b-[3px] border-brand-black bg-brand-yellow">
-            <h2 class="font-display uppercase text-3xl flex items-center gap-2 text-brand-black">
-                <svg class="h-8 w-8 text-brand-red" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                        d="M13 10V3L4 14h7v7l9-11h-7z" />
+
+    <!-- ═══════════ FATO.AI DRAWER ═══════════ -->
+    <div id="ai-overlay" class="drawer-overlay" onclick="toggleAIDrawer()"></div>
+    <div id="ai-drawer" class="drawer-panel">
+        <div class="drawer-header">
+            <div class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-toxic" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
-                FATO.AI
-            </h2>
-            <button onclick="toggleAIDrawer()"
-                class="text-brand-black hover:text-brand-red font-black text-3xl leading-none transition-transform hover:scale-125">✕</button>
+                <span class="font-display text-xl uppercase text-bone">FATO.AI</span>
+            </div>
+            <button onclick="toggleAIDrawer()" class="drawer-close">✕</button>
         </div>
-        <div id="ai-chat-history" class="flex-1 overflow-y-auto p-6 flex flex-col gap-4 bg-brand-white">
-            <div
-                class="bg-brand-blue text-brand-white p-4 rounded-2xl rounded-tl-none self-start max-w-[85%] border-[3px] border-brand-black font-bold text-sm shadow-[4px_4px_0px_#000000]">
-                Salve! Sou o FATO.AI, seu stylist digital. Qual a vibe do seu look hoje? Posso te recomendar as melhores
-                peças da coleção pra montar seu kit.
+
+        <div id="ai-chat-history" class="flex-1 overflow-y-auto p-5 flex flex-col gap-3">
+            <div class="self-start max-w-[85%] px-4 py-3 text-sm font-medium bg-carbon-800 text-bone border border-carbon-700 rounded-2xl rounded-tl-sm">
+                Salve! Sou o FATO.AI, seu stylist digital. Qual a vibe do seu look hoje?
             </div>
         </div>
-        <div class="p-4 border-t-[3px] border-brand-black bg-brand-white">
+
+        <div class="p-4 border-t border-carbon-700">
             <form id="ai-chat-form" class="flex gap-2" onsubmit="handleAISubmit(event)">
                 <input type="text" id="ai-input" placeholder="Manda a ideia..."
-                    class="flex-1 border-[3px] border-brand-black px-4 py-3 font-bold text-brand-black focus:outline-none focus:border-brand-red bg-brand-white placeholder-brand-black"
+                    class="flex-1 bg-carbon-800 border border-carbon-700 px-4 py-3 text-sm text-bone placeholder-muted focus:outline-none focus:border-toxic transition-colors"
                     autocomplete="off">
                 <button type="submit"
-                    class="bg-brand-red text-brand-white px-5 py-3 font-display text-xl uppercase hover:bg-brand-black hover:text-brand-white transition-colors border-[3px] border-brand-black flex items-center justify-center min-w-[90px] shadow-[4px_4px_0px_#000000]">
+                    class="bg-toxic text-carbon-950 px-5 py-3 text-xs font-bold uppercase tracking-wider hover:bg-bone transition-colors flex items-center justify-center min-w-[80px]">
                     <span id="ai-btn-text">Enviar</span>
-                    <svg id="ai-btn-spinner" class="animate-spin h-6 w-6 text-brand-white hidden"
+                    <svg id="ai-btn-spinner" class="animate-spin h-4 w-4 text-carbon-950 hidden"
                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4">
-                        </circle>
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                         <path class="opacity-75" fill="currentColor"
-                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
-                        </path>
+                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
                 </button>
             </form>
         </div>
     </div>
 
-    <div id="cart-overlay" class="fixed inset-0 bg-brand-black bg-opacity-90 z-[60] hidden transition-opacity"
-        onclick="toggleCart()"></div>
-    <div id="cart-drawer"
-        class="fixed top-0 right-0 h-full w-full sm:w-[400px] bg-brand-white border-l-[3px] border-brand-black z-[70] transform translate-x-full transition-transform duration-300 flex flex-col shadow-2xl">
-        <div class="flex justify-between items-center p-6 border-b-[3px] border-brand-black bg-brand-green">
-            <h2 class="font-display uppercase text-3xl text-brand-white drop-shadow-[2px_2px_0px_#000000]">Carrinho</h2>
-            <button onclick="toggleCart()"
-                class="text-brand-black hover:text-brand-white font-black text-3xl leading-none transition-transform hover:scale-125">✕</button>
+
+    <!-- ═══════════ CART DRAWER ═══════════ -->
+    <div id="cart-overlay" class="drawer-overlay" onclick="toggleCart()"></div>
+    <div id="cart-drawer" class="drawer-panel">
+        <div class="drawer-header">
+            <span class="font-display text-xl uppercase text-bone">Carrinho</span>
+            <button onclick="toggleCart()" class="drawer-close">✕</button>
         </div>
-        <div id="cart-items" class="flex-1 overflow-y-auto p-6 flex flex-col gap-6 bg-brand-white">
-            <!-- Items injected by JS -->
-            <p class="text-brand-black font-bold text-center mt-10 text-xl font-display uppercase">Seu carrinho está
-                vazio.</p>
-        </div>
-        <div class="p-6 border-t-[3px] border-brand-black bg-brand-white">
-            <div class="flex justify-between font-display text-4xl mb-6 text-brand-black">
-                <span>TOTAL</span>
-                <span id="cart-total" class="text-brand-red drop-shadow-[2px_2px_0px_#000000]">R$ 0,00</span>
+
+        <div id="cart-items" class="flex-1 overflow-y-auto p-5 flex flex-col gap-3">
+            <div class="flex flex-col items-center justify-center h-full gap-4 text-center">
+                <svg class="w-16 h-16 text-carbon-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                </svg>
+                <p class="text-muted text-sm uppercase tracking-[0.2em] font-semibold">Carrinho vazio</p>
             </div>
-            <button class="btn-brand w-full py-5 text-2xl tracking-wider hover:shadow-[6px_6px_0px_#4c9f38]">
-                FINALIZAR COMPRA
+        </div>
+
+        <div class="p-5 border-t border-carbon-700">
+            <div class="flex justify-between items-baseline mb-5">
+                <span class="text-xs font-semibold uppercase tracking-[0.2em] text-muted">Total</span>
+                <span id="cart-total" class="font-display text-2xl text-toxic">R$ 0,00</span>
+            </div>
+            <button class="btn-primary w-full justify-center py-4 text-sm">
+                <span>Finalizar Compra</span>
             </button>
         </div>
     </div>
 
+
     <script src="assets/js/main.js"></script>
 
-    <!-- Footer -->
-    <footer class="bg-brand-black text-brand-white pt-16 pb-8 border-t-[3px] border-brand-red">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12 border-b-[3px] border-brand-white pb-12">
 
-                <div class="col-span-1 md:col-span-2">
-                    <img class="h-20 w-auto mb-6 bg-brand-white p-3 border-[3px] border-brand-white"
-                        src="Logo-the-fato-ideia.jpg" alt="The Fato Logo">
-                    <p class="text-brand-white font-bold max-w-sm mb-6 text-lg">
-                        Junte-se à revolução. Assine nossa newsletter para receber drops exclusivos, descontos e
-                        novidades antes de todo mundo.
+    <!-- ═══════════════════ FOOTER ═══════════════════════ -->
+    <footer class="bg-carbon-950 border-t border-carbon-700 pt-20 pb-10">
+        <div class="max-w-[1400px] mx-auto px-6 lg:px-10">
+
+            <!-- Top section -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 mb-16">
+
+                <!-- Brand + Newsletter -->
+                <div class="lg:col-span-5">
+                    <img class="h-16 w-auto brightness-0 invert opacity-70 mb-6"
+                        src="assets/images/banners/logo.svg" alt="The Fato">
+                    <p class="text-sm text-muted max-w-sm mb-8 leading-relaxed font-light">
+                        Junte-se à revolução. Receba drops exclusivos, descontos e
+                        provocações antes de todo mundo.
                     </p>
-                    <form
-                        class="flex max-w-md border-[3px] border-brand-white p-1 bg-brand-black focus-within:border-brand-red transition-colors">
-                        <input type="email" placeholder="Seu melhor e-mail"
-                            class="flex-1 bg-transparent px-4 py-2 text-brand-white focus:outline-none font-bold placeholder-brand-white">
+                    <form class="flex max-w-sm">
+                        <input type="email" placeholder="seu@email.com"
+                            class="flex-1 bg-carbon-900 border border-carbon-700 border-r-0 px-4 py-3 text-sm text-bone placeholder-muted focus:outline-none focus:border-toxic transition-colors">
                         <button type="submit"
-                            class="bg-brand-red text-brand-white px-6 py-2 font-display text-xl uppercase hover:bg-brand-white hover:text-brand-black transition-colors">
+                            class="bg-toxic text-carbon-950 px-6 py-3 text-xs font-bold uppercase tracking-wider hover:bg-bone transition-colors flex-shrink-0">
                             Assinar
                         </button>
                     </form>
                 </div>
 
-                <div>
-                    <h4
-                        class="text-2xl font-display uppercase mb-4 text-brand-yellow drop-shadow-[2px_2px_0px_#000000]">
-                        Shop</h4>
-                    <ul class="space-y-3 font-bold text-brand-white">
-                        <li><a href="#"
-                                class="hover:text-brand-red hover:underline decoration-[3px] underline-offset-4 transition-all">Todas
-                                as Camisetas</a></li>
-                        <li><a href="#"
-                                class="hover:text-brand-blue hover:underline decoration-[3px] underline-offset-4 transition-all">Lançamentos</a>
-                        </li>
-                        <li><a href="#"
-                                class="hover:text-brand-green hover:underline decoration-[3px] underline-offset-4 transition-all">Acessórios</a>
-                        </li>
-                        <li><a href="#"
-                                class="hover:text-brand-yellow hover:underline decoration-[3px] underline-offset-4 transition-all">Sale</a>
-                        </li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h4 class="text-2xl font-display uppercase mb-4 text-brand-blue drop-shadow-[2px_2px_0px_#000000]">
-                        Suporte</h4>
-                    <ul class="space-y-3 font-bold text-brand-white">
-                        <li><a href="#"
-                                class="hover:text-brand-red hover:underline decoration-[3px] underline-offset-4 transition-all">FAQ</a>
-                        </li>
-                        <li><a href="#"
-                                class="hover:text-brand-blue hover:underline decoration-[3px] underline-offset-4 transition-all">Trocas
-                                e Devoluções</a></li>
-                        <li><a href="#"
-                                class="hover:text-brand-green hover:underline decoration-[3px] underline-offset-4 transition-all">Guia
-                                de Medidas</a></li>
-                        <li><a href="#"
-                                class="hover:text-brand-yellow hover:underline decoration-[3px] underline-offset-4 transition-all">Contato</a>
-                        </li>
-                    </ul>
+                <!-- Links -->
+                <div class="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-10">
+                    <div>
+                        <h4 class="text-xs font-semibold uppercase tracking-[0.2em] text-bone mb-5">Shop</h4>
+                        <ul class="space-y-3">
+                            <li><a href="#" class="text-sm text-muted hover:text-toxic transition-colors font-light">Camisetas</a></li>
+                            <li><a href="#" class="text-sm text-muted hover:text-toxic transition-colors font-light">Lançamentos</a></li>
+                            <li><a href="#" class="text-sm text-muted hover:text-toxic transition-colors font-light">Acessórios</a></li>
+                            <li><a href="#" class="text-sm text-muted hover:text-toxic transition-colors font-light">Sale</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-xs font-semibold uppercase tracking-[0.2em] text-bone mb-5">Suporte</h4>
+                        <ul class="space-y-3">
+                            <li><a href="#" class="text-sm text-muted hover:text-toxic transition-colors font-light">FAQ</a></li>
+                            <li><a href="#" class="text-sm text-muted hover:text-toxic transition-colors font-light">Trocas e Devoluções</a></li>
+                            <li><a href="#" class="text-sm text-muted hover:text-toxic transition-colors font-light">Guia de Medidas</a></li>
+                            <li><a href="#" class="text-sm text-muted hover:text-toxic transition-colors font-light">Contato</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-xs font-semibold uppercase tracking-[0.2em] text-bone mb-5">Social</h4>
+                        <ul class="space-y-3">
+                            <li><a href="#" class="text-sm text-muted hover:text-toxic transition-colors font-light">Instagram</a></li>
+                            <li><a href="#" class="text-sm text-muted hover:text-toxic transition-colors font-light">TikTok</a></li>
+                            <li><a href="#" class="text-sm text-muted hover:text-toxic transition-colors font-light">Twitter / X</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
-            <div
-                class="flex flex-col md:flex-row justify-between items-center text-brand-white text-sm font-bold uppercase tracking-wider">
-                <p>&copy; 2026 THE FATO. NO PLANET B.</p>
-                <div class="flex space-x-6 mt-6 md:mt-0">
-                    <a href="#" class="hover:text-brand-red transition-colors">Instagram</a>
-                    <a href="#" class="hover:text-brand-blue transition-colors">TikTok</a>
-                    <a href="#" class="hover:text-brand-green transition-colors">Twitter</a>
-                </div>
+            <!-- Bottom -->
+            <div class="divider mb-8"></div>
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+                <p class="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-muted">
+                    © 2026 The Fato. No Planet B. Todos os direitos reservados.
+                </p>
+                <p class="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-carbon-600">
+                    Feito com raiva e amor no Brasil 🇧🇷
+                </p>
             </div>
         </div>
     </footer>
