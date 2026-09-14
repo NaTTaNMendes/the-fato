@@ -5,7 +5,7 @@
 // ── 1. Smooth Scroll (Lenis) ───────────────────────────────
 const lenis = new Lenis({
     duration: 1.2,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
 });
 
 function raf(time) {
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const clock = new THREE.Clock();
     let mouseX = 0, mouseY = 0;
-    
+
     document.addEventListener('mousemove', (e) => {
         mouseX = (e.clientX - window.innerWidth / 2) * 0.001;
         mouseY = (e.clientY - window.innerHeight / 2) * 0.001;
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // The further you scroll, the more it rotates!
         group.rotation.y = scrollY * 0.001 + (mouseX * 0.5);
         group.rotation.x = scrollY * 0.0005 + (mouseY * 0.5);
-        
+
         // Base idle animation
         knot.rotation.z = Math.sin(elapsedTime * 0.5) * 0.1;
         wireKnot.rotation.z = Math.sin(elapsedTime * 0.5) * 0.1;
@@ -141,7 +141,7 @@ VanillaTilt.init(document.querySelectorAll(".js-tilt"), {
 
 // ── 5. GSAP Animations (Bold Reveals) ──────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-    
+
     // Aggressive Hero Reveal
     const heroTl = gsap.timeline();
     heroTl.to('.gs-hero-clip > *', {
@@ -162,8 +162,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Content Reveals on Scroll
     gsap.utils.toArray('.gs-reveal').forEach(elem => {
-        gsap.fromTo(elem, 
-            { autoAlpha: 0, y: 60, scale: 0.95 }, 
+        gsap.fromTo(elem,
+            { autoAlpha: 0, y: 60, scale: 0.95 },
             {
                 autoAlpha: 1, y: 0, scale: 1, duration: 1.2, ease: "expo.out",
                 scrollTrigger: { trigger: elem, start: "top 85%", toggleActions: "play none none reverse" }
@@ -177,7 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
 let cart = [];
 const formatPrice = (price) => `R$ ${price.toFixed(2).replace('.', ',')}`;
 
-window.toggleCart = function(e) {
+window.toggleCart = function (e) {
     if (e) e.preventDefault();
     const panel = document.getElementById('cart-drawer');
     const overlay = document.getElementById('cart-overlay');
@@ -188,11 +188,11 @@ window.toggleCart = function(e) {
     }
 }
 
-window.addToCart = function(title, price, image) {
+window.addToCart = function (title, price, image) {
     cart.push({ title, price, image }); updateCartUI(); window.toggleCart();
 }
 
-window.removeFromCart = function(index) {
+window.removeFromCart = function (index) {
     cart.splice(index, 1); updateCartUI();
 }
 
@@ -227,3 +227,112 @@ function updateCartUI() {
     });
     document.getElementById('cart-total').innerText = formatPrice(total);
 }
+
+// ── Product View ───────────────────────────────────────────
+function openProduct(e, title, image, price, desc) {
+    if (e) e.preventDefault();
+    document.getElementById('main-content').classList.add('hidden');
+    document.getElementById('product-view').classList.remove('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    document.getElementById('pv-image').src = image;
+    document.getElementById('pv-title').innerText = title;
+    document.getElementById('pv-price').innerText = formatPrice(price);
+    document.getElementById('pv-desc').innerText = desc;
+
+    document.getElementById('pv-add-btn').onclick = () => addToCart(title, price, image);
+}
+
+function closeProduct() {
+    document.getElementById('main-content').classList.remove('hidden');
+    document.getElementById('product-view').classList.add('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── Hero Dynamic Text ──────────────────────────────────────
+const words = ["REVOLUCIONÁRIO", "SUSTENTÁVEL", "CAÓTICO", "IRÔNICO", "INEVITÁVEL", "INCÔMODO"];
+let wordIdx = 0;
+
+setInterval(() => {
+    const el = document.getElementById('dynamic-word');
+    if (!el) return;
+
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(-10px)';
+
+    setTimeout(() => {
+        wordIdx = (wordIdx + 1) % words.length;
+        el.innerText = words[wordIdx];
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+    }, 350);
+}, 3000);
+
+// ── Submenu Toggle ─────────────────────────────────────────
+function toggleSubmenu(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    const popup = document.getElementById('submenu-popup');
+    const chevron = document.getElementById('collections-chevron');
+
+    if (popup.classList.contains('opacity-0')) {
+        popup.classList.remove('opacity-0', 'scale-95', 'pointer-events-none');
+        popup.classList.add('opacity-100', 'scale-100', 'pointer-events-auto');
+        if (chevron) chevron.classList.add('rotate-180');
+    } else {
+        popup.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
+        popup.classList.remove('opacity-100', 'scale-100', 'pointer-events-auto');
+        if (chevron) chevron.classList.remove('rotate-180');
+    }
+}
+
+document.addEventListener('click', (e) => {
+    const popup = document.getElementById('submenu-popup');
+    const container = document.getElementById('collections-container');
+    const chevron = document.getElementById('collections-chevron');
+    if (popup && !popup.classList.contains('opacity-0') && container && !container.contains(e.target)) {
+        popup.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
+        popup.classList.remove('opacity-100', 'scale-100', 'pointer-events-auto');
+        if (chevron) chevron.classList.remove('rotate-180');
+    }
+});
+
+
+
+// ── Intersection Observer (Scroll Reveal) ──────────────────
+document.addEventListener('DOMContentLoaded', () => {
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        },
+        { threshold: 0.1, rootMargin: '0px 0px -60px 0px' }
+    );
+
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+    // Size selector buttons
+    document.querySelectorAll('.size-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        });
+    });
+
+    // Init cart badge
+    const badge = document.getElementById('cart-count');
+    if (badge) badge.style.display = 'none';
+
+    // Mobile nav toggle
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const mobileNav = document.getElementById('mobile-nav');
+    if (mobileBtn && mobileNav) {
+        mobileBtn.addEventListener('click', () => {
+            mobileNav.classList.toggle('hidden');
+        });
+    }
+});
