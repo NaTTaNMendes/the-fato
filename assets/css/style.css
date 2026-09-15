@@ -11,16 +11,24 @@
 }
 
 :root {
-  --c-bg: #0a0a0a;
-  --c-surface: #141414;
-  --c-surface2: #1a1a1a;
-  --c-border: #2a2a2a;
-  --c-text: #e8e4de;
-  --c-text-dim: #8a8680;
-  --c-accent: #ccff00;
-  --c-accent-glow: rgba(204, 255, 0, .15);
-  --c-white: #e8e4de;
-  --c-black: #0a0a0a;
+  --c-bg: #ffffff;
+  --c-surface: #f4f4f0;
+  --c-surface2: #e8e8e4;
+  --c-border: #000000;
+  --c-text: #000000;
+  --c-text-dim: #666666;
+  --c-accent: var(--c-red);
+  --c-accent-glow: rgba(255, 0, 0, 0);
+  /* No blur glow in neo-brutalism */
+  --c-white: #ffffff;
+  --c-black: #000000;
+  --c-red: #e5243b;
+  --c-yellow: #fcc30b;
+  --c-green: #4c9f38;
+  --c-blue: #0a97d9;
+  --c-black: #000000;
+  --c-white: #ffffff;
+
 
   --font-display: 'Londrina Solid', system-ui, sans-serif;
   --font-body: 'Space Grotesk', system-ui, sans-serif;
@@ -104,18 +112,52 @@ html.lenis {
 
 #main-content {
   position: relative;
-  background: var(--c-surface);
-  border: 1px solid var(--c-border);
-  border-radius: 1.5rem;
+  background: var(--c-white);
+  border: 4px solid var(--c-black);
+  border-radius: 1rem;
   overflow: hidden;
-  transition: border-color 0.4s ease, transform 0.5s var(--ease-out-expo), box-shadow 0.4s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.product-card:hover {
-  border-color: var(--c-accent);
-  transform: translateY(-4px) rotate(1deg);
-  box-shadow: 0 10px 40px var(--c-accent-glow);
+/* Alternate shadow colors for a fun pop art vibe */
+.product-card:nth-child(4n+1) {
+  box-shadow: 6px 6px 0px var(--c-red);
 }
+
+.product-card:nth-child(4n+1):hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 10px 10px 0px var(--c-red);
+}
+
+.product-card:nth-child(4n+2) {
+  box-shadow: 6px 6px 0px var(--c-yellow);
+}
+
+.product-card:nth-child(4n+2):hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 10px 10px 0px var(--c-yellow);
+}
+
+.product-card:nth-child(4n+3) {
+  box-shadow: 6px 6px 0px var(--c-green);
+}
+
+.product-card:nth-child(4n+3):hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 10px 10px 0px var(--c-green);
+}
+
+.product-card:nth-child(4n+4) {
+  box-shadow: 6px 6px 0px var(--c-blue);
+}
+
+.product-card:nth-child(4n+4):hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 10px 10px 0px var(--c-blue);
+}
+
+
+
 
 .product-card .card-img {
   overflow: hidden;
@@ -195,34 +237,22 @@ html.lenis {
   padding: 1rem 2.5rem;
   font-family: var(--font-body);
   font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
+  font-weight: 900;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--c-black);
+  color: #fff;
   background: var(--c-accent);
-  border: none;
-  border-radius: 9999px;
-  transition: all 0.4s var(--ease-out-expo);
+  border: 4px solid var(--c-black);
+  box-shadow: 6px 6px 0px var(--c-black);
+  border-radius: 1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   position: relative;
   overflow: hidden;
 }
 
-.btn-primary::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: var(--c-white);
-  transform: translateX(-101%);
-  transition: transform 0.4s var(--ease-out-expo);
-}
-
-.btn-primary:hover::before {
-  transform: translateX(0);
-}
-
-.btn-primary span {
-  position: relative;
-  z-index: 1;
+.btn-primary:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 10px 10px 0px var(--c-black);
 }
 
 .btn-ghost {
@@ -232,20 +262,20 @@ html.lenis {
   padding: 1rem 2.5rem;
   font-family: var(--font-body);
   font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
+  font-weight: 900;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--c-text);
-  background: transparent;
-  border: 1px solid var(--c-border);
-  border-radius: 9999px;
-  transition: all 0.4s ease;
+  color: var(--c-black);
+  background: #fff;
+  border: 4px solid var(--c-black);
+  box-shadow: 4px 4px 0px var(--c-black);
+  border-radius: 1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.btn-bold.dark:hover {
-  background: rgba(255, 59, 48, 0.15);
-  border-color: rgba(255, 59, 48, 0.5);
-  box-shadow: 0 15px 40px rgba(255, 59, 48, 0.2), inset 0 1px 0 rgba(255, 59, 48, 0.4);
+.btn-ghost:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px var(--c-black);
 }
 
 /* ── Drawer (Cart / AI) ─────────────────────────────────── */
