@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Fato — Design de Interface</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@400;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        carbon: { 950: '#000000', 900: '#ffffff', 800: '#ffffff', 700: '#000000', 600: '#333333' },
+                        bone: { DEFAULT: '#ffffff', 100: '#ffffff' },
+                        toxic: { DEFAULT: '#e5243b', dark: '#cc0000', glow: 'rgba(0,0,0,0)' },
+                        brand: { red: '#e5243b', yellow: '#fcc30b', green: '#4c9f38', blue: '#0a97d9', magenta: '#dd1367' },
+                        muted: '#555555'
+                    },
+                    fontFamily: {
+                        display: ['"Londrina Solid"', 'system-ui', 'sans-serif'],
+                        body: ['"Space Grotesk"', 'system-ui', 'sans-serif'],
+                        mono: ['"Space Mono"', '"Courier New"', 'monospace'],
+                    },
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <style>
+        /* ═══════════ Documento: pranchas A4 paisagem ═══════════ */
+        body { background: #d9d9d4; padding: 32px 0; }
+
+        .page {
+            position: relative;
+            width: 1123px;
+            height: 794px;
+            margin: 0 auto 32px;
+            background: #fff;
+            overflow: hidden;
+            padding: 40px 40px 0;
+            display: flex;
+            flex-direction: column;
+        }
+        .page-body { flex: 1; min-height: 0; display: flex; gap: 28px; }
+        .page-foot {
+            height: 84px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            padding-bottom: 24px;
+            border-top: 3px solid #000;
+            margin-top: 16px;
+        }
+        .page-foot h2 { font-family: var(--font-display); font-weight: 900; font-size: 30px; line-height: .9; text-transform: uppercase; }
+        .page-foot .meta { font-family: var(--font-mono); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; text-align: right; }
+        .page-foot .meta b { display: block; font-size: 22px; letter-spacing: 0; }
+
+        .lede { font-size: 12.5px; line-height: 1.6; color: #222; font-weight: 400; }
+        .lede p + p { margin-top: 10px; }
+        .lede strong { font-weight: 700; color: #000; }
+        .side { width: 270px; flex-shrink: 0; display: flex; flex-direction: column; gap: 16px; }
+        .over { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .3em; text-transform: uppercase; color: var(--c-red); font-weight: 700; }
+        .cap { font-family: var(--font-mono); font-size: 9px; letter-spacing: .15em; text-transform: uppercase; color: #000; margin-top: 8px; }
+
+        table.spec { width: 100%; border-collapse: collapse; font-size: 11px; }
+        table.spec th { font-family: var(--font-mono); font-size: 9px; letter-spacing: .12em; text-transform: uppercase; text-align: left; background: #000; color: #fff; padding: 6px 8px; }
+        table.spec td { border-bottom: 1px solid #000; padding: 6px 8px; vertical-align: top; }
+
+        /* Grid overlays */
+        .gframe { position: relative; border: 3px solid #000; background: #fff; overflow: hidden; }
+        .gcols { position: absolute; inset: 0; display: grid; }
+        .gcols > span { background: rgba(229, 36, 59, .14); border-left: 1px solid rgba(229, 36, 59, .45); border-right: 1px solid rgba(229, 36, 59, .45); }
+        .glayer { position: absolute; inset: 0; display: grid; align-content: start; }
+        .gblk { background: rgba(0, 0, 0, .78); border-radius: 3px; }
+        .gblk.l { background: rgba(0, 0, 0, .18); }
+        .gblk.y { background: var(--c-yellow); }
+        .dim { position: absolute; font-family: var(--font-mono); font-size: 9px; font-weight: 700; color: #000; background: #fff; padding: 0 3px; white-space: nowrap; }
+
+        /* Wireframe */
+        .wf { border: 2px solid #000; background: #fff; overflow: hidden; display: flex; flex-direction: column; gap: 6px; padding-bottom: 8px; }
+        .wf .bar { height: 8px; background: #bdbdbd; }
+        .wf .nav { height: 18px; border-bottom: 2px solid #000; display: flex; align-items: center; justify-content: space-between; padding: 0 8px; }
+        .wf .nav i { display: block; width: 18px; height: 9px; background: #000; }
+        .wf .nav em { display: flex; gap: 6px; }
+        .wf .nav em u { display: block; width: 18px; height: 3px; background: #777; }
+        .wf .x { position: relative; background: #efefef; border: 1px solid #8a8a8a;
+            background-image: linear-gradient(to top right, transparent calc(50% - .6px), #8a8a8a 50%, transparent calc(50% + .6px)), linear-gradient(to top left, transparent calc(50% - .6px), #8a8a8a 50%, transparent calc(50% + .6px)); }
+        .wf .ln { height: 4px; background: #c9c9c9; border-radius: 2px; }
+        .wf .ln.d { background: #555; height: 7px; }
+        .wf .ln.h { background: #111; height: 12px; }
+        .wf .bt { height: 13px; border: 2px solid #000; border-radius: 4px; background: #e2e2e2; }
+        .wf .bt.k { background: #555; }
+        .wf .px { padding: 0 8px; }
+        .wf .row { display: flex; gap: 5px; }
+        .wf .col { display: flex; flex-direction: column; gap: 4px; }
+        .wf .note { font-family: var(--font-mono); font-size: 7px; color: #e5243b; text-transform: uppercase; letter-spacing: .1em; }
+        .wf-num { display: inline-flex; width: 16px; height: 16px; border-radius: 999px; background: var(--c-red); color: #fff; font: 700 9px/16px var(--font-mono); justify-content: center; margin-right: 6px; }
+
+        /* Jornada */
+        .jr { display: grid; grid-template-columns: 112px repeat(5, 1fr); border: 3px solid #000; font-size: 11px; line-height: 1.45; }
+        .jr > div { border-right: 1px solid #000; border-bottom: 1px solid #000; padding: 9px 9px; }
+        .jr > div:nth-child(6n) { border-right: 0; }
+        .jr .rh { font-family: var(--font-mono); font-size: 8.5px; letter-spacing: .12em; text-transform: uppercase; font-weight: 700; background: #f4f4f0; display: flex; align-items: center; }
+        .jr .ph { font-family: var(--font-display); font-weight: 900; font-size: 18px; text-transform: uppercase; line-height: .95; color: #000; }
+        .jr .ph small { display: block; font-family: var(--font-mono); font-weight: 700; font-size: 8px; letter-spacing: .2em; margin-bottom: 3px; }
+        .jr ul { padding-left: 11px; list-style: disc; }
+        .jr .emo { grid-column: 2 / 7; padding: 0; position: relative; height: 74px; }
+
+        /* Swatches */
+        .sw { border: 3px solid #000; overflow: hidden; display: flex; flex-direction: column; }
+        .sw .c { height: 96px; }
+        .sw .i { padding: 8px 10px; font-family: var(--font-mono); font-size: 9.5px; line-height: 1.5; }
+        .sw .i b { font-family: var(--font-display); font-size: 17px; font-weight: 900; text-transform: uppercase; display: block; line-height: 1; margin-bottom: 4px; }
+
+        /* Screenshots (alta fidelidade) */
+        .shot { position: relative; overflow: hidden; width: calc(var(--w) * var(--s) * 1px); height: calc(var(--h) * var(--s) * 1px); border: 3px solid #000; background: #fff; box-sizing: content-box; }
+        .shot iframe { position: absolute; top: 0; left: 0; width: calc(var(--w) * 1px); height: calc(var(--h) * 1px); border: 0; transform: scale(var(--s)); transform-origin: 0 0; pointer-events: none; }
+        .shot.live iframe { pointer-events: auto; }
+        .phone { border-radius: 26px; border-width: 6px; }
+
+        .comp-label { font-family: var(--font-mono); font-size: 8.5px; letter-spacing: .15em; text-transform: uppercase; color: #555; margin-bottom: 6px; display: block; }
+        .box { border: 2px dashed #b5b5b5; border-radius: 14px; padding: 14px; }
+        .box .btn-primary, .box .btn-ghost { padding: .9rem 1.6rem; white-space: nowrap; }
+
+        @media print {
+            @page { size: 297mm 210mm; margin: 0; }
+            body { background: #fff; padding: 0; }
+            .page { margin: 0; page-break-after: always; break-after: page; }
+            .no-print { display: none !important; }
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <div class="no-print max-w-[1123px] mx-auto mb-6 px-1 flex justify-between items-end">
+        <div>
+            <p class="over">THE FATO · Documento de projeto</p>
+            <h1 class="font-display text-5xl">Design de Interface</h1>
+        </div>
+        <p class="font-mono text-[10px] uppercase tracking-[0.15em] text-right leading-relaxed">Pranchas A4 paisagem<br>Ctrl + P → Salvar como PDF<br>(margens: nenhuma · gráficos de fundo: ativado)</p>
+    </div>
+
+
+    <!-- ═══════════════════ 1 · GRID (DESKTOP) ═══════════════════ -->
+    <section class="page">
+        <div class="page-body">
+            <div class="side">
+                <p class="over">01 · Estrutura</p>
+                <div class="lede">
+                    <p>O grid organiza a interface do e-commerce <strong>The Fato</strong> e garante que o visual chapado da marca — blocos de cor sólida, bordas grossas e tipografia pesada — mantenha ordem e respiro, mesmo com estampas e cores intensas.</p>
+                    <p>No desktop foi adotado um grid de <strong>12 colunas</strong> sobre um frame de <strong>1440 px</strong>, com margens laterais de 40 px, gutter de 20 px e container máximo de 1400 px. A divisão em 12 permite compor vitrines de 4 produtos (3 colunas cada), o lookbook em 2 blocos (6 + 6) e o manifesto em 7 + 5 colunas.</p>
+                    <p>Os espaçamentos verticais seguem uma escala de <strong>8 pt</strong> (múltiplos de 4 px), com seções separadas por 96–128 px.</p>
+                </div>
+                <table class="spec">
+                    <tr><th colspan="2">Desktop · 1440 × 1024</th></tr>
+                    <tr><td>Colunas</td><td><b>12</b></td></tr>
+                    <tr><td>Largura da coluna</td><td>95 px</td></tr>
+                    <tr><td>Gutter</td><td>20 px</td></tr>
+                    <tr><td>Margem lateral</td><td>40 px</td></tr>
+                    <tr><td>Container máx.</td><td>1400 px</td></tr>
+                    <tr><td>Faixa marquee</td><td>40 px (fixa)</td></tr>
+                    <tr><td>Header</td><td>≈ 88 px (fixo)</td></tr>
+                </table>
+            </div>
+
+            <div class="flex-1 flex flex-col">
+                <!-- 1440 × 1024 at 0.5 -->
+                <div class="gframe" style="width:720px;height:512px;">
+                    <div class="gcols" style="padding:0 20px;grid-template-columns:repeat(12,1fr);column-gap:10px;">
+                        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                    </div>
+                    <div class="glayer" style="padding:0 20px;grid-template-columns:repeat(12,1fr);column-gap:10px;row-gap:10px;">
+                        <div class="gblk y" style="grid-column:1/-1;height:20px;margin:0 -20px;border-radius:0;"></div>
+                        <div class="gblk" style="grid-column:1/2;height:30px;"></div>
+                        <div class="gblk l" style="grid-column:5/9;height:10px;align-self:center;"></div>
+                        <div class="gblk" style="grid-column:12/13;height:14px;align-self:center;"></div>
+                        <div class="gblk l" style="grid-column:4/10;height:150px;margin-top:20px;display:flex;align-items:center;justify-content:center;font:900 44px/1 var(--font-display);color:#000;">THE FATO</div>
+                        <div class="gblk" style="grid-column:4/7;height:24px;"></div>
+                        <div class="gblk l" style="grid-column:7/10;height:24px;"></div>
+                        <div class="gblk" style="grid-column:1/4;height:150px;margin-top:20px;"></div>
+                        <div class="gblk" style="grid-column:4/7;height:150px;margin-top:20px;"></div>
+                        <div class="gblk" style="grid-column:7/10;height:150px;margin-top:20px;"></div>
+                        <div class="gblk" style="grid-column:10/13;height:150px;margin-top:20px;"></div>
+                    </div>
+                    <span class="dim" style="left:2px;bottom:6px;">40</span>
+                    <span class="dim" style="right:2px;bottom:6px;">40</span>
+                    <span class="dim" style="left:114px;top:128px;">gutter 20</span>
+                    <span class="dim" style="left:24px;top:470px;">card = 3 col</span>
+                </div>
+                <p class="cap">Frame desktop 1440 × 1024 (escala 50%) — Home: marquee, header, hero centralizado (6 col) e vitrine "Últimos Drops" (4 × 3 col)</p>
+
+                <div class="grid grid-cols-3 gap-4 mt-5" style="width:720px;">
+                    <div>
+                        <div class="gframe" style="height:70px;">
+                            <div class="gcols" style="padding:0 6px;grid-template-columns:repeat(12,1fr);column-gap:3px;"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+                            <div class="glayer" style="padding:8px 6px;grid-template-columns:repeat(12,1fr);column-gap:3px;"><div class="gblk" style="grid-column:1/4;height:54px;"></div><div class="gblk" style="grid-column:4/7;height:54px;"></div><div class="gblk" style="grid-column:7/10;height:54px;"></div><div class="gblk" style="grid-column:10/13;height:54px;"></div></div>
+                        </div>
+                        <p class="cap">Vitrine · 4 × 3 col</p>
+                    </div>
+                    <div>
+                        <div class="gframe" style="height:70px;">
+                            <div class="gcols" style="padding:0 6px;grid-template-columns:repeat(12,1fr);column-gap:3px;"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+                            <div class="glayer" style="padding:8px 6px;grid-template-columns:repeat(12,1fr);column-gap:3px;"><div class="gblk" style="grid-column:1/7;height:54px;"></div><div class="gblk" style="grid-column:7/13;height:54px;"></div></div>
+                        </div>
+                        <p class="cap">Lookbook · 6 + 6 col</p>
+                    </div>
+                    <div>
+                        <div class="gframe" style="height:70px;">
+                            <div class="gcols" style="padding:0 6px;grid-template-columns:repeat(12,1fr);column-gap:3px;"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+                            <div class="glayer" style="padding:8px 6px;grid-template-columns:repeat(12,1fr);column-gap:3px;row-gap:4px;"><div class="gblk" style="grid-column:1/8;height:24px;"></div><div class="gblk l" style="grid-column:9/11;grid-row:1/3;height:54px;"></div><div class="gblk l" style="grid-column:11/13;grid-row:1/3;height:54px;"></div><div class="gblk l" style="grid-column:1/6;height:26px;"></div></div>
+                        </div>
+                        <p class="cap">Manifesto · 7 + 5 col</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-foot">
+            <h2>Grid e dimensão<br>de protótipo</h2>
+            <div class="meta">2026<b>01</b></div>
+        </div>
+    </section>
+
+
+    <!-- ═══════════════════ 2 · GRID (TABLET / MOBILE) ═══════════════════ -->
+    <section class="page">
+        <div class="page-body">
+            <div class="side">
+                <p class="over">01 · Responsividade</p>
+                <div class="lede">
+                    <p>A interface foi construída <strong>mobile first</strong> com os breakpoints do Tailwind CSS. Conforme a tela diminui, o número de colunas é reduzido e os blocos se reorganizam sem perder a hierarquia.</p>
+                    <p>No <strong>mobile</strong> (frame de 390 × 844 px) o grid é de 4 colunas com margem de 24 px: cada produto ocupa a largura total e o menu de navegação é recolhido em um ícone. No <strong>tablet</strong> (768 × 1024 px) são 8 colunas, com a vitrine em 2 produtos por linha.</p>
+                    <p>As áreas de toque respeitam o mínimo de <strong>44 × 44 px</strong>; os botões de tamanho têm 48 × 48 px.</p>
+                </div>
+            </div>
+
+            <div class="flex-1 flex flex-col gap-5">
+                <div class="flex gap-8 items-end">
+                    <!-- Mobile 390x844 @ .5 -->
+                    <div>
+                        <div class="gframe" style="width:195px;height:422px;border-radius:18px;">
+                            <div class="gcols" style="padding:0 12px;grid-template-columns:repeat(4,1fr);column-gap:10px;"><span></span><span></span><span></span><span></span></div>
+                            <div class="glayer" style="padding:0 12px;grid-template-columns:repeat(4,1fr);column-gap:10px;row-gap:8px;">
+                                <div class="gblk y" style="grid-column:1/-1;height:16px;margin:0 -12px;border-radius:0;"></div>
+                                <div class="gblk" style="grid-column:1/2;height:26px;"></div>
+                                <div class="gblk" style="grid-column:4/5;height:12px;align-self:center;width:14px;justify-self:end;"></div>
+                                <div class="gblk l" style="grid-column:1/-1;height:120px;margin-top:10px;"></div>
+                                <div class="gblk" style="grid-column:1/-1;height:22px;"></div>
+                                <div class="gblk l" style="grid-column:1/-1;height:22px;"></div>
+                                <div class="gblk" style="grid-column:1/-1;height:150px;margin-top:10px;"></div>
+                            </div>
+                            <span class="dim" style="left:0;bottom:4px;">24</span><span class="dim" style="right:0;bottom:4px;">24</span>
+                        </div>
+                        <p class="cap">Mobile 390 × 844 · 4 col</p>
+                    </div>
+                    <!-- Tablet 768x1024 @ .41 -->
+                    <div>
+                        <div class="gframe" style="width:315px;height:420px;border-radius:14px;">
+                            <div class="gcols" style="padding:0 10px;grid-template-columns:repeat(8,1fr);column-gap:8px;"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+                            <div class="glayer" style="padding:0 10px;grid-template-columns:repeat(8,1fr);column-gap:8px;row-gap:8px;">
+                                <div class="gblk y" style="grid-column:1/-1;height:16px;margin:0 -10px;border-radius:0;"></div>
+                                <div class="gblk" style="grid-column:1/2;height:26px;"></div>
+                                <div class="gblk l" style="grid-column:3/7;height:8px;align-self:center;"></div>
+                                <div class="gblk" style="grid-column:8/9;height:12px;align-self:center;"></div>
+                                <div class="gblk l" style="grid-column:2/8;height:110px;margin-top:10px;"></div>
+                                <div class="gblk" style="grid-column:1/5;height:165px;margin-top:12px;"></div>
+                                <div class="gblk" style="grid-column:5/9;height:165px;margin-top:12px;"></div>
+                            </div>
+                            <span class="dim" style="left:0;bottom:4px;">24</span><span class="dim" style="right:0;bottom:4px;">24</span>
+                        </div>
+                        <p class="cap">Tablet 768 × 1024 · 8 col</p>
+                    </div>
+                </div>
+
+                <table class="spec">
+                    <tr><th>Dispositivo</th><th>Frame do protótipo</th><th>Breakpoint</th><th>Colunas</th><th>Margem</th><th>Gutter</th><th>Vitrine</th><th>Navegação</th></tr>
+                    <tr><td><b>Desktop</b></td><td>1440 × 1024 px</td><td>≥ 1024 px (lg)</td><td>12</td><td>40 px</td><td>20 px</td><td>4 por linha</td><td>Menu central + dropdown</td></tr>
+                    <tr><td><b>Tablet</b></td><td>768 × 1024 px</td><td>768 – 1023 px (md)</td><td>8</td><td>24 px</td><td>20 px</td><td>2 por linha</td><td>Menu central</td></tr>
+                    <tr><td><b>Mobile</b></td><td>390 × 844 px</td><td>&lt; 768 px</td><td>4</td><td>24 px</td><td>20 px</td><td>1 por linha (2 a partir de 640 px)</td><td>Menu hambúrguer</td></tr>
+                </table>
+            </div>
+        </div>
+        <div class="page-foot">
+            <h2>Grid e dimensão<br>de protótipo</h2>
+            <div class="meta">2026<b>02</b></div>
+        </div>
+    </section>
+
+
+    <!-- ═══════════════════ 3 · FLUXOGRAMA ═══════════════════ -->
+    <section class="page">
+        <div class="page-body" style="flex-direction:column;gap:14px;">
+            <div class="flex gap-8 items-start">
+                <p class="over flex-shrink-0 w-[150px]">02 · Navegação</p>
+                <div class="lede" style="max-width:820px;">
+                    <p>O fluxograma mapeia os caminhos que o usuário percorre no site, da entrada até a confirmação do pedido. A Home funciona como ponto central: dela partem as coleções, o catálogo de drops, o manifesto da marca e as páginas de suporte. O fluxo principal de compra foi reduzido ao menor número de passos possível — <strong>produto → tamanho → carrinho → finalizar</strong> — para que a decisão aconteça sem atrito.</p>
+                </div>
+            </div>
+
+            <svg viewBox="0 0 1043 530" width="1043" height="530" font-family="Space Grotesk, sans-serif">
+                <defs>
+                    <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#000" /></marker>
+                </defs>
+                <style>
+                    .n rect, .n path, .n circle { stroke: #000; stroke-width: 2.5; }
+                    .t { font-size: 11px; font-weight: 700; text-anchor: middle; dominant-baseline: middle; text-transform: uppercase; letter-spacing: .03em; }
+                    .s { font-size: 8.5px; text-anchor: middle; dominant-baseline: middle; font-family: 'Space Mono', monospace; fill: #333; }
+                    .e { fill: none; stroke: #000; stroke-width: 1.6; marker-end: url(#ah); }
+                    .lb { font-family: 'Space Mono', monospace; font-size: 9px; font-weight: 700; fill: #e5243b; text-transform: uppercase; }
+                </style>
+
+                <!-- edges -->
+                <path class="e" d="M130,250 H158" />
+                <path class="e" d="M280,250 H295 V40 H308" />
+                <path class="e" d="M295,120 H308" />
+                <path class="e" d="M295,250 H308" />
+                <path class="e" d="M295,250 V370 H308" />
+                <path class="e" d="M430,120 H445 V95 H458" />
+                <path class="e" d="M445,120 V145 H458" />
+                <path class="e" d="M370,140 V228" />
+                <text class="lb" x="376" y="192">básicos</text>
+                <path class="e" d="M580,95 H640 V228" />
+                <path class="e" d="M580,145 H640" style="marker-end:none" />
+                <path class="e" d="M430,250 H608" />
+                <path class="e" d="M445,370 V330 H458" />
+                <path class="e" d="M445,370 V375 H458" />
+                <path class="e" d="M445,370 V420 H458" />
+                <path class="e" d="M445,420 V480 H458" />
+                <path class="e" d="M730,250 H763" />
+                <path class="e" d="M820,278 V420 H582" />
+                <text class="lb" x="826" y="300">não</text>
+                <text class="lb" x="600" y="414">consulta e volta</text>
+                <path class="e" d="M820,222 V172" />
+                <text class="lb" x="826" y="200">sim</text>
+                <path class="e" d="M880,150 H908" />
+                <path class="e" d="M970,170 V220" />
+                <path class="e" d="M910,250 H893 V293" />
+                <text class="lb" x="886" y="244" text-anchor="end">sim</text>
+                <path class="e" d="M970,280 V318" />
+                <text class="lb" x="976" y="300">não</text>
+                <path class="e" d="M970,360 V388" />
+                <path class="e" d="M970,430 V458" />
+                <path class="e" d="M580,480 H608" />
+                <path class="e" d="M730,480 H758" />
+                <text class="lb" x="736" y="472">sim</text>
+                <path class="e" d="M670,508 V520 H520 V502" />
+                <text class="lb" x="580" y="516">não</text>
+                <path class="e" d="M340,206 V228" />
+
+                <!-- nodes -->
+                <g class="n"><rect x="10" y="230" width="120" height="40" rx="20" fill="#000" /><text class="t" x="70" y="245" fill="#fff">Acesso</text><text class="s" x="70" y="259" fill="#fcc30b" style="fill:#fcc30b">Instagram · Google</text></g>
+                <g class="n"><rect x="160" y="226" width="120" height="48" rx="8" fill="#fcc30b" /><text class="t" x="220" y="244">Home</text><text class="s" x="220" y="259">homepage.html</text></g>
+
+                <g class="n"><rect x="310" y="20" width="120" height="40" rx="8" fill="#fff" /><text class="t" x="370" y="35">Manifesto</text><text class="s" x="370" y="49">sobre.html</text></g>
+                <g class="n"><rect x="310" y="100" width="120" height="40" rx="8" fill="#fff" /><text class="t" x="370" y="115">Coleções ▾</text><text class="s" x="370" y="129">dropdown</text></g>
+                <g class="n"><rect x="310" y="230" width="120" height="40" rx="8" fill="#fff" /><text class="t" x="370" y="245">Drops</text><text class="s" x="370" y="259">produtos.html</text></g>
+                <g class="n"><rect x="310" y="350" width="120" height="40" rx="8" fill="#fff" /><text class="t" x="370" y="365">Rodapé</text><text class="s" x="370" y="379">suporte · social</text></g>
+
+                <g class="n"><rect x="460" y="77" width="120" height="36" rx="8" fill="#fff" /><text class="t" x="520" y="95">Bicharada</text></g>
+                <g class="n"><rect x="460" y="127" width="120" height="36" rx="8" fill="#fff" /><text class="t" x="520" y="145">No Planet B</text></g>
+
+                <g class="n"><rect x="460" y="314" width="120" height="32" rx="8" fill="#fff" /><text class="t" x="520" y="330">FAQ</text></g>
+                <g class="n"><rect x="460" y="359" width="120" height="32" rx="8" fill="#fff" /><text class="t" x="520" y="375">Trocas</text></g>
+                <g class="n"><rect x="460" y="404" width="120" height="32" rx="8" fill="#fff" /><text class="t" x="520" y="420">Guia de Medidas</text></g>
+                <g class="n"><rect x="460" y="460" width="120" height="40" rx="8" fill="#fff" /><text class="t" x="520" y="475">Newsletter</text><text class="s" x="520" y="489">campo de e-mail</text></g>
+
+                <g class="n"><rect x="610" y="226" width="120" height="48" rx="8" fill="#e5243b" /><text class="t" x="670" y="244" fill="#fff">Produto</text><text class="s" x="670" y="259" style="fill:#fff">foto · preço · info</text></g>
+                <g class="n"><path d="M820,222 L878,250 L820,278 L762,250 Z" fill="#fff" /><text class="t" x="820" y="245" style="font-size:9px">Sabe o</text><text class="t" x="820" y="257" style="font-size:9px">tamanho?</text></g>
+                <g class="n"><rect x="760" y="130" width="120" height="40" rx="8" fill="#fff" /><text class="t" x="820" y="145" style="font-size:10px">Escolhe P·M·G·GG</text><text class="s" x="820" y="159">+ adicionar</text></g>
+                <g class="n"><rect x="910" y="126" width="120" height="44" rx="8" fill="#0a97d9" /><text class="t" x="970" y="143" fill="#fff">Carrinho</text><text class="s" x="970" y="158" style="fill:#fff">drawer lateral</text></g>
+                <g class="n"><path d="M970,220 L1030,250 L970,280 L910,250 Z" fill="#fff" /><text class="t" x="970" y="245" style="font-size:9px">Continuar</text><text class="t" x="970" y="257" style="font-size:9px">comprando?</text></g>
+                <g class="n"><circle cx="893" cy="305" r="11" fill="#fcc30b" /><text class="t" x="893" y="306">A</text></g>
+                <g class="n"><circle cx="340" cy="195" r="11" fill="#fcc30b" /><text class="t" x="340" y="196">A</text></g>
+                <g class="n"><rect x="910" y="320" width="120" height="40" rx="8" fill="#e5243b" /><text class="t" x="970" y="340" fill="#fff" style="font-size:10px">Finalizar compra</text></g>
+                <g class="n"><rect x="910" y="390" width="120" height="40" rx="8" fill="#fff" style="stroke-dasharray:5 4" /><text class="t" x="970" y="405" style="font-size:10px">Checkout</text><text class="s" x="970" y="419">entrega · pagamento</text></g>
+                <g class="n"><rect x="910" y="460" width="120" height="40" rx="20" fill="#000" /><text class="t" x="970" y="480" fill="#fff" style="font-size:10px">Pedido confirmado</text></g>
+
+                <g class="n"><path d="M670,452 L730,480 L670,508 L610,480 Z" fill="#fff" /><text class="t" x="670" y="475" style="font-size:9px">E-mail</text><text class="t" x="670" y="487" style="font-size:9px">válido?</text></g>
+                <g class="n"><rect x="760" y="460" width="120" height="40" rx="20" fill="#4c9f38" /><text class="t" x="820" y="480" fill="#fff" style="font-size:10px">Inscrição feita</text></g>
+
+                <!-- legend -->
+                <g transform="translate(10,20)" font-family="Space Mono, monospace" font-size="9">
+                    <rect x="0" y="0" width="34" height="16" rx="8" fill="#000" /><text x="42" y="11">início / fim</text>
+                    <rect x="0" y="24" width="34" height="16" rx="4" fill="#fff" stroke="#000" stroke-width="2" /><text x="42" y="35">tela / ação</text>
+                    <path d="M17,48 L34,57 L17,66 L0,57 Z" fill="#fff" stroke="#000" stroke-width="2" /><text x="42" y="60">decisão</text>
+                    <circle cx="17" cy="82" r="8" fill="#fcc30b" stroke="#000" stroke-width="2" /><text x="42" y="85">conector</text>
+                    <rect x="0" y="98" width="34" height="16" rx="4" fill="#fff" stroke="#000" stroke-width="2" stroke-dasharray="4 3" /><text x="42" y="109">etapa futura</text>
+                </g>
+            </svg>
+        </div>
+        <div class="page-foot">
+            <h2>Fluxograma</h2>
+            <div class="meta">2026<b>03</b></div>
+        </div>
+    </section>
+
+
+    <!-- ═══════════════════ 4 · WIREFRAME DESKTOP ═══════════════════ -->
+    <section class="page">
+        <div class="page-body" style="flex-direction:column;gap:14px;">
+            <div class="flex gap-8 items-start">
+                <p class="over flex-shrink-0 w-[150px]">03 · Baixa fidelidade</p>
+                <div class="lede" style="max-width:820px;">
+                    <p>Os wireframes definem a estrutura das telas antes da aplicação de cor, fotografia e tipografia. Nessa etapa foram decididas a posição fixa da faixa de mensagens e do header, a ordem das seções da Home (hero → drops → números → lookbook → manifesto) e a divisão da página de produto em <strong>imagem à esquerda e decisão de compra à direita</strong>.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-4 gap-5 flex-1">
+                <!-- Home -->
+                <div class="flex flex-col">
+                    <p class="comp-label"><span class="wf-num">1</span>Home</p>
+                    <div class="wf flex-1">
+                        <div class="bar"></div>
+                        <div class="nav"><i></i><em><u></u><u></u><u></u></em><i style="width:8px"></i></div>
+                        <div class="px col items-center" style="padding-top:14px;padding-bottom:10px;gap:6px;">
+                            <div class="ln" style="width:40%"></div>
+                            <div class="ln h" style="width:70%;height:26px;"></div>
+                            <div class="ln d" style="width:45%;background:#e5243b"></div>
+                            <div class="ln" style="width:60%"></div>
+                            <div class="row" style="width:70%;"><div class="bt k flex-1"></div><div class="bt flex-1"></div></div>
+                        </div>
+                        <div class="px"><div class="ln d" style="width:40%"></div></div>
+                        <div class="px row"><div class="x flex-1" style="height:62px"></div><div class="x flex-1" style="height:62px"></div><div class="x flex-1" style="height:62px"></div><div class="x flex-1" style="height:62px"></div></div>
+                        <div class="px row" style="justify-content:space-around;padding-top:4px;padding-bottom:4px;border-top:1px solid #000;border-bottom:1px solid #000;"><div class="ln d" style="width:14%"></div><div class="ln d" style="width:14%"></div><div class="ln d" style="width:14%"></div><div class="ln d" style="width:14%"></div></div>
+                        <div class="px row"><div class="x flex-1" style="height:70px"></div><div class="x flex-1" style="height:70px"></div></div>
+                        <div class="px row" style="gap:8px;"><div class="col" style="flex:7"><div class="ln h"></div><div class="ln h" style="width:80%"></div><div class="ln"></div><div class="ln" style="width:70%"></div></div><div class="row" style="flex:5;flex-wrap:wrap;gap:3px;"><div class="x" style="width:45%;height:22px"></div><div class="x" style="width:45%;height:22px"></div><div class="x" style="width:45%;height:22px"></div><div class="x" style="width:45%;height:22px"></div></div></div>
+                        <div class="px row" style="margin-top:auto;border-top:2px solid #000;padding-top:6px;"><div class="col" style="flex:5"><div class="ln d" style="width:40%"></div><div class="bt"></div></div><div class="col" style="flex:2"><div class="ln"></div><div class="ln"></div></div><div class="col" style="flex:2"><div class="ln"></div><div class="ln"></div></div></div>
+                    </div>
+                </div>
+                <!-- Catálogo -->
+                <div class="flex flex-col">
+                    <p class="comp-label"><span class="wf-num">2</span>Coleção / Catálogo</p>
+                    <div class="wf flex-1">
+                        <div class="bar"></div>
+                        <div class="nav"><i></i><em><u></u><u></u><u></u></em><i style="width:8px"></i></div>
+                        <div class="px col items-center" style="padding-top:12px;padding-bottom:6px;"><div class="ln h" style="width:60%"></div><div class="ln" style="width:50%"></div></div>
+                        <div class="px row" style="justify-content:space-between;align-items:flex-end;"><div class="col" style="width:45%"><div class="ln" style="width:40%;background:#e5243b"></div><div class="ln h"></div></div><div class="col" style="width:35%"><div class="ln"></div><div class="ln"></div></div></div>
+                        <div class="px"><div class="ln" style="height:3px;background:#000"></div></div>
+                        <div class="px" style="display:grid;grid-template-columns:repeat(4,1fr);gap:5px;">
+                            <div class="col"><div class="x" style="height:58px"></div><div class="ln d"></div><div class="ln" style="width:60%"></div></div>
+                            <div class="col"><div class="x" style="height:58px"></div><div class="ln d"></div><div class="ln" style="width:60%"></div></div>
+                            <div class="col"><div class="x" style="height:58px"></div><div class="ln d"></div><div class="ln" style="width:60%"></div></div>
+                            <div class="col"><div class="x" style="height:58px"></div><div class="ln d"></div><div class="ln" style="width:60%"></div></div>
+                            <div class="col"><div class="x" style="height:58px"></div><div class="ln d"></div><div class="ln" style="width:60%"></div></div>
+                            <div class="col"><div class="x" style="height:58px"></div><div class="ln d"></div><div class="ln" style="width:60%"></div></div>
+                            <div class="col"><div class="x" style="height:58px"></div><div class="ln d"></div><div class="ln" style="width:60%"></div></div>
+                            <div class="col"><div class="x" style="height:58px"></div><div class="ln d"></div><div class="ln" style="width:60%"></div></div>
+                        </div>
+                        <div class="px row" style="justify-content:space-between;align-items:flex-end;margin-top:6px;"><div class="col" style="width:45%"><div class="ln" style="width:40%;background:#e5243b"></div><div class="ln h"></div></div></div>
+                        <div class="px"><div class="ln" style="height:3px;background:#000"></div></div>
+                        <div class="px" style="display:grid;grid-template-columns:repeat(4,1fr);gap:5px;">
+                            <div class="col"><div class="x" style="height:58px"></div><div class="ln d"></div></div>
+                            <div class="col"><div class="x" style="height:58px"></div><div class="ln d"></div></div>
+                            <div class="col"><div class="x" style="height:58px"></div><div class="ln d"></div></div>
+                            <div class="col"><div class="x" style="height:58px"></div><div class="ln d"></div></div>
+                        </div>
+                        <p class="note px" style="margin-top:auto">card clicável → abre produto</p>
+                    </div>
+                </div>
+                <!-- Produto -->
+                <div class="flex flex-col">
+                    <p class="comp-label"><span class="wf-num">3</span>Produto</p>
+                    <div class="wf flex-1">
+                        <div class="bar"></div>
+                        <div class="nav"><i></i><em><u></u><u></u><u></u></em><i style="width:8px"></i></div>
+                        <div class="px" style="padding-top:12px;"><div class="ln" style="width:22%"></div></div>
+                        <div class="px row" style="gap:10px;padding-top:6px;">
+                            <div class="x" style="flex:1;height:190px;"></div>
+                            <div class="col" style="flex:1;gap:6px;justify-content:center;">
+                                <div class="ln" style="width:35%;background:#e5243b"></div>
+                                <div class="ln h"></div>
+                                <div class="ln h" style="width:70%"></div>
+                                <div class="ln" style="width:50%"></div>
+                                <div class="ln d" style="width:45%;height:12px;background:#0a97d9"></div>
+                                <div class="ln" style="width:30%;margin-top:6px"></div>
+                                <div class="row" style="gap:3px;"><div class="bt" style="width:18px;height:18px"></div><div class="bt k" style="width:18px;height:18px"></div><div class="bt" style="width:18px;height:18px"></div><div class="bt" style="width:18px;height:18px"></div></div>
+                                <div class="bt k" style="height:18px;margin-top:6px;"></div>
+                                <div class="ln" style="margin-top:6px;height:1px;background:#000"></div>
+                                <div class="ln"></div><div class="ln" style="width:80%"></div>
+                            </div>
+                        </div>
+                        <div class="px col" style="margin-top:8px;gap:3px;">
+                            <p class="note">1 · voltar &nbsp; 2 · tamanho (P/M/G/GG)</p>
+                            <p class="note">3 · CTA "adicionar ao carrinho"</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Carrinho -->
+                <div class="flex flex-col">
+                    <p class="comp-label"><span class="wf-num">4</span>Carrinho (drawer)</p>
+                    <div class="wf flex-1" style="position:relative;">
+                        <div class="bar"></div>
+                        <div class="nav"><i></i><em><u></u><u></u><u></u></em><i style="width:8px"></i></div>
+                        <div class="px row" style="gap:10px;padding-top:24px;"><div class="x" style="flex:1;height:190px;"></div><div class="col" style="flex:1"><div class="ln h"></div><div class="ln"></div></div></div>
+                        <div style="position:absolute;inset:0;background:rgba(0,0,0,.55);"></div>
+                        <div style="position:absolute;top:0;right:0;bottom:0;width:62%;background:#fff;border-left:2px solid #000;display:flex;flex-direction:column;gap:6px;padding:8px;">
+                            <div class="row" style="justify-content:space-between;align-items:center;border-bottom:1px solid #000;padding-bottom:6px;"><div class="ln h" style="width:50%"></div><div style="width:14px;height:14px;border:1px solid #000;border-radius:99px"></div></div>
+                            <div class="row" style="border:1px solid #000;border-radius:5px;padding:4px;"><div class="x" style="width:26px;height:32px"></div><div class="col" style="flex:1"><div class="ln d"></div><div class="ln" style="width:50%;background:#e5243b"></div></div></div>
+                            <div class="row" style="border:1px solid #000;border-radius:5px;padding:4px;"><div class="x" style="width:26px;height:32px"></div><div class="col" style="flex:1"><div class="ln d"></div><div class="ln" style="width:50%;background:#e5243b"></div></div></div>
+                            <div style="margin-top:auto;border-top:1px solid #000;padding-top:6px;" class="col"><div class="row" style="justify-content:space-between"><div class="ln" style="width:30%"></div><div class="ln d" style="width:35%;background:#e5243b"></div></div><div class="bt k" style="height:20px;background:#e5243b"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-foot">
+            <h2>Wireframe</h2>
+            <div class="meta">Desktop · 2026<b>04</b></div>
+        </div>
+    </section>
+
+
+    <!-- ═══════════════════ 5 · WIREFRAME MOBILE ═══════════════════ -->
+    <section class="page">
+        <div class="page-body" style="flex-direction:column;gap:14px;">
+            <div class="flex gap-8 items-start">
+                <p class="over flex-shrink-0 w-[150px]">03 · Mobile</p>
+                <div class="lede" style="max-width:820px;">
+                    <p>No mobile, os elementos foram empilhados em uma única coluna e o menu passou a ser acessado pelo ícone hambúrguer. A página de produto prioriza a foto em tela cheia e posiciona o botão de compra em largura total, ao alcance do polegar. O carrinho abre ocupando toda a tela, mantendo o total e o botão "Finalizar compra" sempre visíveis.</p>
+                </div>
+            </div>
+
+            <div class="flex justify-between flex-1 items-start">
+                <!-- M1 Home -->
+                <div>
+                    <p class="comp-label"><span class="wf-num">1</span>Home</p>
+                    <div class="wf" style="width:200px;height:433px;border-radius:18px;border-width:3px;">
+                        <div class="bar"></div>
+                        <div class="nav"><i></i><i style="width:12px;height:8px;background:repeating-linear-gradient(#000 0 2px,transparent 2px 3px)"></i></div>
+                        <div class="px col items-center" style="padding-top:16px;padding-bottom:10px;gap:6px;"><div class="ln" style="width:50%"></div><div class="ln h" style="width:80%;height:22px"></div><div class="ln d" style="width:55%;background:#e5243b"></div><div class="ln" style="width:80%"></div><div class="ln" style="width:70%"></div><div class="bt k" style="width:70%;height:16px"></div><div class="bt" style="width:70%;height:16px"></div></div>
+                        <div class="px"><div class="ln d" style="width:50%"></div></div>
+                        <div class="px"><div class="x" style="height:130px"></div></div>
+                    </div>
+                </div>
+                <!-- M2 Menu -->
+                <div>
+                    <p class="comp-label"><span class="wf-num">2</span>Menu aberto</p>
+                    <div class="wf" style="width:200px;height:433px;border-radius:18px;border-width:3px;">
+                        <div class="bar"></div>
+                        <div class="nav"><i></i><i style="width:12px;height:8px;background:repeating-linear-gradient(#000 0 2px,transparent 2px 3px)"></i></div>
+                        <div class="px col" style="gap:10px;padding-top:10px;padding-bottom:12px;border-bottom:1px solid #000;"><div class="ln d" style="width:40%"></div><div class="ln d" style="width:50%"></div><div class="ln d" style="width:45%"></div></div>
+                        <div class="px col items-center" style="opacity:.35;gap:6px;padding-top:10px;"><div class="ln h" style="width:80%;height:22px"></div><div class="ln" style="width:70%"></div><div class="bt k" style="width:70%;height:16px"></div></div>
+                        <p class="note px">drops · sobre nós · coleções</p>
+                    </div>
+                </div>
+                <!-- M3 Coleção -->
+                <div>
+                    <p class="comp-label"><span class="wf-num">3</span>Coleção</p>
+                    <div class="wf" style="width:200px;height:433px;border-radius:18px;border-width:3px;">
+                        <div class="bar"></div>
+                        <div class="nav"><i></i><i style="width:12px;height:8px;background:repeating-linear-gradient(#000 0 2px,transparent 2px 3px)"></i></div>
+                        <div class="px col" style="padding-top:12px;"><div class="ln" style="width:25%;background:#e5243b"></div><div class="ln h" style="width:70%"></div><div class="ln" style="width:80%"></div><div class="ln" style="height:3px;background:#000;margin-top:4px"></div></div>
+                        <div class="px col" style="gap:4px;"><div class="x" style="height:150px"></div><div class="ln d" style="width:60%"></div><div class="ln" style="width:40%"></div><div class="ln d" style="width:30%"></div></div>
+                        <div class="px"><div class="x" style="height:80px"></div></div>
+                    </div>
+                </div>
+                <!-- M4 Produto -->
+                <div>
+                    <p class="comp-label"><span class="wf-num">4</span>Produto</p>
+                    <div class="wf" style="width:200px;height:433px;border-radius:18px;border-width:3px;">
+                        <div class="bar"></div>
+                        <div class="nav"><i></i><i style="width:12px;height:8px;background:repeating-linear-gradient(#000 0 2px,transparent 2px 3px)"></i></div>
+                        <div class="px" style="padding-top:8px"><div class="ln" style="width:25%"></div></div>
+                        <div class="px"><div class="x" style="height:150px"></div></div>
+                        <div class="px col" style="gap:5px;"><div class="ln h" style="width:75%"></div><div class="ln" style="width:45%"></div><div class="ln d" style="width:35%;height:11px;background:#0a97d9"></div><div class="row" style="gap:4px;"><div class="bt" style="width:22px;height:22px"></div><div class="bt k" style="width:22px;height:22px"></div><div class="bt" style="width:22px;height:22px"></div><div class="bt" style="width:22px;height:22px"></div></div><div class="bt k" style="height:20px;margin-top:4px"></div></div>
+                    </div>
+                </div>
+                <!-- M5 Carrinho -->
+                <div>
+                    <p class="comp-label"><span class="wf-num">5</span>Carrinho</p>
+                    <div class="wf" style="width:200px;height:433px;border-radius:18px;border-width:3px;">
+                        <div class="px row" style="justify-content:space-between;align-items:center;border-bottom:1px solid #000;padding-top:12px;padding-bottom:8px;"><div class="ln h" style="width:50%"></div><div style="width:16px;height:16px;border:1px solid #000;border-radius:99px"></div></div>
+                        <div class="px col" style="gap:6px;">
+                            <div class="row" style="border:1px solid #000;border-radius:6px;padding:5px;"><div class="x" style="width:34px;height:42px"></div><div class="col" style="flex:1"><div class="ln d"></div><div class="ln" style="width:50%;background:#e5243b"></div></div></div>
+                            <div class="row" style="border:1px solid #000;border-radius:6px;padding:5px;"><div class="x" style="width:34px;height:42px"></div><div class="col" style="flex:1"><div class="ln d"></div><div class="ln" style="width:50%;background:#e5243b"></div></div></div>
+                        </div>
+                        <div class="px col" style="margin-top:auto;border-top:1px solid #000;padding-top:8px;gap:8px;"><div class="row" style="justify-content:space-between"><div class="ln" style="width:30%"></div><div class="ln d" style="width:35%;background:#e5243b"></div></div><div class="bt k" style="height:24px;background:#e5243b"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-foot">
+            <h2>Wireframe</h2>
+            <div class="meta">Mobile · 2026<b>05</b></div>
+        </div>
+    </section>
+
+
+    <!-- ═══════════════════ 6 · JORNADA DO USUÁRIO ═══════════════════ -->
+    <section class="page">
+        <div class="page-body" style="flex-direction:column;gap:12px;">
+            <div class="flex gap-8 items-start">
+                <p class="over flex-shrink-0 w-[150px]">04 · Consumidor</p>
+                <div class="lede" style="max-width:820px;">
+                    <p>A jornada do usuário acompanha o consumidor da The Fato — jovem urbano, entre 18 e 30 anos, que usa a roupa como forma de posicionamento e desconfia de marcas que praticam <em>greenwashing</em> — desde o primeiro contato com a marca até o pós-compra, identificando emoções, dores e oportunidades para a interface.</p>
+                </div>
+            </div>
+
+            <div class="jr">
+                <div class="rh">Etapa</div>
+                <div><p class="ph"><small style="color:#e5243b">01</small>Descoberta</p></div>
+                <div><p class="ph"><small style="color:#e5243b">02</small>Exploração</p></div>
+                <div><p class="ph"><small style="color:#e5243b">03</small>Decisão</p></div>
+                <div><p class="ph"><small style="color:#e5243b">04</small>Compra</p></div>
+                <div><p class="ph"><small style="color:#e5243b">05</small>Pós-compra</p></div>
+
+                <div class="rh">Ações</div>
+                <div>Vê uma estampa no Instagram/TikTok ou em alguém na rua e acessa o site pelo link da bio.</div>
+                <div>Lê o manifesto, navega pelas coleções Bicharada, Consumo e Conceitos e abre os produtos, com a ficha de espécie de cada estampa.</div>
+                <div>Compara estampas, consulta o Guia de Medidas e escolhe o tamanho.</div>
+                <div>Adiciona ao carrinho, revisa os itens e finaliza a compra.</div>
+                <div>Recebe a peça, usa, posta e consulta a política de trocas se precisar.</div>
+
+                <div class="rh">Pontos de contato</div>
+                <div>Redes sociais, marquee, hero da Home</div>
+                <div>Menu Coleções, Drops, página Manifesto</div>
+                <div>Página de produto, seletor de tamanho, Guia de Medidas, FAQ</div>
+                <div>Carrinho lateral, checkout</div>
+                <div>E-mail, embalagem, página de Trocas, newsletter</div>
+
+                <div class="rh">Pensamentos</div>
+                <div>"Essa frase é exatamente o que eu penso."</div>
+                <div>"Essa marca é sustentável de verdade ou é só discurso?"</div>
+                <div>"Oversized... será que o M fica bom em mim?"</div>
+                <div>"Quero pagar rápido e no PIX."</div>
+                <div>"Chegou como eu esperava? Vale indicar."</div>
+
+                <div class="rh">Emoção</div>
+                <div class="emo">
+                    <svg viewBox="0 0 900 74" width="100%" height="74" preserveAspectRatio="none">
+                        <line x1="0" y1="37" x2="900" y2="37" stroke="#bbb" stroke-dasharray="4 4" />
+                        <path d="M90,22 C150,22 210,14 270,14 C330,14 390,48 450,50 C510,52 570,30 630,30 C690,30 750,10 810,8" fill="none" stroke="#e5243b" stroke-width="3" />
+                        <g stroke="#000" stroke-width="2"><circle cx="90" cy="22" r="6" fill="#fcc30b" /><circle cx="270" cy="14" r="6" fill="#4c9f38" /><circle cx="450" cy="50" r="6" fill="#e5243b" /><circle cx="630" cy="30" r="6" fill="#fcc30b" /><circle cx="810" cy="8" r="6" fill="#4c9f38" /></g>
+                    </svg>
+                    <div class="absolute inset-0 grid grid-cols-5 font-mono text-[8px] uppercase tracking-[0.1em] pointer-events-none" style="padding:0 8px 4px;align-items:end;">
+                        <span>Curiosidade</span><span>Identificação</span><span>Insegurança</span><span>Expectativa</span><span>Pertencimento</span>
+                    </div>
+                </div>
+
+                <div class="rh">Dores</div>
+                <div>Não entende de imediato o que a marca vende.</div>
+                <div>Produtos com nomes genéricos; poucas informações sobre material e produção.</div>
+                <div>Dúvida de tamanho em modelagem oversized.</div>
+                <div>Medo de frete alto e de checkout longo.</div>
+                <div>Processo de troca pouco claro.</div>
+
+                <div class="rh">Oportunidades</div>
+                <div>Hero com frase de impacto e CTA "Ver Coleção" em destaque.</div>
+                <div>Selos "100% algodão · produção nacional · 0 greenwashing" visíveis.</div>
+                <div>Link direto ao Guia de Medidas no seletor de tamanho.</div>
+                <div>Carrinho lateral sem trocar de página; PIX em destaque.</div>
+                <div>E-mail pós-compra com link para Trocas e convite para postar.</div>
+            </div>
+        </div>
+        <div class="page-foot">
+            <h2>Jornada<br>do usuário</h2>
+            <div class="meta">2026<b>06</b></div>
+        </div>
+    </section>
+
+
+    <!-- ═══════════════════ 7 · JORNADA DA ONG ═══════════════════ -->
+    <section class="page">
+        <div class="page-body" style="flex-direction:column;gap:12px;">
+            <div class="flex gap-8 items-start">
+                <p class="over flex-shrink-0 w-[150px]">04 · ONG parceira</p>
+                <div class="lede" style="max-width:820px;">
+                    <p>Como marca de streetwear consciente, a The Fato se relaciona com ONGs ligadas aos <strong>Objetivos de Desenvolvimento Sustentável</strong> — causas ambientais e sociais que inspiram as coleções. A jornada da ONG mostra como uma organização conhece a marca, propõe uma parceria, co-cria um drop e acompanha o impacto gerado pelas vendas.</p>
+                </div>
+            </div>
+
+            <div class="jr">
+                <div class="rh">Etapa</div>
+                <div><p class="ph"><small style="color:#4c9f38">01</small>Conhecimento</p></div>
+                <div><p class="ph"><small style="color:#4c9f38">02</small>Contato</p></div>
+                <div><p class="ph"><small style="color:#4c9f38">03</small>Co-criação</p></div>
+                <div><p class="ph"><small style="color:#4c9f38">04</small>Lançamento</p></div>
+                <div><p class="ph"><small style="color:#4c9f38">05</small>Impacto</p></div>
+
+                <div class="rh">Ações</div>
+                <div>Conhece a marca pelas redes, eventos ou indicação e lê o manifesto no site.</div>
+                <div>Envia proposta pelo formulário de parcerias, apresentando a causa e o ODS relacionado.</div>
+                <div>Define com a marca o tema da estampa, a coleção e o percentual de repasse por peça.</div>
+                <div>Divulga o drop em seus canais; a coleção ganha página própria com o selo da ONG.</div>
+                <div>Recebe o repasse e o relatório de vendas; compartilha o resultado e renova a parceria.</div>
+
+                <div class="rh">Pontos de contato</div>
+                <div>Página Manifesto, Instagram, eventos</div>
+                <div>Página "Parcerias", formulário, e-mail</div>
+                <div>Reuniões, arquivos de arte, contrato</div>
+                <div>Página da coleção, cards com selo, redes</div>
+                <div>Painel / relatório de impacto, e-mail</div>
+
+                <div class="rh">Pensamentos</div>
+                <div>"Essa marca fala da nossa causa com a linguagem do público jovem."</div>
+                <div>"Como faço para propor uma parceria?"</div>
+                <div>"A mensagem da nossa causa vai ser respeitada?"</div>
+                <div>"Nosso público vai encontrar e comprar o drop?"</div>
+                <div>"Quanto foi arrecadado e como provamos isso?"</div>
+
+                <div class="rh">Emoção</div>
+                <div class="emo">
+                    <svg viewBox="0 0 900 74" width="100%" height="74" preserveAspectRatio="none">
+                        <line x1="0" y1="37" x2="900" y2="37" stroke="#bbb" stroke-dasharray="4 4" />
+                        <path d="M90,26 C150,26 210,46 270,46 C330,46 390,20 450,18 C510,16 570,34 630,34 C690,34 750,10 810,8" fill="none" stroke="#4c9f38" stroke-width="3" />
+                        <g stroke="#000" stroke-width="2"><circle cx="90" cy="26" r="6" fill="#fcc30b" /><circle cx="270" cy="46" r="6" fill="#e5243b" /><circle cx="450" cy="18" r="6" fill="#4c9f38" /><circle cx="630" cy="34" r="6" fill="#fcc30b" /><circle cx="810" cy="8" r="6" fill="#4c9f38" /></g>
+                    </svg>
+                    <div class="absolute inset-0 grid grid-cols-5 font-mono text-[8px] uppercase tracking-[0.1em] pointer-events-none" style="padding:0 8px 4px;align-items:end;">
+                        <span>Interesse</span><span>Incerteza</span><span>Engajamento</span><span>Expectativa</span><span>Confiança</span>
+                    </div>
+                </div>
+
+                <div class="rh">Dores</div>
+                <div>Não sabe se a marca abre espaço para parcerias.</div>
+                <div>Não há um canal específico para ONGs no site.</div>
+                <div>Receio de a causa virar apenas marketing.</div>
+                <div>Pouca visibilidade da causa dentro da loja.</div>
+                <div>Falta de transparência no valor repassado.</div>
+
+                <div class="rh">Oportunidades</div>
+                <div>Seção "Parcerias" no rodapé e no Manifesto.</div>
+                <div>Formulário curto: ONG, causa, ODS, contato.</div>
+                <div>Briefing compartilhado e aprovação da arte pela ONG.</div>
+                <div>Selo da ONG e texto da causa no card e na página do produto.</div>
+                <div>Contador "R$ repassado" na faixa de números da Home.</div>
+            </div>
+        </div>
+        <div class="page-foot">
+            <h2>Jornada<br>da ONG</h2>
+            <div class="meta">2026<b>07</b></div>
+        </div>
+    </section>
+
+
+    <!-- ═══════════════════ 8 · GUIA DE COMPONENTES 1 ═══════════════════ -->
+    <section class="page">
+        <div class="page-body">
+            <div class="side" style="width:230px;">
+                <p class="over">05 · Componentes</p>
+                <div class="lede">
+                    <p>O guia de componentes reúne os elementos reutilizáveis da interface e seus estados. Todos seguem a linguagem <strong>chapada</strong> do manual da marca: contorno preto de 3 px, cantos retos e cores sólidas, sem sombra nem degradê.</p>
+                    <p>No estado <strong>hover</strong> o componente troca de cor por inteiro — o vermelho vira preto, o branco vira amarelo — dando um retorno visual imediato e sem movimento.</p>
+                </div>
+            </div>
+
+            <div class="flex-1 grid grid-cols-2 gap-5 content-start">
+                <div class="box">
+                    <span class="comp-label">Botão primário · .btn-primary</span>
+                    <div class="flex gap-6 items-center">
+                        <div><a class="btn-primary"><span>Ver Coleção</span></a><p class="cap">Padrão</p></div>
+                        <div><a class="btn-primary" style="background:#000;"><span>Ver Coleção</span></a><p class="cap">Hover</p></div>
+                    </div>
+                </div>
+                <div class="box">
+                    <span class="comp-label">Botão secundário · .btn-ghost</span>
+                    <div class="flex gap-6 items-center">
+                        <div><a class="btn-ghost"><span>Sobre Nós</span></a><p class="cap">Padrão</p></div>
+                        <div><a class="btn-ghost" style="background:var(--c-yellow);"><span>Sobre Nós</span></a><p class="cap">Hover</p></div>
+                    </div>
+                </div>
+                <div class="box">
+                    <span class="comp-label">Botão de destaque · .btn-bold</span>
+                    <div class="flex gap-6 items-center">
+                        <div><button class="btn-bold">Assinar</button><p class="cap">Padrão</p></div>
+                        <div><button class="btn-bold" style="background:#000;color:#fff;">Assinar</button><p class="cap">Hover</p></div>
+                    </div>
+                </div>
+                <div class="box">
+                    <span class="comp-label">Botão de conversão · checkout</span>
+                    <button class="w-full py-4 bg-brand-red text-white border-[3px] border-carbon-950 font-bold uppercase tracking-widest text-sm">Finalizar Compra</button>
+                    <p class="cap">Largura total · 56 px de altura</p>
+                </div>
+                <div class="box">
+                    <span class="comp-label">Seletor de tamanho · 48 × 48 px</span>
+                    <div class="flex gap-2">
+                        <button class="w-12 h-12 border border-carbon-950 text-sm font-semibold">P</button>
+                        <button class="w-12 h-12 border-[3px] border-carbon-950 text-sm font-semibold bg-brand-yellow">M</button>
+                        <button class="w-12 h-12 border border-brand-red text-sm font-semibold text-brand-red">G</button>
+                        <button class="w-12 h-12 border border-carbon-950 text-sm font-semibold opacity-30 line-through">GG</button>
+                    </div>
+                    <p class="cap">Padrão · Selecionado · Hover · Esgotado</p>
+                </div>
+                <div class="box">
+                    <span class="comp-label">Campo newsletter</span>
+                    <form class="flex" onsubmit="return false">
+                        <input type="email" placeholder="seu@email.com" class="flex-1 min-w-0 bg-white border-[3px] border-carbon-950 border-r-0 px-4 py-3 text-sm placeholder-muted focus:outline-none">
+                        <button type="button" class="bg-brand-yellow border-[3px] border-carbon-950 border-l-0 px-5 py-3 text-xs font-bold uppercase tracking-wider">Assinar</button>
+                    </form>
+                    <p class="cap">Input + botão unidos pela mesma borda</p>
+                </div>
+                <div class="box">
+                    <span class="comp-label">Campo de texto · .form-input</span>
+                    <div class="flex gap-3">
+                        <input class="form-input" style="padding:.7rem" placeholder="Nome">
+                        <input class="form-input" style="padding:.7rem;border-color:var(--c-red);" value="Foco">
+                    </div>
+                    <p class="cap">Padrão · Foco (borda vermelha)</p>
+                </div>
+                <div class="box">
+                    <span class="comp-label">Ícones e badge do carrinho</span>
+                    <div class="flex gap-6 items-center">
+                        <span class="relative inline-block">
+                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
+                            <span class="absolute -top-1.5 -right-2 bg-brand-yellow border-[2px] border-carbon-950 text-[0.55rem] font-bold rounded-full h-4 w-4 flex items-center justify-center">2</span>
+                        </span>
+                        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+                        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                        <span class="w-10 h-10 rounded-full border border-carbon-950 flex items-center justify-center">✕</span>
+                    </div>
+                    <p class="cap">Traço 2 px · grade 24 px · estilo outline</p>
+                </div>
+            </div>
+        </div>
+        <div class="page-foot">
+            <h2>Guia de<br>componentes</h2>
+            <div class="meta">2026<b>08</b></div>
+        </div>
+    </section>
+
+
+    <!-- ═══════════════════ 9 · GUIA DE COMPONENTES 2 ═══════════════════ -->
+    <section class="page">
+        <div class="page-body" style="flex-direction:column;gap:18px;">
+            <div class="flex gap-5 items-start">
+                <!-- Product cards -->
+                <div class="box" style="flex:0 0 560px;">
+                    <span class="comp-label">Card de produto · .product-card — faixa de cor alterna entre as 5 cores da marca</span>
+                    <div class="grid grid-cols-4 gap-4">
+                        <a class="product-card"><div class="card-img aspect-[3/4]"><img src="../assets/images/products/camiseta-atras.webp" alt=""></div><div class="card-body" style="padding:.6rem .7rem"><h3 class="card-title" style="font-size:.95rem">Ainda Se Lembra</h3><p class="card-subtitle" style="font-size:.55rem">Off-White / Black</p><p class="card-price" style="font-size:1rem;margin-top:.3rem">R$ 149,90</p></div></a>
+                        <a class="product-card"><div class="card-img aspect-[3/4]"><img src="../assets/images/products/estampa-6.webp" alt=""></div><div class="card-body" style="padding:.6rem .7rem"><h3 class="card-title" style="font-size:.95rem">Melzinho</h3><p class="card-subtitle" style="font-size:.55rem">White / Black</p><p class="card-price" style="font-size:1rem;margin-top:.3rem">R$ 149,90</p></div></a>
+                        <a class="product-card"><div class="card-img aspect-[3/4]"><img src="../assets/images/products/estampa-4.webp" alt=""></div><div class="card-body" style="padding:.6rem .7rem"><h3 class="card-title" style="font-size:.95rem">Let It Quack</h3><p class="card-subtitle" style="font-size:.55rem">White / Black</p><p class="card-price" style="font-size:1rem;margin-top:.3rem">R$ 149,90</p></div></a>
+                        <a class="product-card is-hover"><div class="card-img aspect-[3/4]"><img src="../assets/images/products/estampa-16.webp" alt="" style="transform:scale(1.06);filter:none"></div><div class="card-body" style="padding:.6rem .7rem"><h3 class="card-title" style="font-size:.95rem">Possui Ecobag</h3><p class="card-subtitle" style="font-size:.55rem">Hover</p><p class="card-price" style="font-size:1rem;margin-top:.3rem">R$ 149,90</p></div></a>
+                    </div>
+                </div>
+                <!-- Lookbook -->
+                <div class="box flex-1">
+                    <span class="comp-label">Card lookbook</span>
+                    <div class="relative overflow-hidden aspect-[4/5] border-[3px] border-carbon-950" style="max-height:236px;width:100%;">
+                        <img src="../assets/images/products/mulher-frente.webp" alt="" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-carbon-950/80 via-transparent to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 p-4">
+                            <p class="inline-block font-mono text-[0.5rem] font-bold uppercase tracking-[0.3em] bg-brand-yellow text-carbon-950 px-1.5 py-0.5 mb-2">Col. Bicharada</p>
+                            <h3 class="font-display text-xl text-white uppercase">Very Kill Tee</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-5">
+                <div class="box">
+                    <span class="comp-label">Header + dropdown "Coleções"</span>
+                    <div class="border-b-4 border-black flex items-center justify-between pb-2">
+                        <img src="../assets/images/brand/logo-horizontal.svg" class="h-4 w-auto" alt="">
+                        <span class="text-[0.55rem] font-semibold uppercase tracking-[0.15em] flex gap-3"><b class="text-brand-red">Coleções ▾</b><span>Drops</span><span>Manifesto</span></span>
+                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
+                    </div>
+                    <div class="w-40 mt-2 ml-[54px] bg-white border border-carbon-950 overflow-hidden">
+                        <span class="block px-4 py-2 text-[0.6rem] font-semibold uppercase tracking-[0.15em] bg-brand-yellow border-b-[2px] border-carbon-950/20">Bicharada</span>
+                        <span class="block px-4 py-2 text-[0.6rem] font-semibold uppercase tracking-[0.15em] border-b-[2px] border-carbon-950/20">No Planet B</span>
+                        <span class="block px-4 py-2 text-[0.6rem] font-semibold uppercase tracking-[0.15em]">Básicos</span>
+                    </div>
+                </div>
+                <div class="box">
+                    <span class="comp-label">Marquee · faixa de manifesto</span>
+                    <div class="bg-brand-yellow h-10 flex items-center overflow-hidden whitespace-nowrap font-mono text-[0.6rem] uppercase tracking-[0.3em] font-bold px-2">There is no planet B — Consumo consciente ou extinção —</div>
+                    <p class="cap">Rolagem contínua · 25 s · fixa no topo</p>
+                    <span class="comp-label" style="margin-top:14px">Indicadores (faixa de números)</span>
+                    <div class="grid grid-cols-4 border-y-[3px] border-carbon-950 text-center">
+                        <div class="py-2 bg-carbon-950 text-white"><b class="font-display text-2xl block leading-none">100%</b><span class="font-mono text-[0.45rem] uppercase tracking-[0.15em]">Algodão</span></div>
+                        <div class="py-2 bg-brand-yellow"><b class="font-display text-2xl block leading-none">0</b><span class="font-mono text-[0.45rem] uppercase tracking-[0.15em]">Greenwash</span></div>
+                        <div class="py-2 bg-brand-magenta text-white"><b class="font-display text-2xl block leading-none">BR</b><span class="font-mono text-[0.45rem] uppercase tracking-[0.15em]">Nacional</span></div>
+                        <div class="py-2 bg-brand-blue"><b class="font-display text-2xl block leading-none">∞</b><span class="font-mono text-[0.45rem] uppercase tracking-[0.15em]">Atitude</span></div>
+                    </div>
+                </div>
+                <div class="box">
+                    <span class="comp-label">Item do carrinho + total</span>
+                    <div class="bg-[#f4f4f0] border-l-4 border-carbon-950 p-3">
+                        <div class="flex gap-3 items-center bg-white p-2 border border-carbon-950 relative">
+                            <img src="../assets/images/products/estampa-6.webp" class="w-12 h-14 object-cover" alt="">
+                            <div class="flex-1"><h4 class="font-display text-base uppercase leading-none">Melzinho</h4><p class="text-brand-red text-xs font-bold">R$ 149,90</p></div>
+                            <span class="absolute top-1 right-2 text-xs">✕</span>
+                        </div>
+                        <div class="flex justify-between items-baseline mt-3 pt-2 border-t border-carbon-950">
+                            <span class="text-[0.6rem] font-semibold uppercase tracking-[0.2em]">Total</span>
+                            <span class="font-display text-xl text-brand-red">R$ 149,90</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-foot">
+            <h2>Guia de<br>componentes</h2>
+            <div class="meta">2026<b>09</b></div>
+        </div>
+    </section>
+
+
+    <!-- ═══════════════════ 10 · GUIA DE ESTILO · CORES ═══════════════════ -->
+    <section class="page">
+        <div class="page-body">
+            <div class="side" style="width:250px;">
+                <p class="over">06 · Cor</p>
+                <div class="lede">
+                    <p>A paleta parte de uma base <strong>preto e branco</strong>, que dá o tom de manifesto e destaca as estampas. Sobre ela entram as cinco cores da paleta The Fato, que correspondem às cores dos <strong>ODS da ONU</strong>, sempre aplicadas em blocos chapados.</p>
+                    <p>O <strong>vermelho</strong> é a cor de ação e da capa do banner; o <strong>amarelo</strong> marca a faixa de mensagens e os estados selecionados; <strong>magenta</strong>, <strong>verde</strong> e <strong>azul</strong> aparecem no mosaico, nas faixas dos cards e nos blocos de números.</p>
+                </div>
+                <div>
+                    <span class="comp-label">Proporção de uso</span>
+                    <div class="flex h-6 border-[3px] border-black overflow-hidden">
+                        <span style="flex:55;background:#fff"></span><span style="flex:25;background:#000"></span><span style="flex:7;background:#e5243b"></span><span style="flex:5;background:#fcc30b"></span><span style="flex:3;background:#dd1367"></span><span style="flex:3;background:#4c9f38"></span><span style="flex:2;background:#0a97d9"></span>
+                    </div>
+                    <p class="cap">55% branco · 25% preto · 20% acentos</p>
+                </div>
+            </div>
+
+            <div class="flex-1 flex flex-col gap-4">
+                <div class="grid grid-cols-5 gap-3">
+                    <div class="sw"><div class="c" style="background:#e5243b"></div><div class="i"><b>Vermelho Fato</b>HEX #E5243B<br>RGB 229, 36, 59<br>CMYK 0, 84, 74, 10<br>Branco 4,5:1</div></div>
+                    <div class="sw"><div class="c" style="background:#fcc30b"></div><div class="i"><b>Amarelo Alerta</b>HEX #FCC30B<br>RGB 252, 195, 11<br>CMYK 0, 23, 96, 1<br>Preto 13:1</div></div>
+                    <div class="sw"><div class="c" style="background:#dd1367"></div><div class="i"><b>Magenta</b>HEX #DD1367<br>RGB 221, 19, 103<br>CMYK 0, 91, 53, 13<br>Branco 4,8:1</div></div>
+                    <div class="sw"><div class="c" style="background:#4c9f38"></div><div class="i"><b>Verde Planeta</b>HEX #4C9F38<br>RGB 76, 159, 56<br>CMYK 52, 0, 65, 38<br>Branco 3,3:1</div></div>
+                    <div class="sw"><div class="c" style="background:#0a97d9"></div><div class="i"><b>Azul Oceano</b>HEX #0A97D9<br>RGB 10, 151, 217<br>CMYK 95, 30, 0, 15<br>Branco 3,3:1</div></div>
+                </div>
+                <div class="grid grid-cols-5 gap-3">
+                    <div class="sw"><div class="c" style="background:#000;height:60px"></div><div class="i"><b>Preto</b>#000000<br>Texto, bordas, blocos</div></div>
+                    <div class="sw"><div class="c" style="background:#fff;height:60px;border-bottom:1px solid #000"></div><div class="i"><b>Branco</b>#FFFFFF<br>Fundo principal</div></div>
+                    <div class="sw"><div class="c" style="background:#f4f4f0;height:60px;border-bottom:1px solid #000"></div><div class="i"><b>Off-white</b>#F4F4F0<br>Painéis e drawer</div></div>
+                    <div class="sw"><div class="c" style="background:#e8e8e4;height:60px;border-bottom:1px solid #000"></div><div class="i"><b>Cinza claro</b>#E8E8E4<br>Superfície 2</div></div>
+                    <div class="sw"><div class="c" style="background:#666;height:60px"></div><div class="i"><b>Cinza texto</b>#666666<br>Texto secundário</div></div>
+                </div>
+                <div class="grid grid-cols-5 gap-3 mt-1">
+                    <div class="h-16 border-[3px] border-black flex items-center justify-center font-bold text-[10px] uppercase tracking-widest text-white" style="background:#e5243b">Texto branco ✓</div>
+                    <div class="h-16 border-[3px] border-black flex items-center justify-center font-bold text-[10px] uppercase tracking-widest" style="background:#fcc30b">Texto preto ✓</div>
+                    <div class="h-16 border-[3px] border-black flex items-center justify-center font-bold text-[10px] uppercase tracking-widest text-white" style="background:#dd1367">Texto branco ✓</div>
+                    <div class="h-16 border-[3px] border-black flex items-center justify-center font-bold text-[10px] uppercase tracking-widest text-white" style="background:#4c9f38">Texto branco ✓</div>
+                    <div class="h-16 border-[3px] border-black flex items-center justify-center font-bold text-[10px] uppercase tracking-widest text-white" style="background:#0a97d9">Texto branco ✓</div>
+                </div>
+                <p class="cap" style="margin-top:0">Branco sobre vermelho e magenta: AA · branco sobre verde e azul: AA para texto grande ou em negrito (3:1)</p>
+            </div>
+        </div>
+        <div class="page-foot">
+            <h2>Guia de estilo</h2>
+            <div class="meta">Cores · 2026<b>10</b></div>
+        </div>
+    </section>
+
+
+    <!-- ═══════════════════ 11 · GUIA DE ESTILO · TIPOGRAFIA ═══════════════════ -->
+    <section class="page">
+        <div class="page-body">
+            <div class="flex-1 flex flex-col gap-4">
+                <div class="grid grid-cols-3 gap-4">
+                    <div class="box" style="border-style:solid;border-color:#000;border-width:3px;border-radius:0;">
+                        <span class="comp-label">Títulos · Londrina Solid 900</span>
+                        <p style="font-family:var(--font-display);font-weight:900;font-size:64px;line-height:.85;text-transform:uppercase;">Aa<br>The Fato</p>
+                        <p class="cap">Caixa alta · entrelinha 0,85 · tracking −2%</p>
+                    </div>
+                    <div class="box" style="border-style:solid;border-color:#000;border-width:3px;border-radius:0;">
+                        <span class="comp-label">Texto · Space Grotesk 300–700</span>
+                        <p style="font-family:var(--font-body);font-size:44px;line-height:1;font-weight:500;">Aa</p>
+                        <p style="font-size:12px;line-height:1.6;font-weight:300;margin-top:8px;">Bichos, trocadilhos e conceitos estampados em algodão sustentável.</p>
+                        <p class="cap">Light no corpo · Semibold/Bold em menus</p>
+                    </div>
+                    <div class="box" style="border-style:solid;border-color:#000;border-width:3px;border-radius:0;">
+                        <span class="comp-label">Apoio · Space Mono 400/700</span>
+                        <p style="font-family:var(--font-mono);font-size:44px;line-height:1;font-weight:700;">Aa</p>
+                        <p style="font-family:var(--font-mono);font-size:10px;letter-spacing:.4em;text-transform:uppercase;color:var(--c-red);margin-top:10px;font-weight:700;">Streetwear consciente</p>
+                        <p class="cap">Sobretítulos, legendas, marquee</p>
+                    </div>
+                </div>
+
+                <table class="spec">
+                    <tr><th>Estilo</th><th>Fonte</th><th>Desktop</th><th>Mobile</th><th>Entrelinha</th><th>Uso</th></tr>
+                    <tr><td><span style="font:900 22px/1 var(--font-display);text-transform:uppercase">Display</span></td><td>Londrina Solid 900</td><td>144 px</td><td>56 px</td><td>0,85</td><td>Nome da marca no hero</td></tr>
+                    <tr><td><span style="font:900 18px/1 var(--font-display);text-transform:uppercase">Título H2</span></td><td>Londrina Solid 900</td><td>60–96 px</td><td>36–40 px</td><td>0,85–0,9</td><td>Títulos de seção e manifesto</td></tr>
+                    <tr><td><span style="font:900 15px/1 var(--font-display);text-transform:uppercase">Título card</span></td><td>Londrina Solid 900</td><td>22 px</td><td>22 px</td><td>1,0</td><td>Nome do produto, preço (24 px)</td></tr>
+                    <tr><td><span style="font:300 13px/1 var(--font-body)">Corpo</span></td><td>Space Grotesk 300</td><td>16–18 px</td><td>14–16 px</td><td>1,6</td><td>Parágrafos e descrições</td></tr>
+                    <tr><td><span style="font:600 10px/1 var(--font-body);letter-spacing:.2em;text-transform:uppercase">Menu</span></td><td>Space Grotesk 600</td><td>12 px</td><td>14 px</td><td>—</td><td>Navegação · tracking 0,2em</td></tr>
+                    <tr><td><span style="font:700 9px/1 var(--font-mono);letter-spacing:.3em;text-transform:uppercase;color:#e5243b">Sobretítulo</span></td><td>Space Mono 700</td><td>10–12 px</td><td>10 px</td><td>—</td><td>Rótulos · tracking 0,3–0,4em</td></tr>
+                </table>
+            </div>
+
+            <div class="side" style="width:300px;">
+                <div>
+                    <span class="comp-label">Espaçamento (base 4 px)</span>
+                    <div class="flex items-end gap-1.5">
+                        <div class="flex flex-col items-center gap-1"><span class="bg-brand-red block" style="width:8px;height:4px"></span><small class="font-mono text-[8px]">4</small></div>
+                        <div class="flex flex-col items-center gap-1"><span class="bg-brand-red block" style="width:8px;height:8px"></span><small class="font-mono text-[8px]">8</small></div>
+                        <div class="flex flex-col items-center gap-1"><span class="bg-brand-red block" style="width:8px;height:16px"></span><small class="font-mono text-[8px]">16</small></div>
+                        <div class="flex flex-col items-center gap-1"><span class="bg-brand-red block" style="width:8px;height:20px"></span><small class="font-mono text-[8px]">20</small></div>
+                        <div class="flex flex-col items-center gap-1"><span class="bg-brand-red block" style="width:8px;height:24px"></span><small class="font-mono text-[8px]">24</small></div>
+                        <div class="flex flex-col items-center gap-1"><span class="bg-brand-red block" style="width:8px;height:40px"></span><small class="font-mono text-[8px]">40</small></div>
+                        <div class="flex flex-col items-center gap-1"><span class="bg-brand-red block" style="width:8px;height:64px"></span><small class="font-mono text-[8px]">64</small></div>
+                        <div class="flex flex-col items-center gap-1"><span class="bg-brand-red block" style="width:8px;height:96px"></span><small class="font-mono text-[8px]">96</small></div>
+                        <div class="flex flex-col items-center gap-1"><span class="bg-brand-red block" style="width:8px;height:128px"></span><small class="font-mono text-[8px]">128</small></div>
+                    </div>
+                </div>
+                <div>
+                    <span class="comp-label">Forma · cantos retos (0 px)</span>
+                    <div class="flex gap-3 items-end">
+                        <div class="text-center"><div class="w-12 h-12 border-[3px] border-black"></div><small class="font-mono text-[8px]">inputs</small></div>
+                        <div class="text-center"><div class="w-12 h-12 border-[3px] border-black bg-brand-red"></div><small class="font-mono text-[8px]">botões</small></div>
+                        <div class="text-center"><div class="w-12 h-12 border-[3px] border-black" style="border-bottom:10px solid #fcc30b"></div><small class="font-mono text-[8px]">cards</small></div>
+                        <div class="text-center"><div class="w-12 h-12 rounded-full bg-black"></div><small class="font-mono text-[8px]">só o badge</small></div>
+                    </div>
+                </div>
+                <div>
+                    <span class="comp-label">Bordas e faixas de cor</span>
+                    <div class="flex gap-3 items-center">
+                        <div class="w-14 h-10 bg-white border-[3px] border-black" style="border-bottom:10px solid #e5243b"></div>
+                        <div class="w-14 h-10 bg-white border-[3px] border-black" style="border-bottom:10px solid #dd1367"></div>
+                        <div class="w-24 h-2" style="background:linear-gradient(90deg,#0a97d9 0 33.3%,#4c9f38 33.3% 66.6%,#000 66.6%)"></div>
+                    </div>
+                    <p class="cap">Borda 3 px · faixa de 10 px · divisor tricolor · sem sombra</p>
+                </div>
+                <div>
+                    <span class="comp-label">Movimento</span>
+                    <table class="spec" style="font-size:10px;">
+                        <tr><td>Hover de botões e cards</td><td>200 ms · troca de cor</td></tr>
+                        <tr><td>Abrir carrinho</td><td>500 ms · ease-out-expo</td></tr>
+                        <tr><td>Zoom da imagem</td><td>700 ms · escala 1,06</td></tr>
+                        <tr><td>Palavra do hero</td><td>troca a cada 3 s</td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="page-foot">
+            <h2>Guia de estilo</h2>
+            <div class="meta">Tipografia e forma · 2026<b>11</b></div>
+        </div>
+    </section>
+
+
+    <!-- ═══════════════════ 12 · ALTA FIDELIDADE · DESKTOP ═══════════════════ -->
+    <section class="page">
+        <div class="page-body">
+            <div class="side" style="width:190px;">
+                <p class="over">07 · Telas finais</p>
+                <div class="lede">
+                    <p>Na alta fidelidade os wireframes recebem a identidade visual completa: fotografia das peças, paleta, tipografia e os componentes do guia.</p>
+                    <p>As telas ao lado são capturas do site em funcionamento no frame desktop de <strong>1440 × 1024 px</strong>.</p>
+                </div>
+            </div>
+            <div class="flex-1 grid grid-cols-2 gap-x-5 gap-y-3 content-start">
+                <div><div class="shot" style="--w:1440;--h:1024;--s:.27"><iframe src="../homepage.html" loading="lazy" scrolling="no" tabindex="-1" title="Home"></iframe></div><p class="cap">Home</p></div>
+                <div><div class="shot" style="--w:1440;--h:1024;--s:.27"><iframe src="../colecao-consumo.html" loading="lazy" scrolling="no" tabindex="-1" title="Consumo"></iframe></div><p class="cap">Coleção Consumo</p></div>
+                <div><div class="shot" style="--w:1440;--h:1024;--s:.27"><iframe src="../sobre.html" loading="lazy" scrolling="no" tabindex="-1" title="Manifesto"></iframe></div><p class="cap">Manifesto / Sobre</p></div>
+                <div><div class="shot" style="--w:1440;--h:1024;--s:.27"><iframe src="../medidas.html" loading="lazy" scrolling="no" tabindex="-1" title="Guia de Medidas"></iframe></div><p class="cap">Guia de Medidas</p></div>
+            </div>
+        </div>
+        <div class="page-foot">
+            <h2>Alta fidelidade</h2>
+            <div class="meta">Desktop · 2026<b>12</b></div>
+        </div>
+    </section>
+
+
+    <!-- ═══════════════════ 13 · ALTA FIDELIDADE · PRODUTO + CARRINHO ═══════════════════ -->
+    <section class="page">
+        <div class="page-body" style="flex-direction:column;gap:14px;">
+            <div class="flex gap-8 items-start">
+                <p class="over flex-shrink-0 w-[150px]">07 · Compra</p>
+                <div class="lede" style="max-width:820px;">
+                    <p>A tela de produto concentra a decisão de compra: foto grande da estampa, nome em destaque, preço em azul, seletor de tamanho e o botão vermelho "Adicionar ao carrinho". Ao adicionar, o <strong>carrinho lateral</strong> desliza da direita sobre um fundo escurecido, permitindo revisar o pedido sem sair da página.</p>
+                </div>
+            </div>
+            <div class="flex gap-5">
+                <!-- Produto 1440x1024 @ .405 -->
+                <div>
+                    <div class="shot" style="--w:1440;--h:1024;--s:.505">
+                        <div style="position:absolute;top:0;left:0;width:1440px;height:1024px;transform:scale(.505);transform-origin:0 0;background:#fff;">
+                            <div class="bg-brand-yellow h-10 flex items-center overflow-hidden whitespace-nowrap font-mono text-xs uppercase tracking-[0.3em] font-bold px-6">There is no planet B&nbsp;&nbsp;—&nbsp;&nbsp;Sustentabilidade não é trend, é urgência&nbsp;&nbsp;—&nbsp;&nbsp;Consumo consciente ou extinção&nbsp;&nbsp;—&nbsp;&nbsp;Streetwear com propósito</div>
+                            <div class="flex justify-between items-center px-10 py-2 border-b-4 border-black">
+                                <img src="../assets/images/brand/logo-horizontal.svg" class="h-8 w-auto" alt="">
+                                <nav class="flex gap-10 text-[0.75rem] font-semibold uppercase tracking-[0.2em]"><span>Coleções ▾</span><span>Drops</span><span>Manifesto</span></nav>
+                                <svg class="w-[18px] h-[18px]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
+                            </div>
+                            <div class="max-w-[1200px] mx-auto px-10 pt-10">
+                                <p class="mb-8 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em]">← Voltar</p>
+                                <div class="grid grid-cols-2 gap-20">
+                                    <div class="aspect-[4/5] bg-white border border-carbon-950 overflow-hidden"><img src="../assets/images/products/estampa-6.webp" class="w-full h-full object-cover" alt=""></div>
+                                    <div class="flex flex-col justify-center">
+                                        <p class="font-mono text-[0.6rem] uppercase tracking-[0.3em] text-brand-red mb-4">The Fato®</p>
+                                        <h1 class="font-display text-6xl uppercase mb-2 leading-[0.9]">Melzinho</h1>
+                                        <p class="text-sm font-semibold uppercase tracking-[0.1em] mb-8">White / Black</p>
+                                        <p class="font-display text-4xl text-brand-blue mb-10">R$ 149,90</p>
+                                        <p class="text-xs font-semibold uppercase tracking-[0.2em] mb-4">Tamanho</p>
+                                        <div class="flex gap-2 mb-10">
+                                            <span class="w-12 h-12 border border-carbon-950 text-sm font-semibold flex items-center justify-center">P</span>
+                                            <span class="w-12 h-12 border-[3px] border-carbon-950 text-sm font-semibold bg-brand-yellow flex items-center justify-center">M</span>
+                                            <span class="w-12 h-12 border border-carbon-950 text-sm font-semibold flex items-center justify-center">G</span>
+                                            <span class="w-12 h-12 border border-carbon-950 text-sm font-semibold flex items-center justify-center">GG</span>
+                                        </div>
+                                        <span class="btn-primary w-full justify-center py-4 text-sm">Adicionar ao Carrinho</span>
+                                        <p class="mt-10 pt-8 border-t border-carbon-950 text-sm leading-relaxed font-light">Modelagem streetwear oversized. Tecido 100% algodão premium sustentável. Estampa em DTF de alta durabilidade. Produzido no Brasil.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="cap">Produto · estado padrão</p>
+                </div>
+                <!-- Carrinho -->
+                <div>
+                    <div class="shot" style="--w:560;--h:1024;--s:.505">
+                        <div style="position:absolute;top:0;left:0;width:560px;height:1024px;transform:scale(.505);transform-origin:0 0;background:rgba(0,0,0,.85);">
+                            <div style="position:absolute;top:0;right:0;width:420px;height:100%;background:#f4f4f0;border-left:4px solid #000;border-top-left-radius:1.5rem;border-bottom-left-radius:1.5rem;display:flex;flex-direction:column;">
+                                <div class="flex justify-between items-center p-6 border-b border-carbon-950"><span class="font-display text-xl uppercase">Carrinho</span><span class="drawer-close">✕</span></div>
+                                <div class="flex-1 p-5 flex flex-col gap-3">
+                                    <div class="flex gap-4 items-center bg-white p-3 border border-carbon-950 relative"><img src="../assets/images/products/estampa-6.webp" class="w-16 h-20 object-cover" alt=""><div class="flex-1"><h4 class="font-display text-lg uppercase">Melzinho</h4><p class="text-brand-red text-sm font-bold">R$ 149,90</p></div><span class="absolute top-2 right-3">✕</span></div>
+                                    <div class="flex gap-4 items-center bg-white p-3 border border-carbon-950 relative"><img src="../assets/images/products/estampa-4.webp" class="w-16 h-20 object-cover" alt=""><div class="flex-1"><h4 class="font-display text-lg uppercase">Let It Quack</h4><p class="text-brand-red text-sm font-bold">R$ 149,90</p></div><span class="absolute top-2 right-3">✕</span></div>
+                                </div>
+                                <div class="p-5 border-t border-carbon-950">
+                                    <div class="flex justify-between items-baseline mb-5"><span class="text-xs font-semibold uppercase tracking-[0.2em]">Total</span><span class="font-display text-2xl text-brand-red">R$ 299,80</span></div>
+                                    <div class="w-full py-4 bg-brand-red text-white border-[3px] border-carbon-950 font-bold uppercase tracking-widest text-sm text-center">Finalizar Compra</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="cap">Carrinho aberto</p>
+                </div>
+            </div>
+        </div>
+        <div class="page-foot">
+            <h2>Alta fidelidade</h2>
+            <div class="meta">Produto e carrinho · 2026<b>13</b></div>
+        </div>
+    </section>
+
+
+    <!-- ═══════════════════ 14 · ALTA FIDELIDADE · MOBILE ═══════════════════ -->
+    <section class="page">
+        <div class="page-body" style="flex-direction:column;gap:14px;">
+            <div class="flex gap-8 items-start">
+                <p class="over flex-shrink-0 w-[150px]">07 · Mobile</p>
+                <div class="lede" style="max-width:820px;">
+                    <p>As mesmas telas no frame mobile de <strong>390 × 844 px</strong>. A tipografia display reduz de 144 para 56 px, a vitrine passa a uma coluna e o menu é recolhido, preservando a força visual da marca em telas pequenas.</p>
+                </div>
+            </div>
+            <div class="flex justify-between">
+                <div><div class="shot phone" style="--w:390;--h:844;--s:.5"><iframe src="../homepage.html" loading="lazy" scrolling="no" tabindex="-1" title="Home mobile"></iframe></div><p class="cap">Home</p></div>
+                <div><div class="shot phone" style="--w:390;--h:844;--s:.5"><iframe src="../produtos.html" loading="lazy" scrolling="no" tabindex="-1" title="Catálogo mobile"></iframe></div><p class="cap">Catálogo</p></div>
+                <div><div class="shot phone" style="--w:390;--h:844;--s:.5"><iframe src="../colecao-bicharada.html" loading="lazy" scrolling="no" tabindex="-1" title="Coleção mobile"></iframe></div><p class="cap">Bicharada</p></div>
+                <div><div class="shot phone" style="--w:390;--h:844;--s:.5"><iframe src="../faq.html" loading="lazy" scrolling="no" tabindex="-1" title="FAQ mobile"></iframe></div><p class="cap">FAQ</p></div>
+                <div><div class="shot phone" style="--w:390;--h:844;--s:.5"><iframe src="../trocas.html" loading="lazy" scrolling="no" tabindex="-1" title="Trocas mobile"></iframe></div><p class="cap">Trocas</p></div>
+            </div>
+        </div>
+        <div class="page-foot">
+            <h2>Alta fidelidade</h2>
+            <div class="meta">Mobile · 2026<b>14</b></div>
+        </div>
+    </section>
+
+
+    <!-- ═══════════════════ 15 · PROTOTIPAGEM ═══════════════════ -->
+    <section class="page">
+        <div class="page-body">
+            <div class="flex-1 flex flex-col gap-4">
+                <p class="over">08 · Interação</p>
+                <div class="lede">
+                    <p>A prototipagem conecta as telas de alta fidelidade e simula o comportamento real do site, permitindo testar o fluxo de compra antes da implementação final. O protótipo foi construído diretamente em <strong>HTML, Tailwind CSS e JavaScript</strong>, o que torna cada interação idêntica à experiência publicada: menus, animações de rolagem, troca de tamanho e o carrinho funcionam de fato.</p>
+                    <p>A tabela abaixo descreve as interações do fluxo principal. Ao lado, o protótipo mobile está ativo e pode ser navegado.</p>
+                </div>
+                <table class="spec">
+                    <tr><th>#</th><th>Gatilho</th><th>Elemento</th><th>Ação</th><th>Destino</th><th>Animação</th></tr>
+                    <tr><td>1</td><td>Clique</td><td>"Ver Coleção" (hero)</td><td>Navegar</td><td>Catálogo</td><td>Instantâneo</td></tr>
+                    <tr><td>2</td><td>Clique</td><td>Menu "Coleções"</td><td>Abrir overlay</td><td>Dropdown</td><td>Fade + escala 95→100%, 300 ms</td></tr>
+                    <tr><td>3</td><td>Hover</td><td>Card de produto</td><td>Alterar estado</td><td>Card hover</td><td>Card preenchido com a cor da faixa, 200 ms</td></tr>
+                    <tr><td>4</td><td>Clique</td><td>Card de produto</td><td>Navegar</td><td>Produto</td><td>Rolagem suave ao topo</td></tr>
+                    <tr><td>5</td><td>Clique</td><td>Botão de tamanho</td><td>Alterar estado</td><td>Selecionado</td><td>Fundo amarelo, borda 3 px</td></tr>
+                    <tr><td>6</td><td>Clique</td><td>"Adicionar ao Carrinho"</td><td>Abrir overlay</td><td>Carrinho</td><td>Desliza da direita, 500 ms ease-out-expo</td></tr>
+                    <tr><td>7</td><td>Clique</td><td>Fundo escuro / ✕</td><td>Fechar overlay</td><td>Tela anterior</td><td>Desliza para fora, 500 ms</td></tr>
+                    <tr><td>8</td><td>Clique</td><td>Ícone hambúrguer</td><td>Abrir/fechar</td><td>Menu mobile</td><td>Instantâneo</td></tr>
+                    <tr><td>9</td><td>Rolagem</td><td>Seções da página</td><td>Animar entrada</td><td>—</td><td>Lenis + GSAP ScrollTrigger</td></tr>
+                </table>
+            </div>
+            <div class="flex flex-col items-center">
+                <div class="shot phone live" style="--w:390;--h:844;--s:.72"><iframe src="../homepage.html" title="Protótipo navegável"></iframe></div>
+                <p class="cap">Protótipo navegável · 390 × 844</p>
+            </div>
+        </div>
+        <div class="page-foot">
+            <h2>Prototipagem</h2>
+            <div class="meta">2026<b>15</b></div>
+        </div>
+    </section>
+
+</body>
+
+</html>

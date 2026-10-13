@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produto | The Fato</title>
+    <meta name="description" content="Camiseta streetwear oversized The Fato em algodão 100% sustentável, com estampa em DTF.">
+    <meta name="theme-color" content="#e5243b">
+    <link rel="icon" href="assets/images/brand/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="assets/images/brand/apple-touch-icon.png">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="The Fato">
+    <meta property="og:title" content="Produto | The Fato">
+    <meta property="og:description" content="Camiseta streetwear oversized The Fato em algodão 100% sustentável, com estampa em DTF.">
+    <meta property="og:image" content="assets/images/brand/og-image.jpg">
+    <meta property="og:locale" content="pt_BR">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@400;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        carbon: { 950: '#000000', 900: '#ffffff', 800: '#ffffff', 700: '#000000', 600: '#333333' },
+                        bone: { DEFAULT: '#ffffff', 100: '#ffffff' },
+                        toxic: { DEFAULT: '#e5243b', dark: '#cc0000', glow: 'rgba(0,0,0,0)' },
+                        brand: {
+                            red: '#e5243b', yellow: '#fcc30b', green: '#4c9f38', blue: '#0a97d9', magenta: '#dd1367'
+                        },
+                        muted: '#555555'
+                    },
+                    fontFamily: {
+                        display: ['"Londrina Solid"', 'system-ui', 'sans-serif'],
+                        body: ['"Space Grotesk"', 'system-ui', 'sans-serif'],
+                        mono: ['"Space Mono"', '"Courier New"', 'monospace'],
+                    },
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="assets/css/style.css?v=20261012f">
+    <script>
+        // splash screen: once per visit, never for "reduce motion" (markup is #splash, logic in main.js)
+        try {
+            if (!sessionStorage.getItem('thefato-splash') && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.documentElement.classList.add('show-splash');
+            }
+        } catch (e) { /* storage blocked: no splash */ }
+    </script>
+</head>
+
+<body class="antialiased font-body" data-page="produto">
+
+    <!-- ═══════════ SPLASH (mosaico que se monta) ═══════════ -->
+    <!-- Only bichos, one of each. white-space: pre — continuation lines start at column 0 on purpose. -->
+    <div id="splash" aria-hidden="true">
+        <span class="sp-tile bg-carbon-950 text-white" style="--i:3">{o,o}
+ |)__)
+-"-"-</span>
+        <span class="sp-tile bg-brand-yellow text-carbon-950" style="--i:11">  _@/
+~~~~~~</span>
+        <span class="sp-tile bg-brand-magenta text-white" style="--i:6">(\_/)
+( •.• )
+c(")(")</span>
+        <span class="sp-tile bg-white text-carbon-950" style="--i:15">(°ᴥ°)
+~~~~~~</span>
+        <span class="sp-tile bg-brand-green text-white" style="--i:1">ʕ•ᴥ•ʔ</span>
+        <span class="sp-tile bg-brand-blue text-white" style="--i:9">&gt;&lt;((("•&gt;</span>
+        <span class="sp-tile bg-brand-red text-white" style="--i:13">(°&gt;
+( )
+^^</span>
+        <span class="sp-tile bg-carbon-950 text-white" style="--i:4">ʚïɞ</span>
+        <div class="sp-logo">
+            <img src="assets/images/brand/logo-horizontal-white.svg" alt="" width="151" height="40">
+            <span>Streetwear consciente</span>
+        </div>
+        <span class="sp-tile bg-brand-yellow text-carbon-950" style="--i:17">~~~~( ε:&gt;</span>
+        <span class="sp-tile bg-brand-blue text-white" style="--i:7">&gt;&lt;(((°&gt;
+&lt;°)))&gt;&lt;</span>
+        <span class="sp-tile bg-white text-carbon-950" style="--i:0">/\_/\
+( o.o )
+&gt; ^ &lt;</span>
+        <span class="sp-tile bg-brand-magenta text-white" style="--i:12">A A
+{• ᴥ •}</span>
+        <span class="sp-tile bg-brand-green text-white" style="--i:16">@..@
+(----)
+( &gt;__&lt; )</span>
+        <span class="sp-tile bg-carbon-950 text-white" style="--i:2">\_/
+(•ᴥ•)
+/Z Z</span>
+        <span class="sp-tile bg-brand-red text-white" style="--i:10">U・ᴥ・U</span>
+        <span class="sp-tile bg-brand-yellow text-carbon-950" style="--i:5">@('_')@</span>
+        <span class="sp-tile sp-extra bg-brand-blue text-white" style="--i:14">(°v°)
+^ ^</span>
+        <span class="sp-tile sp-extra bg-white text-carbon-950" style="--i:8">  (°&gt;
+\_/ )
+~~~~</span>
+        <span class="sp-tile sp-extra bg-brand-magenta text-white" style="--i:18">(°ᴗ°)
+/|/|\|\</span>
+        <span class="sp-tile sp-extra bg-brand-green text-white" style="--i:19">(•(oo)•)</span>
+    </div>
+
+    <a href="#main-content" class="skip-link">Pular para o conteúdo</a>
+
+    <!-- ═══════════════════════ MARQUEE ═══════════════════════ -->
+    <div class="marquee-container sticky top-0 z-[100] bg-brand-yellow h-[var(--marquee-h)] flex items-center" aria-hidden="true">
+        <div class="marquee-content font-mono text-[0.65rem] sm:text-xs uppercase tracking-[0.3em] text-carbon-950 font-bold py-1">
+            BICHOS, TROCADILHOS E CONCEITOS&nbsp;&nbsp;&mdash;&nbsp;&nbsp;CONSUMO CONSCIENTE COM HUMOR&nbsp;&nbsp;&mdash;&nbsp;&nbsp;THERE IS NO PLANET B&nbsp;&nbsp;&mdash;&nbsp;&nbsp;STREETWEAR CONSCIENTE&nbsp;&nbsp;&mdash;&nbsp;&nbsp;BICHOS, TROCADILHOS E CONCEITOS&nbsp;&nbsp;&mdash;&nbsp;&nbsp;CONSUMO CONSCIENTE COM HUMOR&nbsp;&nbsp;&mdash;&nbsp;&nbsp;THERE IS NO PLANET B&nbsp;&nbsp;&mdash;&nbsp;&nbsp;STREETWEAR CONSCIENTE&nbsp;&nbsp;&mdash;&nbsp;&nbsp;
+        </div>
+    </div>
+
+    <!-- ═══════════════════ NAVIGATION ═══════════════════════ -->
+    <div id="site-header" class="site-header fixed top-[var(--marquee-h)] left-0 right-0 w-full z-[55] bg-white border-b-4 border-black">
+        <header class="w-full flex justify-between items-center gap-4 px-6 lg:px-10 py-2">
+
+            <a href="homepage.html" class="flex-shrink-0" aria-label="The Fato — início">
+                <img class="h-7 sm:h-8 w-auto" src="assets/images/brand/logo-horizontal.svg" alt="The Fato" width="121" height="32">
+            </a>
+
+            <nav class="hidden md:flex items-center gap-10 flex-1 justify-center" aria-label="Principal">
+                <div class="relative" id="collections-container">
+                    <button type="button" id="collections-btn" class="nav-link flex items-center gap-1" data-nav="colecoes"
+                        aria-expanded="false" aria-controls="submenu-popup" onclick="toggleSubmenu(event)">
+                        Coleções
+                        <svg id="collections-chevron" class="w-3.5 h-3.5 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="absolute top-full mt-3 left-1/2 -translate-x-1/2 z-[70]">
+                        <div id="submenu-popup" class="w-52 bg-white border-[3px] border-carbon-950 opacity-0 scale-95 pointer-events-none transition-all duration-300 origin-top overflow-hidden">
+                            <a href="colecao-bicharada.html" class="submenu-link border-b-[2px] border-carbon-950" data-nav="bicharada">Bicharada</a>
+                            <a href="colecao-consumo.html" class="submenu-link border-b-[2px] border-carbon-950" data-nav="consumo">Consumo</a>
+                            <a href="colecao-conceitos.html" class="submenu-link border-b-[2px] border-carbon-950" data-nav="conceitos">Conceitos</a>
+                            <a href="produtos.html" class="submenu-link">Todos os drops</a>
+                        </div>
+                    </div>
+                </div>
+                <a href="produtos.html" class="nav-link" data-nav="drops">Drops</a>
+                <a href="sobre.html" class="nav-link" data-nav="manifesto">Manifesto</a>
+            </nav>
+
+            <div class="flex items-center gap-5">
+                <button type="button" id="search-toggle" class="icon-btn" aria-label="Buscar" aria-expanded="false" aria-controls="site-search">
+                    <svg class="w-[18px] h-[18px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <circle cx="11" cy="11" r="7" stroke-width="2" />
+                        <path stroke-linecap="round" stroke-width="2" d="M20 20l-3.5-3.5" />
+                    </svg>
+                </button>
+                <a href="favoritos.html" id="fav-link" class="icon-btn relative" aria-label="Favoritos" data-nav="favoritos">
+                    <svg class="w-[18px] h-[18px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linejoin="round" stroke-width="2" d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z" />
+                    </svg>
+                    <span id="fav-count" class="count-badge" style="display:none">0</span>
+                </a>
+                <a href="conta.html" id="account-link" class="icon-btn relative" aria-label="Entrar ou criar conta" data-nav="conta">
+                    <svg class="w-[18px] h-[18px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <circle cx="12" cy="8" r="4" stroke-width="2" />
+                        <path stroke-linecap="round" stroke-width="2" d="M4 21c0-4 3.6-7 8-7s8 3 8 7" />
+                    </svg>
+                    <span id="account-dot" class="account-dot hidden" aria-hidden="true"></span>
+                </a>
+                <button type="button" id="cart-btn" class="icon-btn relative" aria-label="Abrir carrinho" onclick="toggleCart(event)">
+                    <svg class="w-[18px] h-[18px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                    </svg>
+                    <span id="cart-count" class="absolute -top-1.5 -right-1.5 bg-brand-yellow border-[2px] border-carbon-950 text-carbon-950 text-[0.55rem] font-bold rounded-full h-4 w-4 items-center justify-center" style="display:none">0</span>
+                </button>
+                <button type="button" id="mobile-menu-btn" class="icon-btn md:hidden" aria-label="Abrir menu" aria-controls="mobile-nav">
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <form id="site-search" class="site-search hidden" action="produtos.html" method="get" role="search">
+            <label for="site-search-input" class="sr-only">Buscar estampas</label>
+            <input id="site-search-input" name="busca" type="search" class="filter-input" placeholder="Buscar estampas pelo nome" autocomplete="off">
+            <button type="submit" class="btn-bold">Buscar</button>
+        </form>
+
+        <nav id="mobile-nav" class="hidden md:hidden border-t-[3px] border-carbon-950 bg-white px-6 py-6 flex flex-col gap-4" aria-label="Menu">
+            <a href="produtos.html" class="mobile-link" data-nav="drops">Drops</a>
+            <a href="colecao-bicharada.html" class="mobile-link" data-nav="bicharada">Bicharada</a>
+            <a href="colecao-consumo.html" class="mobile-link" data-nav="consumo">Consumo</a>
+            <a href="colecao-conceitos.html" class="mobile-link" data-nav="conceitos">Conceitos</a>
+            <a href="sobre.html" class="mobile-link" data-nav="manifesto">Manifesto</a>
+            <a href="favoritos.html" class="mobile-link" data-nav="favoritos">Favoritos</a>
+            <a href="rastrear.html" class="mobile-link" data-nav="rastrear">Rastrear pedido</a>
+            <a href="faq.html" class="mobile-link" data-nav="faq">Ajuda</a>
+            <a href="conta.html" class="mobile-link" data-nav="conta" id="mobile-account-link">Entrar / Criar conta</a>
+        </nav>
+    </div>
+
+
+    <!-- ======================= MAIN ======================= -->
+    <main id="main-content" class="hero">
+
+        <!-- shown when ?id= is missing or unknown -->
+        <section id="product-missing" class="hidden px-6 lg:px-10 py-24">
+            <div class="max-w-[900px] mx-auto border-[3px] border-carbon-950 bg-brand-yellow p-10 text-center">
+                <p class="font-display text-5xl uppercase">Peça não encontrada (•ᴥ•)</p>
+                <p class="mt-4">Essa estampa não existe ou saiu de linha.</p>
+                <a href="produtos.html" class="btn-primary mt-8"><span>Ver todos os drops</span></a>
+            </div>
+        </section>
+
+        <div id="product-page" class="hidden">
+            <nav aria-label="Você está em" class="px-6 lg:px-10 pt-8">
+                <ol class="max-w-[1400px] mx-auto flex flex-wrap gap-2 font-mono text-[0.65rem] font-bold uppercase tracking-[0.2em]">
+                    <li><a href="produtos.html" class="hover:text-brand-red">Drops</a></li>
+                    <li aria-hidden="true">›</li>
+                    <li><a id="pp-crumb-collection" href="#" class="hover:text-brand-red">Coleção</a></li>
+                    <li aria-hidden="true">›</li>
+                    <li id="pp-crumb-name" aria-current="page" class="text-brand-red">Produto</li>
+                </ol>
+            </nav>
+
+            <section class="px-6 lg:px-10 py-10 lg:py-14">
+                <div class="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+
+                    <!-- Gallery -->
+                    <div class="lg:col-span-7">
+                        <div class="relative border-[3px] border-carbon-950 bg-white aspect-[3/4] overflow-hidden">
+                            <span id="pp-tag" class="absolute top-4 left-4 z-10 bg-carbon-950 text-white font-mono text-[0.65rem] font-bold uppercase tracking-[0.2em] px-2 py-1">Coleção</span>
+                            <span id="pp-badge" class="card-badge hidden" style="top:auto;bottom:1rem;left:1rem"></span>
+                            <img id="pp-image" src="" alt="" class="pp-image w-full h-full" width="1200" height="1600">
+                        </div>
+                        <div id="pp-thumbs" class="hidden grid grid-cols-4 gap-3 mt-3"></div>
+                    </div>
+
+                    <!-- Info -->
+                    <div class="lg:col-span-5 lg:sticky lg:top-32">
+                        <p class="font-mono text-[0.65rem] uppercase tracking-[0.3em] text-brand-red mb-4">The Fato®</p>
+                        <h1 id="pp-name" class="font-display text-5xl sm:text-6xl uppercase leading-[0.9] mb-3">Produto</h1>
+                        <p id="pp-color" class="text-sm font-semibold uppercase tracking-[0.1em] mb-6"></p>
+                        <p id="pp-price" class="font-display text-4xl"></p>
+                        <p id="pp-pay" class="pp-pay mb-8"></p>
+
+                        <div id="product-view">
+                            <p class="text-xs font-semibold uppercase tracking-[0.2em] mb-3">Cor: <span id="pp-color-name">Branca</span></p>
+                            <div id="pp-colors" class="flex gap-3 mb-7" role="radiogroup" aria-label="Cor da camiseta"></div>
+                            <div class="flex justify-between items-baseline mb-4">
+                                <p class="text-xs font-semibold uppercase tracking-[0.2em]">Tamanho</p>
+                                <a href="medidas.html" class="font-mono text-[0.65rem] font-bold uppercase tracking-[0.15em] underline underline-offset-4 hover:text-brand-red">Guia de medidas</a>
+                            </div>
+                            <div class="size-group flex gap-2" role="group" aria-label="Tamanho">
+                                <button type="button" class="size-btn" data-size="P" aria-pressed="false">P</button>
+                                <button type="button" class="size-btn" data-size="M" aria-pressed="false">M</button>
+                                <button type="button" class="size-btn" data-size="G" aria-pressed="false">G</button>
+                                <button type="button" class="size-btn" data-size="GG" aria-pressed="false">GG</button>
+                            </div>
+                            <div class="flex gap-3 mt-8">
+                                <button type="button" id="pv-add-btn" class="btn-primary flex-1 justify-center py-4 text-sm">
+                                    <span>Adicionar ao carrinho</span>
+                                </button>
+                                <button type="button" id="pp-fav" class="fav-btn fav-inline" aria-pressed="false" aria-label="Salvar nos favoritos">
+                                    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <form id="pp-ship-form" class="ship-calc" novalidate>
+                            <label for="pp-cep" class="filter-label">Calcular frete e prazo</label>
+                            <div class="flex">
+                                <input id="pp-cep" class="filter-input" inputmode="numeric" pattern="\d{5}-\d{3}" placeholder="00000-000" data-mask="cep" autocomplete="postal-code" required>
+                                <button type="submit" class="btn-bold shrink-0">OK</button>
+                            </div>
+                            <div id="pp-ship" class="ship-result" aria-live="polite"></div>
+                        </form>
+
+                        <section id="pp-species" class="species-card hidden" aria-label="Ficha de espécie"></section>
+
+                        <div class="mt-10 border-[3px] border-carbon-950">
+                            <details class="faq-item" open style="border:0">
+                                <summary>Sobre a peça</summary>
+                                <div class="faq-answer"><p id="pp-desc"></p></div>
+                            </details>
+                            <details class="faq-item" style="border:0;border-top:3px solid #000">
+                                <summary>Cuidados</summary>
+                                <div class="faq-answer">
+                                    <ul class="faq-list">
+                                        <li>Lave do avesso, em água fria.</li>
+                                        <li>Não use alvejante.</li>
+                                        <li>Seque à sombra e não passe ferro sobre a estampa.</li>
+                                    </ul>
+                                </div>
+                            </details>
+                            <details class="faq-item" style="border:0;border-top:3px solid #000">
+                                <summary>Entrega e trocas</summary>
+                                <div class="faq-answer"><p>Entrega em 3 a 10 dias úteis, calculada pelo CEP no checkout. Troca ou devolução em até 7 dias corridos — a primeira troca por tamanho tem frete por nossa conta. <a href="trocas.html">Saiba mais</a>.</p></div>
+                            </details>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Reviews: no made-up reviews. A visitor's own review is kept only in their browser. -->
+            <section class="px-6 lg:px-10 pb-16" aria-labelledby="rv-title">
+                <div class="max-w-[1400px] mx-auto">
+                    <h2 id="rv-title" class="font-display text-4xl sm:text-5xl uppercase mb-6">Avaliações</h2>
+                    <div class="divider-accent mb-10"></div>
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
+                        <div id="rv-list" class="lg:col-span-7 space-y-4"></div>
+                        <form id="rv-form" class="lg:col-span-5 border-[3px] border-carbon-950 p-6" novalidate>
+                            <p class="font-display text-2xl uppercase mb-4">Avaliar esta peça</p>
+                            <fieldset class="mb-4">
+                                <legend class="filter-label">Sua nota</legend>
+                                <div class="rv-stars">
+                                    <input type="radio" id="rv-5" name="nota" value="5" required><label for="rv-5" title="5 estrelas">★</label>
+                                    <input type="radio" id="rv-4" name="nota" value="4"><label for="rv-4" title="4 estrelas">★</label>
+                                    <input type="radio" id="rv-3" name="nota" value="3"><label for="rv-3" title="3 estrelas">★</label>
+                                    <input type="radio" id="rv-2" name="nota" value="2"><label for="rv-2" title="2 estrelas">★</label>
+                                    <input type="radio" id="rv-1" name="nota" value="1"><label for="rv-1" title="1 estrela">★</label>
+                                </div>
+                            </fieldset>
+                            <div class="field mb-4">
+                                <label for="rv-nome">Nome</label>
+                                <input id="rv-nome" class="filter-input" required minlength="2" maxlength="40" autocomplete="given-name">
+                                <p class="field-error">Digite seu nome.</p>
+                            </div>
+                            <div class="field mb-5">
+                                <label for="rv-texto">Comentário</label>
+                                <textarea id="rv-texto" class="filter-input" rows="3" required minlength="5" maxlength="400"></textarea>
+                                <p class="field-error">Conte um pouco (mín. 5 letras).</p>
+                            </div>
+                            <p id="rv-error" class="hidden mb-4 font-mono text-xs uppercase tracking-[0.15em] text-brand-red" role="alert">Escolha uma nota.</p>
+                            <button type="submit" class="btn-primary"><span>Enviar avaliação</span></button>
+                            <p class="mt-4 text-xs text-carbon-700">Protótipo: sua avaliação fica salva só neste navegador.</p>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <section class="px-6 lg:px-10 pb-20">
+                <div class="max-w-[1400px] mx-auto">
+                    <h2 class="font-display text-4xl sm:text-5xl uppercase mb-6">Você também pode gostar</h2>
+                    <div class="divider-accent mb-10"></div>
+                    <div id="pp-related" class="grid grid-cols-1 sm:grid-cols-3 gap-5"></div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- ═══════════ CART DRAWER ═══════════ -->
+    <div id="cart-overlay" class="drawer-overlay" onclick="toggleCart()"></div>
+    <div id="cart-drawer" class="drawer-panel" role="dialog" aria-modal="true" aria-labelledby="cart-title" aria-hidden="true" tabindex="-1">
+        <div class="drawer-header">
+            <h2 id="cart-title" class="font-display text-xl uppercase text-carbon-950">Carrinho</h2>
+            <button type="button" onclick="toggleCart()" class="drawer-close" aria-label="Fechar carrinho">✕</button>
+        </div>
+        <div id="cart-ship" class="ship-bar hidden" aria-live="polite">
+            <p id="cart-ship-text" class="ship-bar-text"></p>
+            <div class="ship-bar-track" aria-hidden="true"><span id="cart-ship-fill"></span></div>
+        </div>
+        <div id="cart-items" class="flex-1 overflow-y-auto p-5 flex flex-col gap-3"></div>
+        <div class="p-5 border-t-[3px] border-carbon-950">
+            <div class="flex justify-between items-baseline">
+                <span class="text-xs font-semibold uppercase tracking-[0.2em] text-carbon-700">Subtotal</span>
+                <span id="cart-total" class="font-display text-2xl text-brand-red">R$ 0,00</span>
+            </div>
+            <p id="cart-pix" class="font-mono text-[0.65rem] uppercase tracking-[0.12em] text-right mt-1 mb-5"></p>
+            <button type="button" data-checkout class="btn-primary w-full justify-center py-4 text-sm">
+                <span>Finalizar compra</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- ═══════════ WHATSAPP (link only, sends nothing by itself) ═══════════ -->
+    <a id="whatsapp-btn" class="whatsapp-btn" href="#" target="_blank" rel="noopener" aria-label="Falar com a The Fato no WhatsApp">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.1.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.2c0-.1-.2-.2-.4-.3z"/></svg>
+        <span>Ajuda</span>
+    </a>
+
+    <!-- ═══════════ COOKIES (LGPD) ═══════════ -->
+    <div id="cookie-bar" class="cookie-bar hidden" role="region" aria-label="Aviso de cookies">
+        <p>Usamos o armazenamento do navegador para guardar carrinho, favoritos e conta. Nada sai do seu navegador. <a href="privacidade.html">Saiba mais</a>.</p>
+        <div class="flex gap-2 shrink-0">
+            <button type="button" class="btn-bold" data-consent="essencial">Só o necessário</button>
+            <button type="button" class="btn-bold cookie-accept" data-consent="todos">Aceitar</button>
+        </div>
+    </div>
+
+    <!-- ═══════════════════ FOOTER ═══════════════════════ -->
+    <footer class="site-footer bg-carbon-950 text-white">
+        <div class="divider-accent"></div>
+        <div class="max-w-[1400px] mx-auto px-6 lg:px-10 pt-16 pb-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 mb-16">
+                <div class="lg:col-span-5">
+                    <img class="h-10 w-auto mb-6" src="assets/images/brand/logo-horizontal-white.svg" alt="The Fato" width="151" height="40" loading="lazy">
+                    <p class="text-sm max-w-sm mb-8 leading-relaxed text-white">
+                        Entre para a bicharada. Receba drops exclusivos, descontos e trocadilhos novos antes de todo mundo.
+                    </p>
+                    <form class="newsletter flex max-w-sm">
+                        <label for="newsletter-email" class="sr-only">Seu e-mail</label>
+                        <input id="newsletter-email" type="email" placeholder="seu@email.com" required>
+                        <button type="submit">Assinar</button>
+                    </form>
+                </div>
+                <div class="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-10">
+                    <div>
+                        <h3 class="footer-title">Shop</h3>
+                        <ul class="space-y-3">
+                            <li><a href="produtos.html" class="footer-link">Todos os drops</a></li>
+                            <li><a href="colecao-bicharada.html" class="footer-link">Bicharada</a></li>
+                            <li><a href="colecao-consumo.html" class="footer-link">Consumo</a></li>
+                            <li><a href="colecao-conceitos.html" class="footer-link">Conceitos</a></li>
+                            <li><a href="favoritos.html" class="footer-link">Favoritos</a></li>
+                            <li><a href="sobre.html" class="footer-link">Manifesto</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="footer-title">Suporte</h3>
+                        <ul class="space-y-3">
+                            <li><a href="rastrear.html" class="footer-link">Rastrear pedido</a></li>
+                            <li><a href="faq.html" class="footer-link">FAQ</a></li>
+                            <li><a href="trocas.html" class="footer-link">Trocas e devoluções</a></li>
+                            <li><a href="medidas.html" class="footer-link">Guia de medidas</a></li>
+                            <li><a href="mailto:contato@thefato.com" class="footer-link">Contato</a></li>
+                            <li><a href="conta.html" class="footer-link">Minha conta</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="footer-title">Social</h3>
+                        <ul class="space-y-3">
+                            <li><a href="#" class="footer-link">Instagram</a></li>
+                            <li><a href="#" class="footer-link">TikTok</a></li>
+                            <li><a href="#" class="footer-link">Twitter / X</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-5 mb-8">
+                <div>
+                    <p class="footer-title mb-3">Formas de pagamento</p>
+                    <ul class="pay-badges" aria-label="Formas de pagamento aceitas">
+                        <li>PIX</li><li>Visa</li><li>Mastercard</li><li>Elo</li><li>Boleto</li>
+                    </ul>
+                </div>
+                <p class="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-white">Site seguro · protótipo acadêmico, nenhum pagamento real</p>
+            </div>
+            <div class="h-px bg-white/30 mb-8"></div>
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+                <p class="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-white">© 2026 The Fato. No Planet B. Todos os direitos reservados.</p>
+                <p class="flex gap-5 font-mono text-[0.6rem] uppercase tracking-[0.2em]">
+                    <a href="privacidade.html" class="footer-link">Privacidade</a>
+                    <a href="termos.html" class="footer-link">Termos de uso</a>
+                </p>
+                <p class="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-white">Feito com humor e amor no Brasil</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/products.js?v=20261012f"></script>
+    <script src="assets/js/main.js?v=20261012f"></script>
+
+</body>
+
+</html>

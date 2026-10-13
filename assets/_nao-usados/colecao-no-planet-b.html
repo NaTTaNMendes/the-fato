@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>No Planet B | The Fato</title>
+    <meta name="description" content="Coleção No Planet B: manifestos climáticos em estampas ácidas. Não existe planeta reserva.">
+    <meta name="theme-color" content="#e5243b">
+    <link rel="icon" href="assets/images/brand/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="assets/images/brand/apple-touch-icon.png">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="The Fato">
+    <meta property="og:title" content="No Planet B | The Fato">
+    <meta property="og:description" content="Coleção No Planet B: manifestos climáticos em estampas ácidas. Não existe planeta reserva.">
+    <meta property="og:image" content="assets/images/brand/og-image.jpg">
+    <meta property="og:locale" content="pt_BR">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@400;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        carbon: { 950: '#000000', 900: '#ffffff', 800: '#ffffff', 700: '#000000', 600: '#333333' },
+                        bone: { DEFAULT: '#ffffff', 100: '#ffffff' },
+                        toxic: { DEFAULT: '#e5243b', dark: '#cc0000', glow: 'rgba(0,0,0,0)' },
+                        brand: {
+                            red: '#e5243b', yellow: '#fcc30b', green: '#4c9f38', blue: '#0a97d9', magenta: '#dd1367'
+                        },
+                        muted: '#555555'
+                    },
+                    fontFamily: {
+                        display: ['"Londrina Solid"', 'system-ui', 'sans-serif'],
+                        body: ['"Space Grotesk"', 'system-ui', 'sans-serif'],
+                        mono: ['"Space Mono"', '"Courier New"', 'monospace'],
+                    },
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="assets/css/style.css?v=20261011c">
+    <script>
+        // splash screen: once per visit, never for "reduce motion" (markup is #splash, logic in main.js)
+        try {
+            if (!sessionStorage.getItem('thefato-splash') && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.documentElement.classList.add('show-splash');
+            }
+        } catch (e) { /* storage blocked: no splash */ }
+    </script>
+</head>
+
+<body class="antialiased font-body" data-page="no-planet-b">
+
+    <!-- ═══════════ SPLASH (mosaico que se monta) ═══════════ -->
+    <div id="splash" aria-hidden="true">
+        <span class="sp-tile bg-carbon-950 text-white" style="--i:3">{o,o}</span>
+        <span class="sp-tile bg-brand-yellow text-carbon-950" style="--i:11">_@/</span>
+        <span class="sp-tile bg-brand-magenta text-white" style="--i:6">(\_/)</span>
+        <span class="sp-tile bg-white text-carbon-950" style="--i:15">[???]</span>
+        <span class="sp-tile bg-brand-green text-white" style="--i:1">ʕ•ᴥ•ʔ</span>
+        <span class="sp-tile bg-brand-blue text-white" style="--i:9">&lt;3</span>
+        <span class="sp-tile bg-brand-red text-white" style="--i:13">(°&gt;</span>
+        <span class="sp-tile bg-carbon-950 text-white" style="--i:4">{★}</span>
+        <div class="sp-logo">
+            <img src="assets/images/brand/logo-horizontal-white.svg" alt="" width="151" height="40">
+            <span>Streetwear consciente</span>
+        </div>
+        <span class="sp-tile bg-brand-yellow text-carbon-950" style="--i:17">~~( ε:&gt;</span>
+        <span class="sp-tile bg-brand-blue text-white" style="--i:7">&gt;&lt;(((°&gt;</span>
+        <span class="sp-tile bg-white text-carbon-950" style="--i:0">/\_/\</span>
+        <span class="sp-tile bg-brand-magenta text-white" style="--i:12">A A</span>
+        <span class="sp-tile bg-brand-green text-white" style="--i:16">(•ᴥ•)</span>
+        <span class="sp-tile bg-carbon-950 text-white" style="--i:2">\_/</span>
+        <span class="sp-tile bg-brand-red text-white" style="--i:10">^.^</span>
+        <span class="sp-tile bg-brand-yellow text-carbon-950" style="--i:5">{•.•}</span>
+        <span class="sp-tile sp-extra bg-brand-blue text-white" style="--i:14">(^_^)</span>
+        <span class="sp-tile sp-extra bg-white text-carbon-950" style="--i:8">o_O</span>
+        <span class="sp-tile sp-extra bg-brand-magenta text-white" style="--i:18">&lt;3&lt;3</span>
+        <span class="sp-tile sp-extra bg-brand-green text-white" style="--i:19">[o_o]</span>
+    </div>
+
+    <a href="#main-content" class="skip-link">Pular para o conteúdo</a>
+
+    <!-- ═══════════════════════ MARQUEE ═══════════════════════ -->
+    <div class="marquee-container sticky top-0 z-[100] bg-brand-yellow h-[var(--marquee-h)] flex items-center" aria-hidden="true">
+        <div class="marquee-content font-mono text-[0.65rem] sm:text-xs uppercase tracking-[0.3em] text-carbon-950 font-bold py-1">
+            THERE IS NO PLANET B&nbsp;&nbsp;—&nbsp;&nbsp;SUSTENTABILIDADE NÃO É TREND, É URGÊNCIA&nbsp;&nbsp;—&nbsp;&nbsp;CONSUMO CONSCIENTE OU EXTINÇÃO&nbsp;&nbsp;—&nbsp;&nbsp;STREETWEAR COM PROPÓSITO&nbsp;&nbsp;—&nbsp;&nbsp;THERE IS NO PLANET B&nbsp;&nbsp;—&nbsp;&nbsp;SUSTENTABILIDADE NÃO É TREND, É URGÊNCIA&nbsp;&nbsp;—&nbsp;&nbsp;CONSUMO CONSCIENTE OU EXTINÇÃO&nbsp;&nbsp;—&nbsp;&nbsp;STREETWEAR COM PROPÓSITO&nbsp;&nbsp;—&nbsp;&nbsp;
+        </div>
+    </div>
+
+    <!-- ═══════════════════ NAVIGATION ═══════════════════════ -->
+    <div id="site-header" class="site-header fixed top-[var(--marquee-h)] left-0 right-0 w-full z-[55] bg-white border-b-4 border-black">
+        <header class="w-full flex justify-between items-center gap-4 px-6 lg:px-10 py-2">
+
+            <a href="homepage.html" class="flex-shrink-0" aria-label="The Fato — início">
+                <img class="h-7 sm:h-8 w-auto" src="assets/images/brand/logo-horizontal.svg" alt="The Fato" width="121" height="32">
+            </a>
+
+            <nav class="hidden md:flex items-center gap-10 flex-1 justify-center" aria-label="Principal">
+                <div class="relative" id="collections-container">
+                    <button type="button" id="collections-btn" class="nav-link flex items-center gap-1" data-nav="colecoes"
+                        aria-expanded="false" aria-controls="submenu-popup" onclick="toggleSubmenu(event)">
+                        Coleções
+                        <svg id="collections-chevron" class="w-3.5 h-3.5 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="absolute top-full mt-3 left-1/2 -translate-x-1/2 z-[70]">
+                        <div id="submenu-popup" class="w-52 bg-white border-[3px] border-carbon-950 opacity-0 scale-95 pointer-events-none transition-all duration-300 origin-top overflow-hidden">
+                            <a href="colecao-inverno-caos.html" class="submenu-link border-b-[2px] border-carbon-950">Inverno Caos</a>
+                            <a href="colecao-no-planet-b.html" class="submenu-link border-b-[2px] border-carbon-950">No Planet B</a>
+                            <a href="produtos.html" class="submenu-link">Todos os drops</a>
+                        </div>
+                    </div>
+                </div>
+                <a href="produtos.html" class="nav-link" data-nav="drops">Drops</a>
+                <a href="sobre.html" class="nav-link" data-nav="manifesto">Manifesto</a>
+            </nav>
+
+            <div class="flex items-center gap-5">
+                <button type="button" id="search-toggle" class="icon-btn" aria-label="Buscar" aria-expanded="false" aria-controls="site-search">
+                    <svg class="w-[18px] h-[18px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <circle cx="11" cy="11" r="7" stroke-width="2" />
+                        <path stroke-linecap="round" stroke-width="2" d="M20 20l-3.5-3.5" />
+                    </svg>
+                </button>
+                <a href="conta.html" id="account-link" class="icon-btn relative" aria-label="Entrar ou criar conta" data-nav="conta">
+                    <svg class="w-[18px] h-[18px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <circle cx="12" cy="8" r="4" stroke-width="2" />
+                        <path stroke-linecap="round" stroke-width="2" d="M4 21c0-4 3.6-7 8-7s8 3 8 7" />
+                    </svg>
+                    <span id="account-dot" class="account-dot hidden" aria-hidden="true"></span>
+                </a>
+                <button type="button" id="cart-btn" class="icon-btn relative" aria-label="Abrir carrinho" onclick="toggleCart(event)">
+                    <svg class="w-[18px] h-[18px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                    </svg>
+                    <span id="cart-count" class="absolute -top-1.5 -right-1.5 bg-brand-yellow border-[2px] border-carbon-950 text-carbon-950 text-[0.55rem] font-bold rounded-full h-4 w-4 items-center justify-center" style="display:none">0</span>
+                </button>
+                <button type="button" id="mobile-menu-btn" class="icon-btn md:hidden" aria-label="Abrir menu" aria-controls="mobile-nav">
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <form id="site-search" class="site-search hidden" action="produtos.html" method="get" role="search">
+            <label for="site-search-input" class="sr-only">Buscar estampas</label>
+            <input id="site-search-input" name="busca" type="search" class="filter-input" placeholder="Buscar estampas pelo nome" autocomplete="off">
+            <button type="submit" class="btn-bold">Buscar</button>
+        </form>
+
+        <nav id="mobile-nav" class="hidden md:hidden border-t-[3px] border-carbon-950 bg-white px-6 py-6 flex flex-col gap-4" aria-label="Menu">
+            <a href="produtos.html" class="mobile-link" data-nav="drops">Drops</a>
+            <a href="colecao-inverno-caos.html" class="mobile-link" data-nav="inverno-caos">Inverno Caos</a>
+            <a href="colecao-no-planet-b.html" class="mobile-link" data-nav="no-planet-b">No Planet B</a>
+            <a href="sobre.html" class="mobile-link" data-nav="manifesto">Manifesto</a>
+            <a href="faq.html" class="mobile-link" data-nav="faq">Ajuda</a>
+            <a href="conta.html" class="mobile-link" data-nav="conta" id="mobile-account-link">Entrar / Criar conta</a>
+        </nav>
+    </div>
+
+
+    <!-- ======================= MAIN ======================= -->
+    <main id="main-content" class="hero">
+
+        <section class="grid grid-cols-1 lg:grid-cols-12 border-b-[3px] border-carbon-950">
+            <div class="lg:col-span-8 bg-brand-green text-white px-6 sm:px-10 lg:px-16 py-14 lg:py-20">
+                <p class="font-mono text-[0.65rem] font-bold uppercase tracking-[0.4em] text-brand-yellow mb-6">Coleção</p>
+                <h1 class="font-display text-[3.5rem] sm:text-[5rem] lg:text-[7rem] leading-[0.85] uppercase">No<br>Planet B</h1>
+                <p class="max-w-xl mt-6 leading-relaxed">Manifestos climáticos em estampas ácidas. Não existe planeta reserva — então a urgência vai estampada no peito.</p>
+                <div class="flex flex-wrap gap-3 mt-8 font-mono text-[0.65rem] font-bold uppercase tracking-[0.2em]">
+                    <span class="border-2 border-white px-3 py-2" data-collection-count="no-planet-b">— peças</span>
+                    <span class="border-2 border-white px-3 py-2">ODS 12</span>
+                    <span class="border-2 border-white px-3 py-2">Oversized</span>
+                </div>
+            </div>
+            <div class="lg:col-span-4 bg-brand-blue text-white flex items-center justify-center p-10 min-h-[200px]" aria-hidden="true">
+                <span class="font-body font-bold text-5xl lg:text-6xl whitespace-pre text-center leading-tight">&gt;&lt;((("•&gt;</span>
+            </div>
+        </section>
+
+        <section class="px-6 lg:px-10 py-14 sm:py-20">
+            <div class="max-w-[1400px] mx-auto">
+                <div class="flex flex-wrap justify-between items-end gap-4 mb-8">
+                    <h2 class="font-display text-4xl sm:text-5xl uppercase">As peças</h2>
+                    <a href="produtos.html?colecao=inverno-caos" class="font-mono text-xs font-bold uppercase tracking-[0.2em] underline underline-offset-4 hover:text-brand-red">Ver também: Inverno Caos →</a>
+                </div>
+                <div class="divider-accent mb-10"></div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5" data-products="collection:no-planet-b"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ═══════════ CART DRAWER ═══════════ -->
+    <div id="cart-overlay" class="drawer-overlay" onclick="toggleCart()"></div>
+    <div id="cart-drawer" class="drawer-panel" role="dialog" aria-modal="true" aria-labelledby="cart-title" aria-hidden="true" tabindex="-1">
+        <div class="drawer-header">
+            <h2 id="cart-title" class="font-display text-xl uppercase text-carbon-950">Carrinho</h2>
+            <button type="button" onclick="toggleCart()" class="drawer-close" aria-label="Fechar carrinho">✕</button>
+        </div>
+        <div id="cart-items" class="flex-1 overflow-y-auto p-5 flex flex-col gap-3"></div>
+        <div class="p-5 border-t-[3px] border-carbon-950">
+            <div class="flex justify-between items-baseline mb-5">
+                <span class="text-xs font-semibold uppercase tracking-[0.2em] text-carbon-700">Total</span>
+                <span id="cart-total" class="font-display text-2xl text-brand-red">R$ 0,00</span>
+            </div>
+            <button type="button" data-checkout class="btn-primary w-full justify-center py-4 text-sm">
+                <span>Finalizar compra</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- ═══════════════════ FOOTER ═══════════════════════ -->
+    <footer class="site-footer bg-carbon-950 text-white">
+        <div class="divider-accent"></div>
+        <div class="max-w-[1400px] mx-auto px-6 lg:px-10 pt-16 pb-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 mb-16">
+                <div class="lg:col-span-5">
+                    <img class="h-10 w-auto mb-6" src="assets/images/brand/logo-horizontal-white.svg" alt="The Fato" width="151" height="40" loading="lazy">
+                    <p class="text-sm max-w-sm mb-8 leading-relaxed text-white">
+                        Junte-se à revolução. Receba drops exclusivos, descontos e provocações antes de todo mundo.
+                    </p>
+                    <form class="newsletter flex max-w-sm">
+                        <label for="newsletter-email" class="sr-only">Seu e-mail</label>
+                        <input id="newsletter-email" type="email" placeholder="seu@email.com" required>
+                        <button type="submit">Assinar</button>
+                    </form>
+                </div>
+                <div class="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-10">
+                    <div>
+                        <h3 class="footer-title">Shop</h3>
+                        <ul class="space-y-3">
+                            <li><a href="produtos.html" class="footer-link">Todos os drops</a></li>
+                            <li><a href="colecao-inverno-caos.html" class="footer-link">Inverno Caos</a></li>
+                            <li><a href="colecao-no-planet-b.html" class="footer-link">No Planet B</a></li>
+                            <li><a href="sobre.html" class="footer-link">Manifesto</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="footer-title">Suporte</h3>
+                        <ul class="space-y-3">
+                            <li><a href="faq.html" class="footer-link">FAQ</a></li>
+                            <li><a href="trocas.html" class="footer-link">Trocas e devoluções</a></li>
+                            <li><a href="medidas.html" class="footer-link">Guia de medidas</a></li>
+                            <li><a href="mailto:contato@thefato.com" class="footer-link">Contato</a></li>
+                            <li><a href="conta.html" class="footer-link">Minha conta</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="footer-title">Social</h3>
+                        <ul class="space-y-3">
+                            <li><a href="#" class="footer-link">Instagram</a></li>
+                            <li><a href="#" class="footer-link">TikTok</a></li>
+                            <li><a href="#" class="footer-link">Twitter / X</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="h-px bg-white/30 mb-8"></div>
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+                <p class="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-white">© 2026 The Fato. No Planet B. Todos os direitos reservados.</p>
+                <p class="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-white">Feito com raiva e amor no Brasil</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/products.js?v=20261011c"></script>
+    <script src="assets/js/main.js?v=20261011c"></script>
+
+</body>
+
+</html>

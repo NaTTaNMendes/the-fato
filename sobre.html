@@ -4,303 +4,462 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE FATO | Streetwear Consciente</title>
+    <title>Manifesto | The Fato</title>
+    <meta name="description" content="Bichos, trocadilhos e consumo consciente. Conheça a missão, a visão, os valores, o significado do nome e os ODS da The Fato.">
+    <meta name="theme-color" content="#e5243b">
+    <link rel="icon" href="assets/images/brand/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="assets/images/brand/apple-touch-icon.png">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="The Fato">
+    <meta property="og:title" content="Manifesto | The Fato">
+    <meta property="og:description" content="Bichos, trocadilhos e consumo consciente. Conheça a missão, a visão, os valores, o significado do nome e os ODS da The Fato.">
+    <meta property="og:image" content="assets/images/brand/og-image.jpg">
+    <meta property="og:locale" content="pt_BR">
+    <meta name="twitter:card" content="summary_large_image">
 
     <script src="https://cdn.tailwindcss.com"></script>
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@400;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
-        rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@400;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        carbon:  { 950: '#000000', 900: '#ffffff', 800: '#ffffff', 700: '#000000', 600: '#333333' },
-                        bone:    { DEFAULT: '#ffffff', 100: '#ffffff' },
-                        toxic:   { DEFAULT: '#e5243b', dark: '#cc0000', glow: 'rgba(0,0,0,0)' },
-                        brand:   { red: '#e5243b', yellow: '#fcc30b', green: '#4c9f38', blue: '#0a97d9' },
-                        muted:   '#555555'
+                        carbon: { 950: '#000000', 900: '#ffffff', 800: '#ffffff', 700: '#000000', 600: '#333333' },
+                        bone: { DEFAULT: '#ffffff', 100: '#ffffff' },
+                        toxic: { DEFAULT: '#e5243b', dark: '#cc0000', glow: 'rgba(0,0,0,0)' },
+                        brand: {
+                            red: '#e5243b', yellow: '#fcc30b', green: '#4c9f38', blue: '#0a97d9', magenta: '#dd1367'
+                        },
+                        muted: '#555555'
                     },
                     fontFamily: {
                         display: ['"Londrina Solid"', 'system-ui', 'sans-serif'],
-                        body:    ['"Space Grotesk"', 'system-ui', 'sans-serif'],
-                        mono:    ['"Space Mono"', '"Courier New"', 'monospace'],
+                        body: ['"Space Grotesk"', 'system-ui', 'sans-serif'],
+                        mono: ['"Space Mono"', '"Courier New"', 'monospace'],
                     },
                 }
             }
         }
     </script>
-
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css?v=20261012f">
+    <script>
+        // splash screen: once per visit, never for "reduce motion" (markup is #splash, logic in main.js)
+        try {
+            if (!sessionStorage.getItem('thefato-splash') && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.documentElement.classList.add('show-splash');
+            }
+        } catch (e) { /* storage blocked: no splash */ }
+    </script>
 </head>
 
-<body class="antialiased font-body">
+<body class="antialiased font-body" data-page="manifesto">
+
+    <!-- ═══════════ SPLASH (mosaico que se monta) ═══════════ -->
+    <!-- Only bichos, one of each. white-space: pre — continuation lines start at column 0 on purpose. -->
+    <div id="splash" aria-hidden="true">
+        <span class="sp-tile bg-carbon-950 text-white" style="--i:3">{o,o}
+ |)__)
+-"-"-</span>
+        <span class="sp-tile bg-brand-yellow text-carbon-950" style="--i:11">  _@/
+~~~~~~</span>
+        <span class="sp-tile bg-brand-magenta text-white" style="--i:6">(\_/)
+( •.• )
+c(")(")</span>
+        <span class="sp-tile bg-white text-carbon-950" style="--i:15">(°ᴥ°)
+~~~~~~</span>
+        <span class="sp-tile bg-brand-green text-white" style="--i:1">ʕ•ᴥ•ʔ</span>
+        <span class="sp-tile bg-brand-blue text-white" style="--i:9">&gt;&lt;((("•&gt;</span>
+        <span class="sp-tile bg-brand-red text-white" style="--i:13">(°&gt;
+( )
+^^</span>
+        <span class="sp-tile bg-carbon-950 text-white" style="--i:4">ʚïɞ</span>
+        <div class="sp-logo">
+            <img src="assets/images/brand/logo-horizontal-white.svg" alt="" width="151" height="40">
+            <span>Streetwear consciente</span>
+        </div>
+        <span class="sp-tile bg-brand-yellow text-carbon-950" style="--i:17">~~~~( ε:&gt;</span>
+        <span class="sp-tile bg-brand-blue text-white" style="--i:7">&gt;&lt;(((°&gt;
+&lt;°)))&gt;&lt;</span>
+        <span class="sp-tile bg-white text-carbon-950" style="--i:0">/\_/\
+( o.o )
+&gt; ^ &lt;</span>
+        <span class="sp-tile bg-brand-magenta text-white" style="--i:12">A A
+{• ᴥ •}</span>
+        <span class="sp-tile bg-brand-green text-white" style="--i:16">@..@
+(----)
+( &gt;__&lt; )</span>
+        <span class="sp-tile bg-carbon-950 text-white" style="--i:2">\_/
+(•ᴥ•)
+/Z Z</span>
+        <span class="sp-tile bg-brand-red text-white" style="--i:10">U・ᴥ・U</span>
+        <span class="sp-tile bg-brand-yellow text-carbon-950" style="--i:5">@('_')@</span>
+        <span class="sp-tile sp-extra bg-brand-blue text-white" style="--i:14">(°v°)
+^ ^</span>
+        <span class="sp-tile sp-extra bg-white text-carbon-950" style="--i:8">  (°&gt;
+\_/ )
+~~~~</span>
+        <span class="sp-tile sp-extra bg-brand-magenta text-white" style="--i:18">(°ᴗ°)
+/|/|\|\</span>
+        <span class="sp-tile sp-extra bg-brand-green text-white" style="--i:19">(•(oo)•)</span>
+    </div>
+
+    <a href="#main-content" class="skip-link">Pular para o conteúdo</a>
 
     <!-- ═══════════════════════ MARQUEE ═══════════════════════ -->
-    <div class="marquee-container sticky top-0 z-[100] bg-brand-yellow border-b-4 border-carbon-950 border-b border-carbon-950 ">
+    <div class="marquee-container sticky top-0 z-[100] bg-brand-yellow h-[var(--marquee-h)] flex items-center" aria-hidden="true">
         <div class="marquee-content font-mono text-[0.65rem] sm:text-xs uppercase tracking-[0.3em] text-carbon-950 font-bold py-1">
-            THERE IS NO PLANET B&nbsp;&nbsp;—&nbsp;&nbsp;SUSTENTABILIDADE NÃO É TREND, É URGÊNCIA&nbsp;&nbsp;—&nbsp;&nbsp;CONSUMO CONSCIENTE OU EXTINÇÃO&nbsp;&nbsp;—&nbsp;&nbsp;STREETWEAR COM PROPÓSITO&nbsp;&nbsp;—&nbsp;&nbsp;THERE IS NO PLANET B&nbsp;&nbsp;—&nbsp;&nbsp;SUSTENTABILIDADE NÃO É TREND, É URGÊNCIA&nbsp;&nbsp;—&nbsp;&nbsp;CONSUMO CONSCIENTE OU EXTINÇÃO&nbsp;&nbsp;—&nbsp;&nbsp;STREETWEAR COM PROPÓSITO&nbsp;&nbsp;—&nbsp;&nbsp;
+            BICHOS, TROCADILHOS E CONCEITOS&nbsp;&nbsp;&mdash;&nbsp;&nbsp;CONSUMO CONSCIENTE COM HUMOR&nbsp;&nbsp;&mdash;&nbsp;&nbsp;THERE IS NO PLANET B&nbsp;&nbsp;&mdash;&nbsp;&nbsp;STREETWEAR CONSCIENTE&nbsp;&nbsp;&mdash;&nbsp;&nbsp;BICHOS, TROCADILHOS E CONCEITOS&nbsp;&nbsp;&mdash;&nbsp;&nbsp;CONSUMO CONSCIENTE COM HUMOR&nbsp;&nbsp;&mdash;&nbsp;&nbsp;THERE IS NO PLANET B&nbsp;&nbsp;&mdash;&nbsp;&nbsp;STREETWEAR CONSCIENTE&nbsp;&nbsp;&mdash;&nbsp;&nbsp;
         </div>
     </div>
 
     <!-- ═══════════════════ NAVIGATION ═══════════════════════ -->
-    <div class="fixed top-[var(--marquee-h)] left-0 right-0 w-full z-[55] bg-white border-b-4 border-black">
-        <header class="w-full flex justify-between items-center px-6 lg:px-10 py-2">
+    <div id="site-header" class="site-header fixed top-[var(--marquee-h)] left-0 right-0 w-full z-[55] bg-white border-b-4 border-black">
+        <header class="w-full flex justify-between items-center gap-4 px-6 lg:px-10 py-2">
 
-            <!-- Logo -->
-            <div class="flex-shrink-0 w-16 sm:w-20">
-                <a href="homepage.html">
-                    <img class="w-full h-auto opacity-100 hover:opacity-100 transition-opacity"
-                        src="assets/images/banners/logo.svg" alt="The Fato">
-                </a>
-            </div>
+            <a href="homepage.html" class="flex-shrink-0" aria-label="The Fato — início">
+                <img class="h-7 sm:h-8 w-auto" src="assets/images/brand/logo-horizontal.svg" alt="The Fato" width="121" height="32">
+            </a>
 
-            <!-- Center Nav -->
-            <nav class="hidden md:flex items-center gap-10 flex-1 justify-center">
+            <nav class="hidden md:flex items-center gap-10 flex-1 justify-center" aria-label="Principal">
                 <div class="relative" id="collections-container">
-                    <button onclick="toggleSubmenu(event)"
-                        class="flex items-center gap-1 text-[0.75rem] font-semibold uppercase tracking-[0.2em] text-carbon-950 hover:text-brand-red transition-colors">
+                    <button type="button" id="collections-btn" class="nav-link flex items-center gap-1" data-nav="colecoes"
+                        aria-expanded="false" aria-controls="submenu-popup" onclick="toggleSubmenu(event)">
                         Coleções
-                        <svg id="collections-chevron" class="w-3.5 h-3.5 transform transition-transform duration-300"
-                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg id="collections-chevron" class="w-3.5 h-3.5 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                         </svg>
                     </button>
-
-                    <!-- Dropdown -->
                     <div class="absolute top-full mt-3 left-1/2 -translate-x-1/2 z-[70]">
-                        <div id="submenu-popup"
-                            class="w-52 bg-white border border-carbon-950 rounded-2xl opacity-0 scale-95 pointer-events-none transition-all duration-300 origin-top overflow-hidden shadow-2xl">
-                            <a href="colecao-inverno-caos.html"
-                                class="block px-5 py-3 text-xs font-semibold uppercase tracking-[0.15em] text-carbon-950 hover:bg-brand-yellow border-b-4 border-carbon-950 hover:text-carbon-950 transition-colors border-b border-carbon-950">Inverno Caos</a>
-                            <a href="colecao-no-planet-b.html"
-                                class="block px-5 py-3 text-xs font-semibold uppercase tracking-[0.15em] text-carbon-950 hover:bg-brand-yellow border-b-4 border-carbon-950 hover:text-carbon-950 transition-colors border-b border-carbon-950">No Planet B</a>
-                            <a href="produtos.html"
-                                class="block px-5 py-3 text-xs font-semibold uppercase tracking-[0.15em] text-carbon-950 hover:bg-brand-yellow border-b-4 border-carbon-950 hover:text-carbon-950 transition-colors">Básicos</a>
+                        <div id="submenu-popup" class="w-52 bg-white border-[3px] border-carbon-950 opacity-0 scale-95 pointer-events-none transition-all duration-300 origin-top overflow-hidden">
+                            <a href="colecao-bicharada.html" class="submenu-link border-b-[2px] border-carbon-950" data-nav="bicharada">Bicharada</a>
+                            <a href="colecao-consumo.html" class="submenu-link border-b-[2px] border-carbon-950" data-nav="consumo">Consumo</a>
+                            <a href="colecao-conceitos.html" class="submenu-link border-b-[2px] border-carbon-950" data-nav="conceitos">Conceitos</a>
+                            <a href="produtos.html" class="submenu-link">Todos os drops</a>
                         </div>
                     </div>
                 </div>
-
-                <a href="produtos.html"
-                    class="text-[0.75rem] font-semibold uppercase tracking-[0.2em] text-carbon-950 hover:text-brand-red transition-colors">
-                    Drops
-                </a>
-                <a href="sobre.html"
-                    class="text-[0.75rem] font-semibold uppercase tracking-[0.2em] text-carbon-950 hover:text-brand-red transition-colors">
-                    Manifesto
-                </a>
+                <a href="produtos.html" class="nav-link" data-nav="drops">Drops</a>
+                <a href="sobre.html" class="nav-link" data-nav="manifesto">Manifesto</a>
             </nav>
 
-            <!-- Right Icons -->
             <div class="flex items-center gap-5">
-                <!-- Cart -->
-                <button onclick="toggleCart(event)"
-                    class="text-carbon-700 hover:text-brand-red transition-colors relative">
-                    <span class="sr-only">Carrinho</span>
-                    <svg class="w-[18px] h-[18px]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                <button type="button" id="search-toggle" class="icon-btn" aria-label="Buscar" aria-expanded="false" aria-controls="site-search">
+                    <svg class="w-[18px] h-[18px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <circle cx="11" cy="11" r="7" stroke-width="2" />
+                        <path stroke-linecap="round" stroke-width="2" d="M20 20l-3.5-3.5" />
                     </svg>
-                    <span id="cart-count"
-                        class="absolute -top-1.5 -right-1.5 bg-brand-yellow border-b-4 border-carbon-950 text-carbon-950 text-[0.55rem] font-bold rounded-xl h-4 w-4 flex items-center justify-center">0</span>
                 </button>
-
-                <!-- Mobile Menu -->
-                <button id="mobile-menu-btn" class="md:hidden text-carbon-950">
-                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <a href="favoritos.html" id="fav-link" class="icon-btn relative" aria-label="Favoritos" data-nav="favoritos">
+                    <svg class="w-[18px] h-[18px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linejoin="round" stroke-width="2" d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z" />
+                    </svg>
+                    <span id="fav-count" class="count-badge" style="display:none">0</span>
+                </a>
+                <a href="conta.html" id="account-link" class="icon-btn relative" aria-label="Entrar ou criar conta" data-nav="conta">
+                    <svg class="w-[18px] h-[18px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <circle cx="12" cy="8" r="4" stroke-width="2" />
+                        <path stroke-linecap="round" stroke-width="2" d="M4 21c0-4 3.6-7 8-7s8 3 8 7" />
+                    </svg>
+                    <span id="account-dot" class="account-dot hidden" aria-hidden="true"></span>
+                </a>
+                <button type="button" id="cart-btn" class="icon-btn relative" aria-label="Abrir carrinho" onclick="toggleCart(event)">
+                    <svg class="w-[18px] h-[18px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                    </svg>
+                    <span id="cart-count" class="absolute -top-1.5 -right-1.5 bg-brand-yellow border-[2px] border-carbon-950 text-carbon-950 text-[0.55rem] font-bold rounded-full h-4 w-4 items-center justify-center" style="display:none">0</span>
+                </button>
+                <button type="button" id="mobile-menu-btn" class="icon-btn md:hidden" aria-label="Abrir menu" aria-controls="mobile-nav">
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
                 </button>
             </div>
         </header>
 
-        <!-- Mobile Nav -->
-        <nav id="mobile-nav" class="hidden md:hidden bg-bone-100 border-b border-carbon-950 px-6 py-6 flex flex-col gap-4">
-            <a href="produtos.html" class="text-sm font-semibold uppercase tracking-[0.2em] text-carbon-950 hover:text-brand-red transition-colors">Drops</a>
-            <a href="sobre.html" class="text-sm font-semibold uppercase tracking-[0.2em] text-carbon-950 hover:text-brand-red transition-colors">Sobre Nós</a>
-            <a href="#" class="text-sm font-semibold uppercase tracking-[0.2em] text-carbon-950 hover:text-brand-red transition-colors">Coleções</a>
+        <form id="site-search" class="site-search hidden" action="produtos.html" method="get" role="search">
+            <label for="site-search-input" class="sr-only">Buscar estampas</label>
+            <input id="site-search-input" name="busca" type="search" class="filter-input" placeholder="Buscar estampas pelo nome" autocomplete="off">
+            <button type="submit" class="btn-bold">Buscar</button>
+        </form>
+
+        <nav id="mobile-nav" class="hidden md:hidden border-t-[3px] border-carbon-950 bg-white px-6 py-6 flex flex-col gap-4" aria-label="Menu">
+            <a href="produtos.html" class="mobile-link" data-nav="drops">Drops</a>
+            <a href="colecao-bicharada.html" class="mobile-link" data-nav="bicharada">Bicharada</a>
+            <a href="colecao-consumo.html" class="mobile-link" data-nav="consumo">Consumo</a>
+            <a href="colecao-conceitos.html" class="mobile-link" data-nav="conceitos">Conceitos</a>
+            <a href="sobre.html" class="mobile-link" data-nav="manifesto">Manifesto</a>
+            <a href="favoritos.html" class="mobile-link" data-nav="favoritos">Favoritos</a>
+            <a href="rastrear.html" class="mobile-link" data-nav="rastrear">Rastrear pedido</a>
+            <a href="faq.html" class="mobile-link" data-nav="faq">Ajuda</a>
+            <a href="conta.html" class="mobile-link" data-nav="conta" id="mobile-account-link">Entrar / Criar conta</a>
         </nav>
     </div>
 
 
-    <!-- ═══════════════════════ MAIN ═══════════════════════ -->
-    <main id="main-content" class="pt-32 pb-24 px-6 lg:px-10 min-h-screen">
-        <div class="max-w-[1400px] mx-auto">
-            <p class="font-mono text-[0.6rem] uppercase tracking-[0.4em] text-brand-red mb-3">The Fato</p>
-            <h1 class="font-display text-5xl sm:text-6xl lg:text-7xl text-carbon-950 uppercase mb-10">Sobre Nós</h1>
-            <div class="divider-accent mb-12"></div>
-            <div class="text-carbon-700 leading-relaxed font-light text-base sm:text-lg max-w-3xl space-y-6">
-                
-<p>Inspirados no caos urbano e na arte subversiva, a <strong class="text-carbon-950">THE FATO</strong> não é apenas uma marca, é um manifesto. Nascemos da insatisfação com o consumo descartável e o fast fashion que destrói o planeta.</p>
-<p>Nossas estampas são mais do que tinta no tecido — são declarações impressas em algodão 100% sustentável. Acreditamos que a revolução pode ser estética, confortável e ética.</p>
-<h3 class="font-display text-3xl text-carbon-950 uppercase mt-10 mb-4 tracking-wide">Zero Greenwashing</h3>
-<p>Produzimos localmente no Brasil. Valorizamos a mão de obra justa. Não há desculpas para não sermos melhores amanhã do que somos hoje.</p>
-<p class="text-brand-red font-mono text-xs uppercase tracking-widest mt-12 py-4 border-l-2 border-toxic pl-6">"A revolução será fofa ou não será."</p>
+    <!-- ======================= MAIN ======================= -->
+    <main id="main-content" class="hero">
 
-            </div>
-        </div>
-    </main>
-
-
-    <!-- ═══════════ PRODUCT VIEW (Single) ═══════════ -->
-    <main id="product-view" class="hidden min-h-screen bg-bone-100"
-        style="padding-top: calc(var(--marquee-h) + var(--header-h) + 3rem);">
-        <div class="max-w-[1200px] mx-auto px-6 lg:px-10 py-12">
-
-            <button onclick="closeProduct()"
-                class="mb-10 flex items-center gap-2 text-carbon-700 hover:text-brand-red text-xs font-semibold uppercase tracking-[0.2em] transition-colors">
-                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-                </svg>
-                Voltar
-            </button>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
-                <!-- Image -->
-                <div class="aspect-[3/4] bg-white border border-carbon-950 overflow-hidden flex items-center justify-center p-8 rounded-3xl">
-                    <img id="pv-image" src="" alt="Product" class="max-w-full max-h-full object-contain">
-                </div>
-
-                <!-- Info -->
-                <div class="flex flex-col justify-center">
-                    <p class="font-mono text-[0.6rem] uppercase tracking-[0.3em] text-brand-red mb-4">The Fato®</p>
-                    <h1 id="pv-title"
-                        class="font-display text-4xl sm:text-5xl lg:text-6xl text-carbon-950 uppercase mb-2 leading-[0.9]">
-                        Title</h1>
-                    <p id="pv-desc" class="text-sm text-carbon-700 font-semibold uppercase tracking-[0.1em] mb-8">Color</p>
-                    <p id="pv-price" class="font-display text-3xl sm:text-4xl text-brand-blue mb-10">R$ 0,00</p>
-
-                    <!-- Size selector -->
-                    <div class="mb-10">
-                        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-carbon-700 mb-4">Tamanho</p>
-                        <div class="flex gap-2">
-                            <button class="size-btn w-12 h-12 rounded-xl border border-carbon-950 text-sm font-semibold text-carbon-950 bg-transparent hover:border-toxic hover:text-brand-red transition-colors">P</button>
-                            <button class="size-btn active w-12 h-12 rounded-xl border border-toxic text-sm font-semibold text-carbon-950 bg-brand-yellow border-b-4 border-carbon-950 transition-colors">M</button>
-                            <button class="size-btn w-12 h-12 rounded-xl border border-carbon-950 text-sm font-semibold text-carbon-950 bg-transparent hover:border-toxic hover:text-brand-red transition-colors">G</button>
-                            <button class="size-btn w-12 h-12 rounded-xl border border-carbon-950 text-sm font-semibold text-carbon-950 bg-transparent hover:border-toxic hover:text-brand-red transition-colors">GG</button>
-                        </div>
-                    </div>
-
-                    <button id="pv-add-btn" class="btn-primary w-full justify-center py-4 text-sm">
-                        <span>Adicionar ao Carrinho</span>
-                    </button>
-
-                    <div class="mt-10 pt-8 border-t border-carbon-950">
-                        <p class="text-sm text-carbon-700 leading-relaxed font-light">
-                            Modelagem streetwear oversized. Tecido 100% algodão premium sustentável.
-                            Estampa em serigrafia de alta durabilidade. Produzido no Brasil.
-                        </p>
-                    </div>
+        <!-- ─────────── ABERTURA ─────────── -->
+        <section class="grid grid-cols-1 lg:grid-cols-12 border-b-[3px] border-carbon-950">
+            <div class="lg:col-span-7 px-6 sm:px-10 lg:px-16 py-16 lg:py-24 flex flex-col justify-center">
+                <p class="font-mono text-[0.65rem] uppercase tracking-[0.4em] text-brand-red mb-6">Manifesto</p>
+                <h1 class="font-display text-[3rem] sm:text-[4.5rem] lg:text-[6rem] leading-[0.85] text-carbon-950 uppercase mb-10">
+                    Moda é<br>trocadilho.<br><span class="text-brand-red">Vista o seu.</span>
+                </h1>
+                <div class="text-carbon-700 leading-relaxed text-base sm:text-lg max-w-xl space-y-5">
+                    <p>A <strong class="text-carbon-950">The Fato</strong> é uma marca brasileira de vestuário que usa a moda como forma de expressão, comunicação e humor sobre o cotidiano.</p>
+                    <p>Por meio de camisetas estampadas, abordamos questões sociais e comportamentos do dia a dia de maneira bem-humorada, irônica e criativa — trocadilhos, jogos de palavras e associações inusitadas sobre consumo, sustentabilidade e as contradições da sociedade.</p>
                 </div>
             </div>
-        </div>
-    </main>
+            <div class="lg:col-span-5 flex flex-col lg:border-l-[3px] border-carbon-950" aria-hidden="true">
+                <div class="band grid-cols-3"><span class="bg-brand-blue"></span><span class="bg-brand-green"></span><span class="bg-carbon-950"></span></div>
+                <div class="mosaic">
+                    <span class="tile bg-brand-yellow text-carbon-950">(\_/)
+{•ᴥ•}</span>
+                    <span class="tile bg-carbon-950 text-white">\_/
+(•ᴥ•)
+/Z Z</span>
+                    <span class="tile bg-brand-magenta text-white">/\_/\
+{ •ᴥ• }</span>
+                    <span class="tile bg-brand-green text-white">A A
+{• ᴥ •}</span>
+                    <span class="tile bg-white text-carbon-950">{★}</span>
+                    <span class="tile bg-brand-blue text-white">&lt;3</span>
+                    <span class="tile bg-carbon-950 text-white">[???]</span>
+                    <span class="tile bg-brand-red text-white">_@/</span>
+                    <span class="tile tile-extra bg-brand-yellow text-carbon-950">~~~~( ε:&gt;</span>
+                </div>
+                <div class="band grid-cols-3"><span class="bg-brand-blue"></span><span class="bg-brand-green"></span><span class="bg-carbon-950"></span></div>
+            </div>
+        </section>
 
+        <!-- ─────────── SIGNIFICADO DO NOME ─────────── -->
+        <section class="bg-carbon-950 text-white px-6 sm:px-10 lg:px-16 py-20 lg:py-28">
+            <div class="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-20 items-center">
+                <div class="lg:col-span-5">
+                    <p class="font-mono text-[0.65rem] uppercase tracking-[0.4em] text-brand-yellow mb-6">Significado do nome</p>
+                    <p class="font-mono font-bold text-4xl sm:text-6xl tracking-[0.05em] leading-none">THE FA<span class="text-brand-red"> • </span>TO</p>
+                </div>
+                <div class="lg:col-span-7 space-y-5 text-base sm:text-lg leading-relaxed text-white">
+                    <p>O nome carrega autenticidade, atitude urbana e consciência. Nasce de um jogo de palavras com a expressão <strong>“de fato”</strong> — algo verdadeiro e comprovado — ao mesmo tempo em que <strong>“fato”</strong> também significa vestimenta, ligando o nome direto ao universo da moda.</p>
+                    <p>Também faz referência à cultura urbana e ao rap nacional, dialogando com o projeto do rapper brasileiro Derek. Um nome marcante, com significado, personalidade e uma leve ironia.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─────────── COMO NASCE UMA ESTAMPA ─────────── -->
+        <section class="px-6 sm:px-10 lg:px-16 pt-20 lg:pt-28">
+            <div class="max-w-[1400px] mx-auto">
+                <p class="font-mono text-[0.65rem] uppercase tracking-[0.4em] text-brand-red mb-3">Receita da casa</p>
+                <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl text-carbon-950 uppercase">Como nasce uma estampa</h2>
+                <div class="divider-accent mt-8 mb-12"></div>
+                <ol class="grid grid-cols-1 md:grid-cols-3 border-[3px] border-carbon-950">
+                    <li class="bg-brand-green text-white p-8 lg:p-10 border-b-[3px] md:border-b-0 md:border-r-[3px] border-carbon-950">
+                        <p class="font-body font-bold text-4xl mb-6" aria-hidden="true">ʕ•ᴥ•ʔ</p>
+                        <h3 class="font-display text-3xl uppercase mb-3">1. Um bicho</h3>
+                        <p class="leading-relaxed">Ariranha, pato, abelha, gato, morcego, cavalo-marinho. Ou um bicho chamado humano.</p>
+                    </li>
+                    <li class="bg-brand-yellow text-carbon-950 p-8 lg:p-10 border-b-[3px] md:border-b-0 md:border-r-[3px] border-carbon-950">
+                        <p class="font-body font-bold text-4xl mb-6" aria-hidden="true">[???]</p>
+                        <h3 class="font-display text-3xl uppercase mb-3">2. Um trocadilho</h3>
+                        <p class="leading-relaxed">Let it be vira Let It Quack. O Pensador vira Pensamenos. A lontra vira vilã.</p>
+                    </li>
+                    <li class="bg-brand-magenta text-white p-8 lg:p-10">
+                        <p class="font-body font-bold text-4xl mb-6" aria-hidden="true">*</p>
+                        <h3 class="font-display text-3xl uppercase mb-3">3. Um fato</h3>
+                        <p class="leading-relaxed">Toda piada tem uma nota de rodapé: um dado real sobre consumo, natureza ou cidade. Está na ficha de espécie de cada peça.</p>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- ─────────── MISSÃO · VISÃO · VALORES ─────────── -->
+        <section class="px-6 sm:px-10 lg:px-16 py-20 lg:py-28">
+            <div class="max-w-[1400px] mx-auto">
+                <p class="font-mono text-[0.65rem] uppercase tracking-[0.4em] text-brand-red mb-3">No que acreditamos</p>
+                <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl text-carbon-950 uppercase">Missão, visão e valores</h2>
+                <div class="divider-accent mt-8 mb-12"></div>
+                <div class="grid grid-cols-1 md:grid-cols-3 border-[3px] border-carbon-950">
+                    <article class="bg-brand-yellow text-carbon-950 p-8 lg:p-10 border-b-[3px] md:border-b-0 md:border-r-[3px] border-carbon-950">
+                        <h3 class="font-display text-3xl uppercase mb-4">Missão</h3>
+                        <p class="leading-relaxed">Transformar o vestuário streetwear em uma plataforma de comunicação viva e, às vezes, de reflexão crítica, criando peças duráveis e com forte apelo gráfico que unem humor, ironia e práticas produtivas responsáveis.</p>
+                    </article>
+                    <article class="bg-brand-magenta text-white p-8 lg:p-10 border-b-[3px] md:border-b-0 md:border-r-[3px] border-carbon-950">
+                        <h3 class="font-display text-3xl uppercase mb-4">Visão</h3>
+                        <p class="leading-relaxed">Ser reconhecida como uma marca independente de streetwear que transforma sustentabilidade, autenticidade e expressão artística em uma forma de questionar padrões e provocar novas maneiras de pensar o consumo.</p>
+                    </article>
+                    <article class="bg-brand-blue text-white p-8 lg:p-10">
+                        <h3 class="font-display text-3xl uppercase mb-4">Valores</h3>
+                        <p class="leading-relaxed">Autenticidade, liberdade criativa e autoria humana. Humor como forma de comunicação e ironia como recurso para provocar novas perspectivas — sem abrir mão da responsabilidade, da durabilidade e do cuidado na produção.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─────────── ODS ─────────── -->
+        <section class="px-6 sm:px-10 lg:px-16 pb-20 lg:pb-28">
+            <div class="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+                <div class="lg:col-span-5">
+                    <p class="font-mono text-[0.65rem] uppercase tracking-[0.4em] text-brand-red mb-3">Compromisso</p>
+                    <h2 class="font-display text-4xl sm:text-5xl text-carbon-950 uppercase mb-6">Objetivos de Desenvolvimento Sustentável</h2>
+                    <p class="text-carbon-700 leading-relaxed">A The Fato trabalha com dois ODS da ONU. Eles são traduzidos em estampas bem-humoradas, irônicas e criativas: uma linguagem leve e acessível que usa a sustentabilidade, o consumo e a vida em sociedade como ponto de partida para provocar reflexão.</p>
+                </div>
+                <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 border-[3px] border-carbon-950">
+                    <div class="p-8 bg-[#fd9d24] text-carbon-950 border-b-[3px] sm:border-b-0 sm:border-r-[3px] border-carbon-950">
+                        <p class="font-display text-7xl leading-none">11</p>
+                        <p class="font-display text-2xl uppercase leading-tight mt-2 mb-4">Cidades e comunidades sustentáveis</p>
+                        <p class="text-sm leading-relaxed">A cidade que inspira as estampas também é o lugar que queremos mais justo e habitável.</p>
+                    </div>
+                    <div class="p-8 bg-[#bf8b2e] text-carbon-950">
+                        <p class="font-display text-7xl leading-none">12</p>
+                        <p class="font-display text-2xl uppercase leading-tight mt-2 mb-4">Consumo e produção responsáveis</p>
+                        <p class="text-sm leading-relaxed">Peças duráveis, algodão sustentável e produção nacional, contra o consumo descartável.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─────────── ZERO GREENWASHING ─────────── -->
+        <section class="grid grid-cols-1 md:grid-cols-3 border-y-[3px] border-carbon-950">
+            <div class="p-8 lg:p-12 bg-carbon-950 text-white">
+                <p class="font-display text-5xl">100%</p>
+                <p class="font-mono text-xs uppercase tracking-[0.2em] mt-3">Algodão sustentável</p>
+            </div>
+            <div class="p-8 lg:p-12 bg-brand-green text-white md:border-x-[3px] border-carbon-950">
+                <p class="font-display text-5xl">BR</p>
+                <p class="font-mono text-xs uppercase tracking-[0.2em] mt-3">Produção local e mão de obra justa</p>
+            </div>
+            <div class="p-8 lg:p-12 bg-white text-carbon-950">
+                <p class="font-display text-5xl">0</p>
+                <p class="font-mono text-xs uppercase tracking-[0.2em] mt-3">Greenwashing</p>
+            </div>
+        </section>
+
+        <!-- ─────────── CITAÇÃO + CTA ─────────── -->
+        <section class="bg-brand-red text-white px-6 sm:px-10 lg:px-16 py-20 lg:py-28 text-center">
+            <p class="font-display text-4xl sm:text-6xl lg:text-7xl uppercase leading-[0.9] max-w-4xl mx-auto">“A revolução será fofa ou não será.”</p>
+            <p class="max-w-xl mx-auto mt-8 leading-relaxed">Não há desculpas para não sermos melhores amanhã do que somos hoje.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center mt-10">
+                <a href="produtos.html" class="btn-primary on-red"><span>Ver coleção</span></a>
+                <a href="colecao-bicharada.html" class="btn-ghost on-red"><span>Bicharada</span></a>
+            </div>
+        </section>
+    </main>
 
     <!-- ═══════════ CART DRAWER ═══════════ -->
     <div id="cart-overlay" class="drawer-overlay" onclick="toggleCart()"></div>
-    <div id="cart-drawer" class="drawer-panel border-l-4 border-carbon-950">
+    <div id="cart-drawer" class="drawer-panel" role="dialog" aria-modal="true" aria-labelledby="cart-title" aria-hidden="true" tabindex="-1">
         <div class="drawer-header">
-            <span class="font-display text-xl uppercase text-carbon-950">Carrinho</span>
-            <button onclick="toggleCart()" class="drawer-close">✕</button>
+            <h2 id="cart-title" class="font-display text-xl uppercase text-carbon-950">Carrinho</h2>
+            <button type="button" onclick="toggleCart()" class="drawer-close" aria-label="Fechar carrinho">✕</button>
         </div>
-
-        <div id="cart-items" class="flex-1 overflow-y-auto p-5 flex flex-col gap-3">
-            <div class="flex flex-col items-center justify-center h-full gap-4 text-center">
-                <svg class="w-16 h-16 text-carbon-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
-                </svg>
-                <p class="text-carbon-700 text-sm uppercase tracking-[0.2em] font-semibold">Carrinho vazio</p>
-            </div>
+        <div id="cart-ship" class="ship-bar hidden" aria-live="polite">
+            <p id="cart-ship-text" class="ship-bar-text"></p>
+            <div class="ship-bar-track" aria-hidden="true"><span id="cart-ship-fill"></span></div>
         </div>
-
-        <div class="p-5 border-t border-carbon-950">
-            <div class="flex justify-between items-baseline mb-5">
-                <span class="text-xs font-semibold uppercase tracking-[0.2em] text-carbon-700">Total</span>
+        <div id="cart-items" class="flex-1 overflow-y-auto p-5 flex flex-col gap-3"></div>
+        <div class="p-5 border-t-[3px] border-carbon-950">
+            <div class="flex justify-between items-baseline">
+                <span class="text-xs font-semibold uppercase tracking-[0.2em] text-carbon-700">Subtotal</span>
                 <span id="cart-total" class="font-display text-2xl text-brand-red">R$ 0,00</span>
             </div>
-            <button class="btn-primary w-full justify-center py-4 text-sm">
-                <span>Finalizar Compra</span>
+            <p id="cart-pix" class="font-mono text-[0.65rem] uppercase tracking-[0.12em] text-right mt-1 mb-5"></p>
+            <button type="button" data-checkout class="btn-primary w-full justify-center py-4 text-sm">
+                <span>Finalizar compra</span>
             </button>
         </div>
     </div>
 
+    <!-- ═══════════ WHATSAPP (link only, sends nothing by itself) ═══════════ -->
+    <a id="whatsapp-btn" class="whatsapp-btn" href="#" target="_blank" rel="noopener" aria-label="Falar com a The Fato no WhatsApp">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.1.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.2c0-.1-.2-.2-.4-.3z"/></svg>
+        <span>Ajuda</span>
+    </a>
 
-    <script src="assets/js/main.js"></script>
-
+    <!-- ═══════════ COOKIES (LGPD) ═══════════ -->
+    <div id="cookie-bar" class="cookie-bar hidden" role="region" aria-label="Aviso de cookies">
+        <p>Usamos o armazenamento do navegador para guardar carrinho, favoritos e conta. Nada sai do seu navegador. <a href="privacidade.html">Saiba mais</a>.</p>
+        <div class="flex gap-2 shrink-0">
+            <button type="button" class="btn-bold" data-consent="essencial">Só o necessário</button>
+            <button type="button" class="btn-bold cookie-accept" data-consent="todos">Aceitar</button>
+        </div>
+    </div>
 
     <!-- ═══════════════════ FOOTER ═══════════════════════ -->
-    <footer class="bg-bone-100 border-t border-carbon-950 pt-20 pb-10">
-        <div class="max-w-[1400px] mx-auto px-6 lg:px-10">
-
-            <!-- Top section -->
+    <footer class="site-footer bg-carbon-950 text-white">
+        <div class="divider-accent"></div>
+        <div class="max-w-[1400px] mx-auto px-6 lg:px-10 pt-16 pb-10">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 mb-16">
-
-                <!-- Brand + Newsletter -->
                 <div class="lg:col-span-5">
-                    <img class="h-16 w-auto brightness-0 invert opacity-70 mb-6"
-                        src="assets/images/banners/logo.svg" alt="The Fato">
-                    <p class="text-sm text-carbon-700 max-w-sm mb-8 leading-relaxed font-light">
-                        Junte-se à revolução. Receba drops exclusivos, descontos e
-                        provocações antes de todo mundo.
+                    <img class="h-10 w-auto mb-6" src="assets/images/brand/logo-horizontal-white.svg" alt="The Fato" width="151" height="40" loading="lazy">
+                    <p class="text-sm max-w-sm mb-8 leading-relaxed text-white">
+                        Entre para a bicharada. Receba drops exclusivos, descontos e trocadilhos novos antes de todo mundo.
                     </p>
-                    <form class="flex max-w-sm">
-                        <input type="email" placeholder="seu@email.com"
-                            class="flex-1 bg-white border border-carbon-950 border-r-0 px-4 py-3 text-sm text-carbon-950 placeholder-muted focus:outline-none focus:border-toxic transition-colors">
-                        <button type="submit"
-                            class="bg-brand-yellow border-b-4 border-carbon-950 text-carbon-950 px-6 py-3 text-xs font-bold uppercase tracking-wider hover:bg-bone transition-colors flex-shrink-0">
-                            Assinar
-                        </button>
+                    <form class="newsletter flex max-w-sm">
+                        <label for="newsletter-email" class="sr-only">Seu e-mail</label>
+                        <input id="newsletter-email" type="email" placeholder="seu@email.com" required>
+                        <button type="submit">Assinar</button>
                     </form>
                 </div>
-
-                <!-- Links -->
                 <div class="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-10">
                     <div>
-                        <h4 class="text-xs font-semibold uppercase tracking-[0.2em] text-carbon-950 mb-5">Shop</h4>
+                        <h3 class="footer-title">Shop</h3>
                         <ul class="space-y-3">
-                            <li><a href="produtos.html" class="text-sm text-carbon-700 hover:text-brand-red transition-colors font-light">Camisetas</a></li>
-                            <li><a href="produtos.html" class="text-sm text-carbon-700 hover:text-brand-red transition-colors font-light">Lançamentos</a></li>
-                            <li><a href="#" class="text-sm text-carbon-700 hover:text-brand-red transition-colors font-light">Acessórios</a></li>
-                            <li><a href="#" class="text-sm text-carbon-700 hover:text-brand-red transition-colors font-light">Sale</a></li>
+                            <li><a href="produtos.html" class="footer-link">Todos os drops</a></li>
+                            <li><a href="colecao-bicharada.html" class="footer-link">Bicharada</a></li>
+                            <li><a href="colecao-consumo.html" class="footer-link">Consumo</a></li>
+                            <li><a href="colecao-conceitos.html" class="footer-link">Conceitos</a></li>
+                            <li><a href="favoritos.html" class="footer-link">Favoritos</a></li>
+                            <li><a href="sobre.html" class="footer-link">Manifesto</a></li>
                         </ul>
                     </div>
                     <div>
-                        <h4 class="text-xs font-semibold uppercase tracking-[0.2em] text-carbon-950 mb-5">Suporte</h4>
+                        <h3 class="footer-title">Suporte</h3>
                         <ul class="space-y-3">
-                            <li><a href="faq.html" class="text-sm text-carbon-700 hover:text-brand-red transition-colors font-light">FAQ</a></li>
-                            <li><a href="trocas.html" class="text-sm text-carbon-700 hover:text-brand-red transition-colors font-light">Trocas e Devoluções</a></li>
-                            <li><a href="medidas.html" class="text-sm text-carbon-700 hover:text-brand-red transition-colors font-light">Guia de Medidas</a></li>
-                            <li><a href="#" class="text-sm text-carbon-700 hover:text-brand-red transition-colors font-light">Contato</a></li>
+                            <li><a href="rastrear.html" class="footer-link">Rastrear pedido</a></li>
+                            <li><a href="faq.html" class="footer-link">FAQ</a></li>
+                            <li><a href="trocas.html" class="footer-link">Trocas e devoluções</a></li>
+                            <li><a href="medidas.html" class="footer-link">Guia de medidas</a></li>
+                            <li><a href="mailto:contato@thefato.com" class="footer-link">Contato</a></li>
+                            <li><a href="conta.html" class="footer-link">Minha conta</a></li>
                         </ul>
                     </div>
                     <div>
-                        <h4 class="text-xs font-semibold uppercase tracking-[0.2em] text-carbon-950 mb-5">Social</h4>
+                        <h3 class="footer-title">Social</h3>
                         <ul class="space-y-3">
-                            <li><a href="#" class="text-sm text-carbon-700 hover:text-brand-red transition-colors font-light">Instagram</a></li>
-                            <li><a href="#" class="text-sm text-carbon-700 hover:text-brand-red transition-colors font-light">TikTok</a></li>
-                            <li><a href="#" class="text-sm text-carbon-700 hover:text-brand-red transition-colors font-light">Twitter / X</a></li>
+                            <li><a href="#" class="footer-link">Instagram</a></li>
+                            <li><a href="#" class="footer-link">TikTok</a></li>
+                            <li><a href="#" class="footer-link">Twitter / X</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
-
-            <!-- Bottom -->
-            <div class="divider mb-8"></div>
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-5 mb-8">
+                <div>
+                    <p class="footer-title mb-3">Formas de pagamento</p>
+                    <ul class="pay-badges" aria-label="Formas de pagamento aceitas">
+                        <li>PIX</li><li>Visa</li><li>Mastercard</li><li>Elo</li><li>Boleto</li>
+                    </ul>
+                </div>
+                <p class="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-white">Site seguro · protótipo acadêmico, nenhum pagamento real</p>
+            </div>
+            <div class="h-px bg-white/30 mb-8"></div>
             <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
-                <p class="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-carbon-700">
-                    © 2026 The Fato. No Planet B. Todos os direitos reservados.
+                <p class="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-white">© 2026 The Fato. No Planet B. Todos os direitos reservados.</p>
+                <p class="flex gap-5 font-mono text-[0.6rem] uppercase tracking-[0.2em]">
+                    <a href="privacidade.html" class="footer-link">Privacidade</a>
+                    <a href="termos.html" class="footer-link">Termos de uso</a>
                 </p>
-                <p class="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-carbon-600">
-                    Feito com raiva e amor no Brasil 🇧🇷
-                </p>
+                <p class="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-white">Feito com humor e amor no Brasil</p>
             </div>
         </div>
     </footer>
+
+    <script src="assets/js/products.js?v=20261012f"></script>
+    <script src="assets/js/main.js?v=20261012f"></script>
 
 </body>
 
